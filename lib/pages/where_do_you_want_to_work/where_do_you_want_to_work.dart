@@ -1,0 +1,78 @@
+import 'package:Trip/components/custom_item_select.dart';
+import 'package:Trip/pages/enter_holder_or_owner_info_page/enter_holder_or_owner_info_page.dart';
+import 'package:Trip/router/router.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../components/custom_back_botton.dart';
+import '../../config/utils/const_class.dart';
+import '../../config/utils/functions.dart';
+import '../../controller/create_onwer_controller.dart';
+
+class WhereDoYouWantToWorkPage extends StatelessWidget {
+  const WhereDoYouWantToWorkPage({super.key});
+  String? validator(String? query) {
+    final isValid = validateInfo(query: query);
+    return isValid;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final CreateOwnerController controller =
+        Get.put<CreateOwnerController>(CreateOwnerController());
+    final _formKey = GlobalKey<FormState>();
+   // final data =
+   //     ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+   // bool isOwner = data['isOwner'];
+    void checkValidation() {
+      controller.printValues();
+      if (_formKey.currentState!.validate()) {
+        Get.toNamed(Routes.createQrCodePage, arguments: {'isOwner': false});
+      }
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        leadingWidth: 100,
+        foregroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        leading: CustomBackButton(),
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: Insets.medium, vertical: Insets.large),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              Text(
+                'أين تريد العمل',
+                style: TextStyle(
+                  fontSize: CustomFontsTheme.veryBigSize,
+                ),
+              ),
+              SizedBox(height: Insets.exLarge * 1.5),
+              CustomItemSelect(
+                  labelText: 'المحافظة',
+                  controller: controller.holderStateWork,
+                  itemsList: iraqStates,
+                  validator: validator),
+              SizedBox(height: Insets.small),
+              CustomItemSelect(
+                  labelText: 'الكراج',
+                  controller: controller.holderGarageWork,
+                  itemsList: ['العلاوي', 'النهضة'],
+                  validator: validator),
+              Spacer(),
+              ElevatedButton(
+                onPressed: checkValidation,
+                child: Text('أرسل طلب'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
