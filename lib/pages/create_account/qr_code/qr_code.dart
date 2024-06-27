@@ -4,13 +4,8 @@ import 'package:flutter/material.dart';
 import '../../../components/custom_auth_steps_tracker.dart';
 import '../../../components/custom_back_botton.dart';
 
-
-
-
 class CreateQrCodePage extends StatelessWidget {
   const CreateQrCodePage({Key? key}) : super(key: key);
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +19,7 @@ class CreateQrCodePage extends StatelessWidget {
         Get.toNamed(Routes.tapsPage);
       }
     }
+
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 100,
@@ -81,9 +77,12 @@ class CreateQrCodePage extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(isOwner ?'التالي' : 'أبحث عن عمل'),
+                  Text(isOwner ? 'التالي' : 'أبحث عن عمل'),
                   SizedBox(width: Insets.small),
-                  SvgPicture.asset(Assets.assetsIconsMagnifyingGlass,color: Theme.of(context).scaffoldBackgroundColor,)
+                  SvgPicture.asset(
+                    Assets.assetsIconsMagnifyingGlass,
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                  )
                 ],
               ),
             ),

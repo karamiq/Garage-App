@@ -1,19 +1,21 @@
 import 'package:Trip/config/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-
-import '../../config/utils/const_class.dart';
+import '../../components/custom_app_bar.dart';
 
 class QrCodeGEneratorPage extends StatelessWidget {
   const QrCodeGEneratorPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var title;
     return Scaffold(
+      appBar: CustomAppBar(title: title),
       body: Center(
+        heightFactor: .9,
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: Insets.medium, vertical: Insets.large),
+              horizontal: Insets.medium, vertical: Insets.large),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,11 +39,11 @@ class QrCodeGEneratorPage extends StatelessWidget {
                             CoustomBorderTheme.normalBorderRaduis * 2)),
                     child: Center(
                       child: QrImageView(
-                        dataModuleStyle: QrDataModuleStyle(dataModuleShape: QrDataModuleShape.circle),
+                        dataModuleStyle: QrDataModuleStyle(
+                            dataModuleShape: QrDataModuleShape.circle),
                         foregroundColor: Theme.of(context).colorScheme.primary,
                         data: 'https://www.youtube.com/watch?v=vdRCbg2FQ2M',
                         version: QrVersions.auto,
-                        
                       ),
                     ),
                   ),

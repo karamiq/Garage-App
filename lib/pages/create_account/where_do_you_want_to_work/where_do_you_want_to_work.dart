@@ -4,10 +4,10 @@ import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../components/custom_back_botton.dart';
-import '../../config/utils/const_class.dart';
-import '../../config/utils/functions.dart';
-import '../../controller/create_onwer_controller.dart';
+import '../../../components/custom_back_botton.dart';
+import '../../../config/utils/const_class.dart';
+import '../../../config/utils/functions.dart';
+import '../../../controller/create_onwer_controller.dart';
 
 class WhereDoYouWantToWorkPage extends StatelessWidget {
   const WhereDoYouWantToWorkPage({super.key});
@@ -21,9 +21,9 @@ class WhereDoYouWantToWorkPage extends StatelessWidget {
     final CreateOwnerController controller =
         Get.put<CreateOwnerController>(CreateOwnerController());
     final _formKey = GlobalKey<FormState>();
-   // final data =
-   //     ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-   // bool isOwner = data['isOwner'];
+    // final data =
+    //     ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    // bool isOwner = data['isOwner'];
     void checkValidation() {
       controller.printValues();
       if (_formKey.currentState!.validate()) {

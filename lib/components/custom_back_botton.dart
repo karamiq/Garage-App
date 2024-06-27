@@ -11,15 +11,15 @@ class CustomBackButton extends StatelessWidget {
     return Row(
       children: [
         Gap(Insets.medium),
-        IconButton(
+        IconButton.outlined(
           onPressed: () => Get.back(),
           icon: Icon(Icons.chevron_left,
               color: Theme.of(context).colorScheme.primary),
           style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                      CoustomBorderTheme.normalBorderRaduis),
-                  side: BorderSide()),
+                borderRadius: BorderRadius.circular(
+                    CoustomBorderTheme.normalBorderRaduis),
+              ),
               side: BorderSide(
                   width: 2, color: Theme.of(context).colorScheme.primary),
               backgroundColor: Colors.transparent),

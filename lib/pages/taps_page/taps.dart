@@ -15,14 +15,15 @@ class TapsPage extends StatefulWidget {
 }
 
 class _TapsPageState extends State<TapsPage> {
-   int pageIndex = 0;
+  int pageIndex = 0;
   void _selectedPage(int index) {
     setState(() {
       // selectedPageIndex = index;
       pageIndex = index;
     });
   }
-    @override
+
+  @override
   void initState() {
     super.initState();
     _pages = [
@@ -32,6 +33,7 @@ class _TapsPageState extends State<TapsPage> {
       const VeichlesPage(),
     ];
   }
+
   // int selectedPageIndex = 0;
   double slideSize = 0;
   List<Widget> _pages = [];
@@ -58,11 +60,11 @@ class _TapsPageState extends State<TapsPage> {
       //    ),
       //  ),
       //),
-      bottomNavigationBar:CustomBottomAppBar(
+      bottomNavigationBar: CustomBottomAppBar(
         selectedPage: _selectedPage,
         selectedPageIndex: pageIndex,
       ),
-      body: _pages[pageIndex],
+      body: SafeArea(bottom: false, child: _pages[pageIndex]),
     );
   }
 }

@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import '../../../components/custom_back_botton.dart';
 import 'components/account_type_card.dart';
 
-
-
 class CreateAccountTypePage extends StatefulWidget {
   const CreateAccountTypePage({super.key});
 
@@ -16,8 +14,9 @@ class CreateAccountTypePage extends StatefulWidget {
 class _CreateAccountTypePageState extends State<CreateAccountTypePage> {
   bool isOnwerType = false;
   void next() {
-      Get.toNamed(Routes.enterHolderOrOwnerInfoPage, arguments: {'isOwner': isOnwerType});
-    }
+    Get.toNamed(Routes.enterHolderOrOwnerInfoPage,
+        arguments: {'isOwner': isOnwerType});
+  }
 
   @override
   Widget build(BuildContext context) {
