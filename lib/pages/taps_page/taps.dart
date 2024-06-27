@@ -1,7 +1,5 @@
 import 'package:Trip/config/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:spincircle_bottom_bar/modals.dart';
-import 'package:spincircle_bottom_bar/spincircle_bottom_bar.dart';
 
 import '../card_page/card_page.dart';
 import '../home_page/home_page.dart';
@@ -39,43 +37,30 @@ class _TapsPageState extends State<TapsPage> {
   List<Widget> _pages = [];
   @override
   Widget build(BuildContext context) {
-    
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        shape: const CircleBorder(),
-        elevation: 0,
-        onPressed: () {},
-        mini: true,
-        child: Container(
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              color: const Color(0xFFC9DEE5),
-              borderRadius: BorderRadius.circular(50)),
-          child: const Icon(
-            Icons.add_circle_outline_rounded,
-            color: CustomColorsTheme.headLineColor,
-            size: 40,
-          ),
-        ),
-      ),
-      bottomNavigationBar: SpinCircleBottomBarHolder(
-        child: Container(
-          color: Colors.amber,
-          height: 200,width: 300,
-        ),
-        bottomNavigationBar: SCBottomBarDetails(
-          items: [
-            SCBottomBarItem(
-              icon: Icons.house_outlined, 
-              onPressed: (){})
-          ], 
-          circleItems: []
-          ),
+      //floatingActionButton: FloatingActionButton(
+      //  shape: const CircleBorder(),
+      //  elevation: 0,
+      //  onPressed: () {},
+      //  mini: true,
+      //  child: Container(
+      //    alignment: Alignment.center,
+      //    decoration: BoxDecoration(
+      //        color: const Color(0xFFC9DEE5),
+      //        borderRadius: BorderRadius.circular(50)),
+      //    child: const Icon(
+      //      Icons.add_circle_outline_rounded,
+      //      color: CustomColorsTheme.headLineColor,
+      //      size: 40,
+      //    ),
+      //  ),
+      //),
+      bottomNavigationBar:CustomBottomAppBar(
+        selectedPage: _selectedPage,
+        selectedPageIndex: pageIndex,
       ),
       body: _pages[pageIndex],
     );

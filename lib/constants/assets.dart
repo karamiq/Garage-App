@@ -217,6 +217,14 @@ class Assets {
   /// assets/icons/User.svg
   static const String assetsIconsUser = "assets/icons/User.svg";
 
+  /// Assets for assetsIconsVector
+  /// assets/icons/Vector.svg
+  static const String assetsIconsVector = "assets/icons/Vector.svg";
+
+  /// Assets for assetsImagesAvatarImage
+  /// assets/images/AvatarImage.png
+  static const String assetsImagesAvatarImage = "assets/images/AvatarImage.png";
+
   /// Assets for assetsImagesBackground
   /// assets/images/background.png
   static const String assetsImagesBackground = "assets/images/background.png";

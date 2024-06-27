@@ -2,49 +2,81 @@ import 'package:Trip/config/constant.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
-  const CustomBottomAppBar(
-      {super.key,
-      required this.selectedPageIndex,
-      required this.selectedPage,
-      required this.size});
+  const CustomBottomAppBar({
+    super.key,
+    required this.selectedPageIndex,
+    required this.selectedPage,
+  });
   final int selectedPageIndex;
   final void Function(int)? selectedPage;
-  final Size size;
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      clipBehavior: Clip.antiAlias,
-      notchMargin: 5,
-      shape: const CircularNotchedRectangle(),
-      padding: const EdgeInsets.all(0),
-      child: BottomNavigationBar(
-        showSelectedLabels: true,
-        //selectedFontSize: CoustomIconTheme.smallize,
-        //unselectedFontSize: CoustomIconTheme.smallize,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        currentIndex: selectedPageIndex,
-        type: BottomNavigationBarType.fixed,
-        onTap: selectedPage,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            activeIcon: SvgPicture.asset(Assets.assetsIconsHouse,color: Colors.white),
-            icon: SvgPicture.asset(Assets.assetsIconsHouse),
+    return Container(
+      height: 105,
+      child: AnimatedSwitcher(
+        duration: Duration(milliseconds: 300),
+        transitionBuilder: (Widget child, Animation<double> animation) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+        child: BottomNavigationBar(
+          key: ValueKey<int>(selectedPageIndex),
+          elevation: 0,
+          showSelectedLabels: false,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          currentIndex: selectedPageIndex,
+          type: BottomNavigationBarType.fixed,
+          onTap: selectedPage,
+          items: <BottomNavigationBarItem>[
+            customBottomAppBarItem(
+            context: context,
             label: 'الرئيسية',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(Assets.assetsIconsCard),
-            label: 'البطاقة',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(Assets.assetsIconsRouting),
-            label: 'الخط',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(Assets.assetsIconsDriving),
-            label: 'المركبات',
-          ),
-        ],
+            
+            icon: Assets.assetsIconsHouse),
+            customBottomAppBarItem(
+              icon: Assets.assetsIconsCard,
+              label: 'البطاقة',
+              context: context,
+            ),
+            customBottomAppBarItem(
+              icon:Assets.assetsIconsRouting,
+              label: 'الخط',
+              context: context,
+            ),
+            customBottomAppBarItem(
+              icon: Assets.assetsIconsDriving,
+              label: 'المركبات',
+              context: context,
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  BottomNavigationBarItem customBottomAppBarItem({
+    required String icon,
+    required label,
+    required BuildContext context,
+  }) {
+    return BottomNavigationBarItem(
+          activeIcon: Container(
+              height: 70,
+              width: 70,
+              padding: EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                border: Border.all(
+                    width: 5,
+                    color: Theme.of(context).colorScheme.primaryFixed),
+                color: Theme.of(context).colorScheme.primary,
+                shape: BoxShape.circle,
+              ),
+              child: SvgPicture.asset(icon,
+                  color: Colors.white)),
+          icon: SvgPicture.asset(icon,color: Theme.of(context).hintColor.withAlpha(100),),
+          label: label,
+        );
   }
 }

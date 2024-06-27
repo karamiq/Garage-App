@@ -1,5 +1,5 @@
 import 'package:Trip/components/custom_item_select.dart';
-import 'package:Trip/pages/enter_holder_or_owner_info_page/enter_holder_or_owner_info_page.dart';
+import 'package:Trip/pages/create_account/enter_holder_or_owner_info_page/enter_holder_or_owner_info_page.dart';
 import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
