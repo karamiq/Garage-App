@@ -45,7 +45,7 @@ class CustomPageTheme {
 class CustomFontsTheme {
   static const bigWeight = FontWeight.w700;
   static const mediumWeight = FontWeight.w500;
-  static const double veryBigSize = 34;
+  static const double veryBigSize = 32;
   static const double bigSize = 24;
   static const normalWeight = FontWeight.w400;
   static const double  mediumSize= 16;

@@ -24,7 +24,6 @@ class CreateQrCodePage extends StatelessWidget {
         Get.toNamed(Routes.tapsPage);
       }
     }
-
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 100,

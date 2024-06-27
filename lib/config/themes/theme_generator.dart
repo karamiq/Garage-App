@@ -234,7 +234,7 @@ class AppTheme {
   TextButtonThemeData _buildTextButtonTheme(Brightness brightness) {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
-        minimumSize: const Size(double.infinity, 50),
+       minimumSize: const Size(double.infinity, 50),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),

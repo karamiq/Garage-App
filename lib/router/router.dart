@@ -7,10 +7,11 @@ import 'package:Trip/pages/auth/otp/otp.dart';
 import 'package:Trip/pages/create_account/owner_car_info.dart/owner_car_info.dart';
 import 'package:Trip/pages/create_account/qr_code/qr_code.dart';
 import 'package:Trip/pages/auth/register/register.dart';
-import 'package:Trip/pages/splash/splash_page.dart';
 import 'package:Trip/pages/taps_page/taps.dart';
 import 'package:Trip/pages/where_do_you_want_to_work/where_do_you_want_to_work.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
+
+import '../pages/home_page/qr_code_generator.dart';
 
 List<GetPage> generateRoutes() {
   return [
@@ -22,8 +23,7 @@ List<GetPage> generateRoutes() {
         //GetPage(name: '/details', page: () => DetailsScreen()), // Nested route
       ],
     ),
-    GetPage(
-        name: Routes.tapsPage, page: () => TapsPage()),
+    GetPage(name: Routes.tapsPage, page: () => TapsPage()),
     GetPage(
         name: Routes.loginOrRigisterPage, page: () => LoginOrRigisterPage()),
     GetPage(name: Routes.otpPage, page: () => OtpPage()),
@@ -44,10 +44,19 @@ List<GetPage> generateRoutes() {
     GetPage(
         name: Routes.whereDoYouWantToWorkPage,
         page: () => WhereDoYouWantToWorkPage()),
+
+
+
+    GetPage(name: Routes.qrCodeGeneratorPage, page: () => QrCodeGEneratorPage()),
   ];
 }
 
 class Routes {
+  static const homePage = '/home_page';
+  static const cardPage = '/card_page';
+  static const pathPage = '/path_page';
+  static const viechlesPage = '/viechles_page';
+  static const qrCodeGeneratorPage = '/qr_code_generator';
   static const tapsPage = '/taps_page';
   static const whereDoYouWantToWorkPage = '/where_do_you_want_to_work';
   static const keepGoingPage = '/keep_going_page';
