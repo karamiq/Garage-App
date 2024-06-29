@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../config/utils/const_class.dart';
@@ -35,7 +34,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
       decoration: BoxDecoration(
         color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius:
-            BorderRadius.circular(CoustomBorderTheme.normalBorderRaduis),
+            BorderRadius.circular(CustomBorderTheme.normalBorderRadius),
         border: Border.all(
           color: Theme.of(context).hintColor.withAlpha(100),
         ),
@@ -63,7 +62,6 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
                     setState(() {
                       _currentTitle = option;
                       _isExpanded = false;
-                      
                     });
                   },
                 );

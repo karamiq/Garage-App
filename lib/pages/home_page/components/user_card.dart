@@ -10,8 +10,8 @@ class UserCard extends StatelessWidget {
     required this.cardMoney,
     required this.expireDate,
     required this.carType,
-    required this.carPlateInfo, 
-     this.buttonAppears = true,
+    required this.carPlateInfo,
+    this.buttonAppears = true,
   });
   final String cardNumber;
   final String cardMoney;
@@ -28,28 +28,28 @@ class UserCard extends StatelessWidget {
           height: 210,
           decoration: BoxDecoration(
               borderRadius:
-                  BorderRadius.circular(CoustomBorderTheme.normalBorderRaduis),
+                  BorderRadius.circular(CustomBorderTheme.normalBorderRadius),
               color: Theme.of(context).colorScheme.primaryContainer),
           child: Stack(
             children: [
-              if(buttonAppears)
-              Align(
-                alignment: Alignment.bottomLeft,
-                child: IconButton(
-                  onPressed: () {},
-                  style: IconButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor:
-                          Theme.of(context).scaffoldBackgroundColor),
-                  icon: Transform.rotate(
-                    angle: 0.5,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.chevron_right),
+              if (buttonAppears)
+                Align(
+                  alignment: Alignment.bottomLeft,
+                  child: IconButton(
+                    onPressed: () => Get.toNamed(Routes.profilePage),
+                    style: IconButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        foregroundColor:
+                            Theme.of(context).scaffoldBackgroundColor),
+                    icon: Transform.rotate(
+                      angle: 0.5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(Icons.chevron_right),
+                      ),
                     ),
                   ),
                 ),
-              ),
               Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
@@ -59,7 +59,7 @@ class UserCard extends StatelessWidget {
                       style: IconButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(
-                                CoustomBorderTheme.normalBorderRaduis),
+                                CustomBorderTheme.normalBorderRadius),
                           ),
                           backgroundColor:
                               Theme.of(context).scaffoldBackgroundColor,

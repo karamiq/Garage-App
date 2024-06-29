@@ -12,7 +12,7 @@ import '../../../controller/create_onwer_controller.dart';
 class WhereDoYouWantToWorkPage extends StatelessWidget {
   const WhereDoYouWantToWorkPage({super.key});
   String? validator(String? query) {
-    final isValid = validateInfo(query: query);
+    final isValid = validateInfo(query);
     return isValid;
   }
 

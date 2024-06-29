@@ -18,15 +18,11 @@ class MoneyTransfers extends StatelessWidget {
       child: ListView.separated(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemBuilder: (context, index) => Card(
-                elevation: .1,
-                color: Theme.of(context).scaffoldBackgroundColor,
-                child: CustomListTile(
-                    icon: icon,
-                    title: title,
-                    subtitle: subtitle,
-                    trailing2: trailing),
-              ),
+          itemBuilder: (context, index) => CustomListTile(
+              icon: icon,
+              title: title,
+              subtitle: subtitle,
+              trailing2: trailing),
           separatorBuilder: (context, index) => Gap(Insets.small),
           itemCount: 7),
     );

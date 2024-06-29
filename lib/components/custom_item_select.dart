@@ -11,7 +11,6 @@ class CustomItemSelect extends StatelessWidget {
       required this.itemsList,
       required this.validator,
       this.prefixIcon});
-  
   final String labelText;
   final dynamic validator;
   final TextEditingController controller;
@@ -42,7 +41,7 @@ class CustomItemSelect extends StatelessWidget {
 class showSelectionBottomSheet extends StatefulWidget {
   const showSelectionBottomSheet(
       {super.key, required this.originalList, required this.controller});
-  
+
   final List<String> originalList;
   final TextEditingController controller;
 
@@ -95,7 +94,7 @@ class _showSelectionBottomSheetState extends State<showSelectionBottomSheet> {
       height: height,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(
-              top: Radius.circular(CoustomBorderTheme.normalBorderRaduis))),
+              top: Radius.circular(CustomBorderTheme.normalBorderRadius))),
       padding: EdgeInsets.all(16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

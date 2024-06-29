@@ -9,36 +9,36 @@ Future<dynamic> customBottomSheet(BuildContext context,
     {Widget? child, double? height}) {
   return Get.bottomSheet(
     Container(
-      width: context.width,
-      constraints: BoxConstraints(
-        maxHeight: height ?? context.height * 0.8,
-        minHeight: context.height * 0.2,
-      ),
-      decoration: BoxDecoration(
-        color: Get.isDarkMode
-            ? context.theme.colorScheme.surface
-            : context.theme.colorScheme.surface,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(Insets.medium),
-          topRight: Radius.circular(Insets.medium),
+        width: context.width,
+        constraints: BoxConstraints(
+          maxHeight: height ?? context.height * 0.8,
+          minHeight: context.height * 0.2,
         ),
-      ),
-      child: child
-      //Column(
-      //  children: [
-      //    Gap(Insets.small),
-      //    Container(
-      //      width: context.width * 0.2,
-      //      height: Insets.exSmall,
-      //      decoration: BoxDecoration(
-      //        borderRadius: BorderRadius.circular(Insets.medium),
-      //        color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
-      //      ),
-      //    ),
-      //    child ?? Gap(Insets.small),
-      //  ],
-      //),
-    ),
+        decoration: BoxDecoration(
+          color: Get.isDarkMode
+              ? context.theme.colorScheme.surface
+              : context.theme.colorScheme.surface,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(Insets.medium),
+            topRight: Radius.circular(Insets.medium),
+          ),
+        ),
+        child: child
+        //Column(
+        //  children: [
+        //    Gap(Insets.small),
+        //    Container(
+        //      width: context.width * 0.2,
+        //      height: Insets.exSmall,
+        //      decoration: BoxDecoration(
+        //        borderRadius: BorderRadius.circular(Insets.medium),
+        //        color: Theme.of(context).colorScheme.outline.withOpacity(0.2),
+        //      ),
+        //    ),
+        //    child ?? Gap(Insets.small),
+        //  ],
+        //),
+        ),
     enterBottomSheetDuration: const Duration(milliseconds: 300),
     exitBottomSheetDuration: const Duration(milliseconds: 300),
     isScrollControlled: true,

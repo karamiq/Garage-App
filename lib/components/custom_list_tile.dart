@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../config/constant.dart';
+import 'custom_svg_style.dart';
 
 class CustomListTile extends StatelessWidget {
   const CustomListTile({
@@ -21,22 +22,13 @@ class CustomListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0.1,
-      color: Theme.of(context).colorScheme.onPrimary,
+    return Container(
+      decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.onSecondary,
+          borderRadius:
+              BorderRadius.circular(CustomBorderTheme.normalBorderRadius)),
       child: ListTile(
-        leading: Container(
-          padding: EdgeInsets.all(Insets.small),
-          decoration: BoxDecoration(
-            borderRadius:
-                BorderRadius.circular(CoustomBorderTheme.normalBorderRaduis),
-            color: Theme.of(context).colorScheme.onInverseSurface,
-          ),
-          child: SvgPicture.asset(
-            icon,
-            color: Theme.of(context).colorScheme.primary,
-          ),
-        ),
+        leading: CustomISvgStyle(icon: icon),
         title: Text(title),
         subtitle: Text(
           subtitle,

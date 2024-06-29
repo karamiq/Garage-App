@@ -27,7 +27,7 @@ class ViewedItemsTitle extends StatelessWidget {
         InkWell(
           onTap: onTap,
           borderRadius:
-              BorderRadius.circular(CoustomBorderTheme.normalBorderRaduis),
+              BorderRadius.circular(CustomBorderTheme.normalBorderRadius),
           child: Padding(
             padding: EdgeInsets.all(Insets.exSmall),
             child: Column(

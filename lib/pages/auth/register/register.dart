@@ -71,7 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
               Gap(Insets.exLarge),
               ElevatedButton(
                   onPressed: next,
-                  child: CustomElevatedButton(
+                  child: ElevatedButtonChild(
                     text: 'التالي',
                     icon: Icons.chevron_left,
                   )),

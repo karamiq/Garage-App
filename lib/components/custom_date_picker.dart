@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -29,9 +28,10 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       readOnly: true,
       keyboardType: TextInputType.datetime,
       decoration: CustomInputDecoration(
-          labelText: widget.labelText,
-          prefixIcon: widget.prefixIcon,
-          context: context),
+        labelText: widget.labelText,
+        prefixIcon: widget.prefixIcon,
+        context: context,
+      ),
       onTap: () async {
         DateTime? dateTime = await showDatePicker(
             initialEntryMode: DatePickerEntryMode.calendarOnly,

@@ -17,8 +17,8 @@ class CustomBackButton extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary),
           style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                    CoustomBorderTheme.normalBorderRaduis),
+                borderRadius:
+                    BorderRadius.circular(CustomBorderTheme.normalBorderRadius),
               ),
               side: BorderSide(
                   width: 2, color: Theme.of(context).colorScheme.primary),

@@ -31,14 +31,14 @@ class HomePage extends StatelessWidget {
                 cardMoney: '125,000'),
             Gap(Insets.small),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 MiniCard(
                     cardTitle: 'الغرامات المالية',
                     cardNumber: '20',
                     cardNumText: 'غرامة مالية',
                     decoration: SequaredPositionedContainers(),
-                    onIconPressed: onIconPressed),
+                    onIconPressed: () => Get.toNamed(Routes.feesOnCarPage)),
+                Gap(Insets.small),
                 MiniCard(
                     cardTitle: 'عدد الرحلات',
                     cardNumber: '50',
@@ -47,7 +47,7 @@ class HomePage extends StatelessWidget {
                     onIconPressed: () => Get.toNamed(Routes.tripsPage)),
               ],
             ),
-            Gap(Insets.medium),
+            Gap(Insets.small),
             HomePageBottomHalf(),
           ],
         ),

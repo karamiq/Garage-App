@@ -37,7 +37,7 @@ class _ImageInputState extends State<ImageInput> {
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius:
-                BorderRadius.circular(CoustomBorderTheme.normalBorderRaduis),
+                BorderRadius.circular(CustomBorderTheme.normalBorderRadius),
             color:
                 Theme.of(context).colorScheme.primaryContainer.withAlpha(100)),
         child: Column(
@@ -77,7 +77,7 @@ class _ImageInputState extends State<ImageInput> {
           child: ClipRRect(
             clipBehavior: Clip.hardEdge,
             borderRadius:
-                BorderRadius.circular(CoustomBorderTheme.normalBorderRaduis),
+                BorderRadius.circular(CustomBorderTheme.normalBorderRadius),
             child: Image.file(
               _selectedImage!,
               width: double.infinity,
@@ -89,7 +89,7 @@ class _ImageInputState extends State<ImageInput> {
     return Container(
         decoration: BoxDecoration(
             borderRadius:
-                BorderRadius.circular(CoustomBorderTheme.normalBorderRaduis),
+                BorderRadius.circular(CustomBorderTheme.normalBorderRadius),
             border: Border.all(
                 width: 1, color: Theme.of(context).colorScheme.primary)),
         height: 200,

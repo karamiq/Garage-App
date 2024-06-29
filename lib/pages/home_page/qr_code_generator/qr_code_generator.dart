@@ -1,7 +1,7 @@
 import 'package:Trip/config/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import '../../components/custom_app_bar.dart';
+import '../../../components/custom_app_bar.dart';
 
 class QrCodeGEneratorPage extends StatelessWidget {
   const QrCodeGEneratorPage({super.key});
@@ -26,7 +26,7 @@ class QrCodeGEneratorPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.circular(
-                      CoustomBorderTheme.normalBorderRaduis * 3),
+                      CustomBorderTheme.normalBorderRadius * 3),
                 ),
                 child: Center(
                   child: Container(
@@ -36,7 +36,7 @@ class QrCodeGEneratorPage extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(
-                            CoustomBorderTheme.normalBorderRaduis * 2)),
+                            CustomBorderTheme.normalBorderRadius * 2)),
                     child: Center(
                       child: QrImageView(
                         dataModuleStyle: QrDataModuleStyle(

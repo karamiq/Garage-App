@@ -1,8 +1,8 @@
 import 'package:Trip/config/constant.dart';
 import 'package:flutter/material.dart';
 
-class CustomElevatedButton extends StatelessWidget {
-  const CustomElevatedButton({
+class ElevatedButtonChild extends StatelessWidget {
+  const ElevatedButtonChild({
     super.key,
     required this.text,
     required this.icon,

@@ -11,6 +11,7 @@ class SeeAllMoneyTransferingPage extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(title: 'التحويلات المالية'),
       body: SingleChildScrollView(
+        padding: EdgeInsets.symmetric(horizontal: Insets.medium),
         child: ListView.separated(
           padding: EdgeInsets.symmetric(vertical: Insets.medium),
           itemCount: 16,

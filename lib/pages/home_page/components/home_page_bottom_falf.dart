@@ -19,12 +19,14 @@ class _HomePageBottomHalfState extends State<HomePageBottomHalf>
     _tabController = TabController(length: 2, vsync: this);
     _scorllingController = ScrollController();
   }
+
   @override
   void dispose() {
     _tabController.dispose();
     _scorllingController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -50,7 +52,7 @@ class _HomePageBottomHalfState extends State<HomePageBottomHalf>
                 isScrollable: true,
                 indicator: BoxDecoration(
                   borderRadius: BorderRadius.circular(
-                      CoustomBorderTheme.normalBorderRaduis),
+                      CustomBorderTheme.normalBorderRadius),
                   color: Theme.of(context).colorScheme.primary,
                 ),
                 tabs: [

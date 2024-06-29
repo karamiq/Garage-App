@@ -1,27 +1,34 @@
+import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
 
 import '../../../config/constant.dart';
 
 class TripCard extends StatelessWidget {
-  const TripCard({
-    super.key,
-    required this.from,
-    required this.to,
-    required this.price,
-  });
+  const TripCard(
+      {super.key,
+      required this.from,
+      required this.to,
+      required this.price,
+      this.id = ''});
 
+  final String id;
   final String from;
   final String to;
   final String price;
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      elevation: 0.01,
-      child: Padding(
+    return InkWell(
+      borderRadius: BorderRadius.circular(CustomBorderTheme.normalBorderRadius),
+      onTap: () => Get.toNamed(Routes.tripsPage + Routes.trpiDetailesPage,
+          arguments: {'id': id}),
+      child: Container(
           padding: EdgeInsets.symmetric(
-              horizontal: Insets.small - 5, vertical: Insets.small),
+              vertical: Insets.small, horizontal: Insets.small),
+          decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.onSecondary,
+              borderRadius:
+                  BorderRadius.circular(CustomBorderTheme.normalBorderRadius)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,7 +39,7 @@ class TripCard extends StatelessWidget {
                     padding: EdgeInsets.all(Insets.small),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
-                          CoustomBorderTheme.normalBorderRaduis),
+                          CustomBorderTheme.normalBorderRadius),
                       color: Theme.of(context).colorScheme.onInverseSurface,
                     ),
                     child: SvgPicture.asset(
@@ -60,7 +67,6 @@ class TripCard extends StatelessWidget {
               Container(
                 height: 40.0,
                 child: VerticalDivider(
-                  color: Theme.of(context).colorScheme.secondary,
                   thickness: 1,
                 ),
               ),
@@ -80,7 +86,7 @@ class TripCard extends StatelessWidget {
                       Text(to)
                     ],
                   ),
-                  Gap(Insets.medium),
+                  Gap(Insets.small),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -94,13 +100,9 @@ class TripCard extends StatelessWidget {
                       Text('$price د. ع.')
                     ],
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.chevron_right_outlined,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    iconSize: Insets.large,
+                  SvgPicture.asset(
+                    Assets.assetsIconsCaretLeft,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ],
               ),

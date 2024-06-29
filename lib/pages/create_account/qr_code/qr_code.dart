@@ -44,7 +44,7 @@ class CreateQrCodePage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.circular(
-                    CoustomBorderTheme.normalBorderRaduis * 3),
+                    CustomBorderTheme.normalBorderRadius * 3),
               ),
               child: Center(
                 child: Container(
@@ -53,7 +53,7 @@ class CreateQrCodePage extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(
-                          CoustomBorderTheme.normalBorderRaduis * 2)),
+                          CustomBorderTheme.normalBorderRadius * 2)),
                   child: Center(
                     child: null,
                   ),

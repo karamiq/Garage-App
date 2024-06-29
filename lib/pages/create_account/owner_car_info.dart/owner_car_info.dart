@@ -21,9 +21,10 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
   final CreateOwnerController controller =
       Get.put<CreateOwnerController>(CreateOwnerController());
   String? validator(String? query) {
-    final isValid = validateInfo(query: query);
+    final isValid = validateInfo(query);
     return isValid;
   }
+
   bool valid = true;
 
   @override
@@ -32,27 +33,28 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     bool isOwner = data['isOwner'];
     void checkValidation() {
-    setState(() => valid = true);
-    if (!_formKey.currentState!.validate()) {
-      valid = false;
+      setState(() => valid = true);
+      if (!_formKey.currentState!.validate()) {
+        valid = false;
+      }
+      if (controller.carPicture == null) {
+        valid = false;
+      }
+      if (controller.carLicensePicture == null) {
+        valid = false;
+      }
+      if (valid) {
+        Get.toNamed(Routes.enterPersonalPicturePage,
+            arguments: {'isOwner': isOwner});
+      } else {
+        print('error');
+      }
     }
-    if (controller.carPicture == null) {
-      valid = false;
-    }
-    if (controller.carLicensePicture == null) {
-      valid = false;
-    }
-    if (valid) {
-      Get.toNamed(Routes.enterPersonalPicturePage, arguments: {'isOwner' : isOwner});
-    } else {
-      print('error');
-    }
-  }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        leadingWidth:100,
+        leadingWidth: 100,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         leading: CustomBackButton(),
       ),
@@ -70,7 +72,8 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
                 ),
               ),
               SizedBox(height: Insets.small),
-              CustomAuthStepsTracker(itemCount: isOwner ? 4 : 3,highlightIndex: 1),
+              CustomAuthStepsTracker(
+                  itemCount: isOwner ? 4 : 3, highlightIndex: 1),
               SizedBox(height: Insets.medium * 2),
               Row(
                 mainAxisSize: MainAxisSize.min,
@@ -88,7 +91,7 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
                   Expanded(
                     child: CustomItemSelect(
                       //onSelect: (value) =>
-                          //controller.carPlateLetter.text = value,
+                      //controller.carPlateLetter.text = value,
                       labelText: 'حرف اللوحة',
                       controller: controller.carPlateLetter,
                       itemsList: iraqiPlateLetters,
@@ -137,12 +140,11 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
               ),
               SizedBox(height: Insets.small),
               CustomDatePicker(
-                validator: validator,
-                onSelect:(value) => controller.carYear.text = value, 
-                labelText: 'سنة الصنع', 
-                controller: controller.carYear, 
-                prefixIcon: Assets.assetsIconsCalendar),
-
+                  validator: validator,
+                  onSelect: (value) => controller.carYear.text = value,
+                  labelText: 'سنة الصنع',
+                  controller: controller.carYear,
+                  prefixIcon: Assets.assetsIconsCalendar),
               SizedBox(height: Insets.small),
               CustomTextFormField(
                 validator: validator,

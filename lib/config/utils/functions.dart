@@ -117,7 +117,12 @@ SnackbarController noti(title, body, {Function(GetSnackBar)? onTap}) {
     onTap: onTap,
   );
   return x;
-}String? validatePhoneNumber({required String? query, required String message,required BuildContext context}) {
+}
+
+String? validatePhoneNumber(
+    {required String? query,
+    required String message,
+    required BuildContext context}) {
   if (query == null || query.isEmpty) {
     return 'الحقل مطلوب';
   } else if (RegExp(r'[a-zA-Z]').hasMatch(query)) {
@@ -132,11 +137,11 @@ SnackbarController noti(title, body, {Function(GetSnackBar)? onTap}) {
     return null;
   }
 }
-String? validateInfo({required String? query}) {
+
+String? validateInfo(String? query) {
   if (query == null || query.isEmpty) {
     return 'الحقل مطلوب';
   } else {
     return null;
   }
 }
-

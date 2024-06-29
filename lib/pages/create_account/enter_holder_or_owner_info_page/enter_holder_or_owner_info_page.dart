@@ -26,7 +26,7 @@ class _EnterHolderOrOwnerInfoPageState
   String? storagingType;
   final _formKey = GlobalKey<FormState>();
   String? validator(String? query) {
-    final isvalid = validateInfo(query: query);
+    final isvalid = validateInfo(query);
     return isvalid;
   }
 
@@ -42,7 +42,8 @@ class _EnterHolderOrOwnerInfoPageState
         if (isOwner) {
           Get.toNamed(Routes.ownerCarInfoPage, arguments: {'isOwner': isOwner});
         } else {
-          Get.toNamed(Routes.enterPersonalPicturePage, arguments: {'isOwner': isOwner});
+          Get.toNamed(Routes.enterPersonalPicturePage,
+              arguments: {'isOwner': isOwner});
         }
       }
     }

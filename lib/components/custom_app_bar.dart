@@ -19,7 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: title == null ? null : Text(title!),
       titleTextStyle: TextStyle(
-          fontSize: CustomFontsTheme.veryBigSize,
+          fontSize: CustomFontsTheme.bigSize,
           fontFamily: GoogleFonts.cairo().fontFamily,
           color: Theme.of(context).colorScheme.inverseSurface),
       centerTitle: true,

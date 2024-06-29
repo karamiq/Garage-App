@@ -55,7 +55,7 @@ class CardPage extends StatelessWidget {
                   onPressed: () {},
                   child: ElevatedButton(
                       onPressed: () {},
-                      child: CustomElevatedButton(
+                      child: ElevatedButtonChild(
                         text: 'تعبئة البطاقة ',
                         icon: Assets.assetsIconsCard,
                       )),

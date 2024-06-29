@@ -1,3 +1,4 @@
+import 'package:Trip/config/constant.dart';
 import 'package:Trip/pages/card_page/money_transfering.dart';
 import 'package:Trip/pages/create_account/enter_holder_or_owner_info_page/enter_holder_or_owner_info_page.dart';
 import 'package:Trip/pages/create_account/enter_personal_picture/enter_personal_picture.dart';
@@ -7,9 +8,17 @@ import 'package:Trip/pages/auth/otp/otp.dart';
 import 'package:Trip/pages/create_account/owner_car_info.dart/owner_car_info.dart';
 import 'package:Trip/pages/create_account/qr_code/qr_code.dart';
 import 'package:Trip/pages/auth/register/register.dart';
-import 'package:Trip/pages/home_page/qr_code_generator.dart';
-import 'package:Trip/pages/home_page/trips.dart';
+import 'package:Trip/pages/home_page/fee_detailes/fee_detailes.dart';
+import 'package:Trip/pages/home_page/fees_on_car/fees_on_car.dart';
+import 'package:Trip/pages/home_page/financial_transcations/financial_transcations.dart';
+import 'package:Trip/pages/home_page/garage_rating/garage_rating.dart';
+import 'package:Trip/pages/home_page/profile/profile.dart';
+import 'package:Trip/pages/home_page/qr_code_generator/qr_code_generator.dart';
+import 'package:Trip/pages/home_page/sending_complain/sending_complain.dart';
+import 'package:Trip/pages/home_page/trip_detailes/trip_detailes.dart';
+import 'package:Trip/pages/home_page/trips/trips.dart';
 import 'package:Trip/pages/shared_pages/notifications.dart';
+import 'package:Trip/pages/splash/splash_page.dart';
 import 'package:Trip/pages/taps_page/taps.dart';
 import 'package:Trip/pages/create_account/where_do_you_want_to_work/where_do_you_want_to_work.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -51,11 +60,31 @@ List<GetPage> generateRoutes() {
         name: Routes.qrCodeGeneratorPage, page: () => QrCodeGEneratorPage()),
     GetPage(name: Routes.seeAllPage, page: () => SeeAllMoneyTransferingPage()),
     GetPage(name: Routes.notificationsPage, page: () => NotificationsPage()),
-    GetPage(name: Routes.tripsPage, page: () => TripsPage())
+    GetPage(name: Routes.tripsPage, page: () => TripsPage(), children: [
+      GetPage(name: Routes.trpiDetailesPage, page: () => TripDetailesPage())
+    ]),
+    GetPage(name: Routes.feesOnCarPage, page: () => FeesOnCarPage(), children: [
+      GetPage(name: Routes.feeDetailesPage, page: () => FeeDetailesPage()),
+      GetPage(
+          name: Routes.sendingComplainPage, page: () => SendingComplainPage())
+    ]),
+    GetPage(name: Routes.profilePage, page: () => ProfilePage(), children: [
+      GetPage(
+          name: Routes.financialTranscationsPage,
+          page: () => FinancialTranscationsPage()),
+      GetPage(name: Routes.garageRatingPage, page: () => GarageRatingPage())
+    ]),
   ];
 }
 
 class Routes {
+  static const garageRatingPage = '/garage_rating';
+  static const financialTranscationsPage = '/financial_transcations';
+  static const profilePage = '/profile';
+  static const sendingComplainPage = '/sending_complain';
+  static const feeDetailesPage = '/fee_detailes';
+  static const feesOnCarPage = '/fees_on_car';
+  static const trpiDetailesPage = '/trip_detailes';
   static const tripsPage = '/trips_page';
   static const notificationsPage = '/notifications';
   static const seeAllPage = '/see_all';

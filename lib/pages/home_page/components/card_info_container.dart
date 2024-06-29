@@ -1,14 +1,11 @@
-
 import 'package:flutter/material.dart';
 
 import '../../../config/utils/const_class.dart';
 
 class CardInfoContainer extends StatelessWidget {
-  const CardInfoContainer({
-    super.key,
-    required this.text,
-  });
+  CardInfoContainer({super.key, required this.text, this.fontSize});
   final String text;
+  double? fontSize;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,8 +14,11 @@ class CardInfoContainer extends StatelessWidget {
       decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,
           borderRadius:
-              BorderRadius.circular(CoustomBorderTheme.normalBorderRaduis)),
-      child: Text(text),
+              BorderRadius.circular(CustomBorderTheme.normalBorderRadius)),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: fontSize),
+      ),
     );
   }
 }

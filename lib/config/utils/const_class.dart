@@ -48,14 +48,14 @@ class CustomFontsTheme {
   static const double veryBigSize = 32;
   static const double bigSize = 24;
   static const normalWeight = FontWeight.w400;
-  static const double  mediumSize= 16;
-  static const double  normalSize= 14;
-  
-  static const double  smallSize= 12;
+  static const double mediumSize = 16;
+  static const double normalSize = 14;
+  static const double smallSize = 12;
+  static const double verySmallSize = 10;
 }
 
-class CoustomBorderTheme {
-  static const double normalBorderRaduis = 16;
+class CustomBorderTheme {
+  static const double normalBorderRadius = 16;
   static const double borderWidth = 2;
 }
 

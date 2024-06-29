@@ -16,7 +16,7 @@ class HomePageHead extends StatelessWidget {
               shape: BoxShape.circle,
               border: Border.all(
                   color: Theme.of(context).colorScheme.primaryContainer,
-                  width: CoustomBorderTheme.borderWidth / 2)),
+                  width: CustomBorderTheme.borderWidth / 2)),
           padding: EdgeInsets.all(5),
           child: CircleAvatar(
               radius: 25,
@@ -24,8 +24,8 @@ class HomePageHead extends StatelessWidget {
       trailing: IconButton(
           style: IconButton.styleFrom(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(
-                    CoustomBorderTheme.normalBorderRaduis),
+                borderRadius:
+                    BorderRadius.circular(CustomBorderTheme.normalBorderRadius),
               ),
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               elevation: 1,
