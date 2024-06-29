@@ -8,6 +8,8 @@ import 'package:Trip/pages/create_account/owner_car_info.dart/owner_car_info.dar
 import 'package:Trip/pages/create_account/qr_code/qr_code.dart';
 import 'package:Trip/pages/auth/register/register.dart';
 import 'package:Trip/pages/home_page/qr_code_generator.dart';
+import 'package:Trip/pages/home_page/trips.dart';
+import 'package:Trip/pages/shared_pages/notifications.dart';
 import 'package:Trip/pages/taps_page/taps.dart';
 import 'package:Trip/pages/create_account/where_do_you_want_to_work/where_do_you_want_to_work.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -47,11 +49,15 @@ List<GetPage> generateRoutes() {
         page: () => WhereDoYouWantToWorkPage()),
     GetPage(
         name: Routes.qrCodeGeneratorPage, page: () => QrCodeGEneratorPage()),
-    GetPage(name: Routes.seeAllPage, page: () => SeeAllMoneyTransferingPage())
+    GetPage(name: Routes.seeAllPage, page: () => SeeAllMoneyTransferingPage()),
+    GetPage(name: Routes.notificationsPage, page: () => NotificationsPage()),
+    GetPage(name: Routes.tripsPage, page: () => TripsPage())
   ];
 }
 
 class Routes {
+  static const tripsPage = '/trips_page';
+  static const notificationsPage = '/notifications';
   static const seeAllPage = '/see_all';
   static const qrCodeGeneratorPage = '/qr_code_generator';
   static const tapsPage = '/taps_page';

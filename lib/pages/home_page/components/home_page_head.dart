@@ -1,5 +1,5 @@
-
 import 'package:Trip/config/constant.dart';
+import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
 
 class HomePageHead extends StatelessWidget {
@@ -22,18 +22,16 @@ class HomePageHead extends StatelessWidget {
               radius: 25,
               backgroundImage: AssetImage(Assets.assetsImagesAvatarImage))),
       trailing: IconButton(
-          onPressed: () {},
-          icon: IconButton(
-              style: IconButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(
-                        CoustomBorderTheme.normalBorderRaduis),
-                  ),
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  elevation: 1,
-                  shadowColor: Theme.of(context).colorScheme.shadow),
-              onPressed: () {},
-              icon: SvgPicture.asset(Assets.assetsIconsNotification))),
+          style: IconButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(
+                    CoustomBorderTheme.normalBorderRaduis),
+              ),
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              elevation: 1,
+              shadowColor: Theme.of(context).colorScheme.shadow),
+          onPressed: () => Get.toNamed(Routes.notificationsPage),
+          icon: SvgPicture.asset(Assets.assetsIconsNotification)),
     );
   }
 }

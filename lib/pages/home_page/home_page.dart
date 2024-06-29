@@ -1,5 +1,6 @@
 import 'package:Trip/config/constant.dart';
 import 'package:Trip/pages/home_page/components/user_card.dart';
+import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
 import 'components/container_stack_decoration.dart';
 import 'components/home_page_bottom_falf.dart';
@@ -43,7 +44,7 @@ class HomePage extends StatelessWidget {
                     cardNumber: '50',
                     cardNumText: 'رحلة',
                     decoration: CirculerPositionedContainers(),
-                    onIconPressed: onIconPressed),
+                    onIconPressed: () => Get.toNamed(Routes.tripsPage)),
               ],
             ),
             Gap(Insets.medium),

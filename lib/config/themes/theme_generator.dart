@@ -234,7 +234,7 @@ class AppTheme {
   TextButtonThemeData _buildTextButtonTheme(Brightness brightness) {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
-       minimumSize: const Size(double.infinity, 50),
+        minimumSize: const Size(double.infinity, 50),
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
@@ -244,20 +244,22 @@ class AppTheme {
   }
 
   ElevatedButtonThemeData _buildElevatedButtonTheme(Brightness brightness) {
-  final colorScheme = _buildColorScheme(brightness); // Assuming you have a _buildColorScheme function
+    final colorScheme = _buildColorScheme(
+        brightness); // Assuming you have a _buildColorScheme function
 
-  return ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      elevation: 0,
-      minimumSize: const Size(double.infinity, 50),
-      backgroundColor: colorScheme.primary, // Use primary color from color scheme
-      foregroundColor: Colors.white, // White text color for foreground
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
+    return ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        elevation: 0,
+        minimumSize: const Size(double.infinity, 50),
+        backgroundColor:
+            colorScheme.primary, // Use primary color from color scheme
+        foregroundColor: Colors.white, // White text color for foreground
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   DatePickerThemeData _buildDatePickerTheme(Brightness) {
     return DatePickerThemeData(

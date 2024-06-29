@@ -23,7 +23,7 @@ class CustomListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 0.1,
-      color: Theme.of(context).scaffoldBackgroundColor,
+      color: Theme.of(context).colorScheme.onPrimary,
       child: ListTile(
         leading: Container(
           padding: EdgeInsets.all(Insets.small),
