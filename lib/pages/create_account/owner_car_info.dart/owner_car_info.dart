@@ -37,12 +37,9 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
       if (!_formKey.currentState!.validate()) {
         valid = false;
       }
-      if (controller.carPicture == null) {
-        valid = false;
-      }
-      if (controller.carLicensePicture == null) {
-        valid = false;
-      }
+      if (controller.carPicture == null) valid = false;
+      if (controller.carLicensePicture == null) valid = false;
+
       if (valid) {
         if (isOwner) {
           //Here im using osOwner as a way to know if the page is getting used in
@@ -53,7 +50,11 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
               arguments: {'isOwner': isOwner});
         } else {
           //and here just adding new car
-          Get.back();
+          Get.toNamed(Routes.qrCodeGeneratorPage, arguments: {
+            'text': 'اذهب الى الهيأة لأضافة السيارة',
+            'qrData': "https://github.com/karamiq/Garage-App",
+            'newCar': true,
+          });
         }
       } else {
         print('error');

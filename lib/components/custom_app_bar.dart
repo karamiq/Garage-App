@@ -23,7 +23,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           fontFamily: GoogleFonts.cairo().fontFamily,
           color: Theme.of(context).colorScheme.inverseSurface),
       centerTitle: true,
-      leadingWidth: 100,
+      leadingWidth: 70,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       leading: CustomBackButton(),
     );

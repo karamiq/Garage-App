@@ -1,7 +1,7 @@
 import 'package:Trip/components/custom_app_bar.dart';
 import 'package:Trip/config/constant.dart';
 import 'package:Trip/config/utils/const_class.dart';
-import 'package:Trip/pages/home_page/components/trip_card.dart';
+import 'package:Trip/components/trip_card.dart';
 import 'package:flutter/material.dart';
 
 import '../components/trips_sequared_card.dart';

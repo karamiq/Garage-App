@@ -12,12 +12,14 @@ class UserCard extends StatelessWidget {
     required this.carType,
     required this.carPlateInfo,
     this.buttonAppears = true,
+    required this.qrData,
   });
   final String cardNumber;
   final int cardMoney;
   final String expireDate;
   final String carType;
   final String carPlateInfo;
+  final String qrData;
   final bool buttonAppears;
   @override
   Widget build(BuildContext context) {
@@ -65,7 +67,13 @@ class UserCard extends StatelessWidget {
                               Theme.of(context).scaffoldBackgroundColor,
                           elevation: 1,
                           shadowColor: Theme.of(context).colorScheme.shadow),
-                      onPressed: () => Get.toNamed(Routes.qrCodeGeneratorPage),
+                      onPressed: () =>
+                          Get.toNamed(Routes.qrCodeGeneratorPage, arguments: {
+                            'text':
+                                'قم بأعطاء الكود عند البوابة للخروج من الكراج',
+                            'qrData': qrData,
+                            'newCar': false,
+                          }),
                       icon: Icon(
                         Icons.qr_code,
                         color: Theme.of(context).colorScheme.primary,

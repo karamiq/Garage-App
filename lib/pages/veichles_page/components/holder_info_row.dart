@@ -63,11 +63,11 @@ class HolderInfoRow extends StatelessWidget {
               child: VerticalDivider(),
             ),
             Expanded(
-              flex: 13,
+              flex: 12,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Gap(Insets.small),
+                  Gap(Insets.medium),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

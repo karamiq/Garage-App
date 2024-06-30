@@ -64,7 +64,7 @@ class _TapsPageState extends State<TapsPage> {
         selectedPage: _selectedPage,
         selectedPageIndex: pageIndex,
       ),
-      body: SafeArea(bottom: false, child: _pages[pageIndex]),
+      body: SafeArea(child: _pages[pageIndex]),
     );
   }
 }

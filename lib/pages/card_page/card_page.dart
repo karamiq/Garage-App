@@ -1,8 +1,6 @@
 import 'package:Trip/components/viewed_item_title.dart';
 import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
-
-import '../../components/custom_elevated_button.dart';
 import '../../components/custom_list_tile.dart';
 import '../../config/constant.dart';
 import '../home_page/components/home_page_head.dart';
@@ -26,6 +24,7 @@ class CardPage extends StatelessWidget {
                 ),
                 Gap(Insets.medium),
                 UserCard(
+                  qrData: 'https://github.com/karamiq/Garage-App',
                   carPlateInfo: '24214 أ / بغداد',
                   carType: 'دوج جارجر',
                   expireDate: ' 10/12/2025',

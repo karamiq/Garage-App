@@ -149,9 +149,17 @@ class Assets {
   /// assets/icons/lightMode.svg
   static const String assetsIconsLightMode = "assets/icons/lightMode.svg";
 
+  /// Assets for assetsIconsLocation
+  /// assets/icons/location.svg
+  static const String assetsIconsLocation = "assets/icons/location.svg";
+
   /// Assets for assetsIconsLocationMap
   /// assets/icons/locationMap.svg
   static const String assetsIconsLocationMap = "assets/icons/locationMap.svg";
+
+  /// Assets for assetsIconsLocationTick
+  /// assets/icons/location-tick.svg
+  static const String assetsIconsLocationTick = "assets/icons/location-tick.svg";
 
   /// Assets for assetsIconsLocations
   /// assets/icons/locations.svg
@@ -360,5 +368,9 @@ class Assets {
   /// Assets for assetsJsonTrip
   /// assets/json/trip.json
   static const String assetsJsonTrip = "assets/json/trip.json";
+
+  /// Assets for assetsThemesDarkMapStyle
+  /// assets/themes/dark_map_style.json
+  static const String assetsThemesDarkMapStyle = "assets/themes/dark_map_style.json";
 }
 

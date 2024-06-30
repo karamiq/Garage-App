@@ -13,7 +13,7 @@ import 'package:Trip/pages/home_page/fees_on_car/fees_on_car.dart';
 import 'package:Trip/pages/home_page/financial_transcations/financial_transcations.dart';
 import 'package:Trip/pages/home_page/garage_rating/garage_rating.dart';
 import 'package:Trip/pages/home_page/profile/profile.dart';
-import 'package:Trip/pages/home_page/qr_code_generator/qr_code_generator.dart';
+import 'package:Trip/pages/shared_pages/qr_code_generator/qr_code_generator.dart';
 import 'package:Trip/pages/shared_pages/sending_complain/sending_complain.dart';
 import 'package:Trip/pages/home_page/trip_detailes/trip_detailes.dart';
 import 'package:Trip/pages/home_page/trips/trips.dart';
@@ -23,6 +23,7 @@ import 'package:Trip/pages/taps_page/taps.dart';
 import 'package:Trip/pages/create_account/where_do_you_want_to_work/where_do_you_want_to_work.dart';
 import 'package:Trip/pages/veichles_page/all_available_drivers/all_available_drivers.dart';
 import 'package:Trip/pages/veichles_page/all_veichles/all_veichles.dart';
+import 'package:Trip/pages/veichles_page/selected_car_info/selected_car_info.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
 
 import '../pages/create_account/create_account_type/create_account_type.dart';
@@ -80,10 +81,12 @@ List<GetPage> generateRoutes() {
         name: Routes.allAvailableDriversPage,
         page: () => AllAvailableDriversPage()),
     GetPage(name: Routes.allVeichlesPage, page: () => AllVeichlesPage()),
+    GetPage(name: Routes.selectedCarInfoPage, page: () => SelectedCarInfoPage())
   ];
 }
 
 class Routes {
+  static const selectedCarInfoPage = '/selected_car_info';
   static const allAvailableDriversPage = '/all_available_drivers';
   static const allVeichlesPage = '/all_veichles';
   static const garageRatingPage = '/garage_rating';

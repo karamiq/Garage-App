@@ -64,6 +64,8 @@ dependencies:
   flutter_animated_dialog: ^2.0.1
   google_maps_flutter: ^2.2.8
   flutter_phone_direct_caller: ^2.1.1
+  widget_to_marker: ^1.0.5
+  flutter_polyline_points: ^2.0.1
   # google_maps_flutter: ^2.5.0
   # geolocator: ^10.1.0
   # dropdown_selection: ^2.0.3
@@ -106,6 +108,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/json/
+    - assets/themes/dark_map_style.json
   
   fonts:
     - family: Cairo

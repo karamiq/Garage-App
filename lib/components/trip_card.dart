@@ -1,7 +1,7 @@
 import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
 
-import '../../../config/constant.dart';
+import '../config/constant.dart';
 
 class TripCard extends StatelessWidget {
   const TripCard(

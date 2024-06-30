@@ -19,7 +19,6 @@ class CustomListTile extends StatelessWidget {
   final String trailing2;
 
   final String? trailing1;
-
   @override
   Widget build(BuildContext context) {
     return Container(

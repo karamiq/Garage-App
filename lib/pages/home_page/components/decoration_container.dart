@@ -10,10 +10,11 @@ class SequaredContainer extends StatelessWidget {
     return Transform.rotate(
       angle: 0.25 * 3.14,
       child: Container(
-        height: 150, width: 150,
+        height: 150,
+        width: 150,
         decoration: BoxDecoration(
-          border: Border.all(color: Theme.of(context).colorScheme.inversePrimary)
-        ),
+            border: Border.all(
+                color: Theme.of(context).colorScheme.inversePrimary)),
       ),
     );
   }
@@ -26,11 +27,12 @@ class CirculerContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150, width: 150,
+      height: 150,
+      width: 150,
       decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).colorScheme.inversePrimary),
-       shape: BoxShape.circle
-      ),
+          border:
+              Border.all(color: Theme.of(context).colorScheme.inversePrimary),
+          shape: BoxShape.circle),
     );
   }
 }

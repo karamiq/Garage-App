@@ -1,13 +1,8 @@
 import 'package:Trip/components/custom_elevated_button.dart';
-import 'package:Trip/components/custom_svg_style.dart';
-import 'package:Trip/components/custom_list_tile.dart';
 import 'package:Trip/config/constant.dart';
 import 'package:Trip/pages/home_page/components/home_page_head.dart';
-import 'package:Trip/pages/home_page/components/trip_card.dart';
 import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../components/viewed_item_title.dart';
 import 'components/holder_info_row.dart';
@@ -18,6 +13,35 @@ class VeichlesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List availableDrivers = [
+      HolderInfoRow(
+        id: '',
+        name: 'محمد علي',
+        state: 'بغداد',
+        photoUrl: '',
+        phoneNumber: '07728833423',
+      )
+    ];
+    List viechles = [
+      VehiclesInfoRow(
+          id: '',
+          carType: "سايبة",
+          carPlateNumber: '235587',
+          carLetter: "ج",
+          carState: "السليمانيو"),
+      VehiclesInfoRow(
+          id: '',
+          carType: "بي ام دبليو",
+          carPlateNumber: '9356',
+          carLetter: "ي",
+          carState: "البصرة"),
+      VehiclesInfoRow(
+          id: '',
+          carType: "بي ام دبليو",
+          carPlateNumber: '9356',
+          carLetter: "ي",
+          carState: "البصرة"),
+    ];
     return Scaffold(
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: Insets.medium),
@@ -34,43 +58,45 @@ class VeichlesPage extends StatelessWidget {
                       Routes.allVeichlesPage,
                     )),
             Gap(Insets.large * 1.5),
-            VehiclesInfoRow(
-                carType: "سايبة",
-                carPlateNumber: '235587',
-                carLetter: "ج",
-                carState: "السليمانيو"),
-            VehiclesInfoRow(
-                carType: "بي ام دبليو",
-                carPlateNumber: '9356',
-                carLetter: "ي",
-                carState: "البصرة"),
-            VehiclesInfoRow(
-                carType: "بي ام دبليو",
-                carPlateNumber: '9356',
-                carLetter: "ي",
-                carState: "البصرة"),
+            ListView.separated(
+                padding: EdgeInsets.all(0),
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                //The filtered list must be applied here when linking with api
+                itemBuilder: (context, index) => viechles[index],
+                separatorBuilder: (context, index) => Gap(Insets.small),
+                itemCount: viechles.length),
             Gap(Insets.large),
             ElevatedButton(
                 onPressed: () => Get.toNamed(Routes.ownerCarInfoPage,
                     arguments: {'isOwner': false}),
                 child: ElevatedButtonChild(
                     text: 'اضافة مركبة', icon: Assets.assetsIconsPlusCircle)),
-            Gap(Insets.large),
+            Gap(Insets.medium),
             Divider(),
-            Gap(Insets.large),
+            Gap(Insets.medium),
             ViewedItemsTitle(
                 mainText: 'الحائزين المتوفرين',
                 secontText: 'رؤية الجميع',
                 onTap: () => Get.toNamed(
                       Routes.allAvailableDriversPage,
                     )),
-            HolderInfoRow(
-              id: '',
-              name: 'محمد علي',
-              state: 'بغداد',
-              photoUrl: '',
-              phoneNumber: '07728833423',
-            )
+            if (availableDrivers.isNotEmpty)
+              ListView.separated(
+                  padding: EdgeInsets.all(0),
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  //The filtered list must be applied here when linking with api
+                  itemBuilder: (context, index) => availableDrivers[index],
+                  separatorBuilder: (context, index) => Gap(Insets.small),
+                  itemCount: availableDrivers.length),
+            if (availableDrivers.isEmpty)
+              Column(
+                children: [
+                  Gap(Insets.medium),
+                  Text('لا يوجد سآىق متوفر'),
+                ],
+              )
           ],
         ),
       ),

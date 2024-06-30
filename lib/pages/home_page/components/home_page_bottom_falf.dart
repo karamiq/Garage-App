@@ -1,9 +1,18 @@
-import 'package:Trip/pages/home_page/components/latest_trips.dart';
+import 'package:Trip/components/custom_list_tile.dart';
+import 'package:Trip/pages/home_page/latest_trips/latest_trips.dart';
 import 'package:Trip/pages/home_page/components/money_transfers.dart';
+import 'package:Trip/components/trip_card.dart';
 import 'package:flutter/material.dart';
 import '../../../config/constant.dart';
 
 class HomePageBottomHalf extends StatefulWidget {
+  final List latestTripsList;
+  final List moneyTransfersList;
+
+  const HomePageBottomHalf(
+      {super.key,
+      required this.latestTripsList,
+      required this.moneyTransfersList});
   @override
   _HomePageBottomHalfState createState() => _HomePageBottomHalfState();
 }
@@ -79,8 +88,8 @@ class _HomePageBottomHalfState extends State<HomePageBottomHalf>
           controller: _tabController,
           physics: NeverScrollableScrollPhysics(),
           children: [
-            LatestTrips(),
-            MoneyTransfers(),
+            LatestTrips(latestTripsList: widget.latestTripsList),
+            MoneyTransfers(moneyTransfersList: widget.moneyTransfersList),
           ],
         ),
       ),

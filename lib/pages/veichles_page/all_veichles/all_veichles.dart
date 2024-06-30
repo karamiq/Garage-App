@@ -1,6 +1,5 @@
 import 'package:Trip/components/custom_text_form_field.dart';
 import 'package:Trip/config/constant.dart';
-import 'package:Trip/pages/home_page/fees_on_car/components/car_fees_info_card.dart';
 import 'package:Trip/pages/veichles_page/components/viechle_info_row.dart';
 import 'package:flutter/material.dart';
 
@@ -56,6 +55,7 @@ class _AllVeichlesPageState extends State<AllVeichlesPage> {
                 physics: NeverScrollableScrollPhysics(),
                 //The filtered list must be applied here when linking with api
                 itemBuilder: (context, index) => VehiclesInfoRow(
+                    id: index.toString(),
                     carType: 'كورلا',
                     carPlateNumber: '93745',
                     carLetter: 'أ ',
