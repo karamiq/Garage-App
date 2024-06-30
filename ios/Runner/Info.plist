@@ -3,10 +3,13 @@
 <plist version="1.0">
 <dict>
 	
+	<key>NSContactsUsageDescription</key>
+<string>We need access to your contacts to make phone calls.</string>
 
 	<key>LSApplicationQueriesSchemes</key>
 <array>
   <string>sms</string>
+  <string>tel</string>
 </array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>

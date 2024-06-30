@@ -8,8 +8,8 @@ import '../../../config/constant.dart';
 import '../../../router/router.dart';
 import '../../home_page/components/container_stack_decoration.dart';
 import '../../home_page/components/home_page_bottom_falf.dart';
-import '../../home_page/components/home_page_head.dart';
 import '../../home_page/components/user_card.dart';
+import 'components/selected_car_info_head.dart';
 
 class SelectedCarInfoPage extends StatelessWidget {
   const SelectedCarInfoPage({super.key});
@@ -22,23 +22,8 @@ class SelectedCarInfoPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: Insets.medium),
           child: Column(
             children: [
-              ListTile(
-                contentPadding: EdgeInsets.all(0),
-                leading:
-                    CustomCirculerAvatar(path: Assets.assetsImagesAvatarImage),
-                trailing: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CustomISvgStyle(icon: Assets.assetsIconsPhone),
-                    Gap(Insets.small),
-                    Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Theme.of(context).colorScheme.primary,
-                      size: 30,
-                    ),
-                  ],
-                ),
-              ),
+              SelectedCarInfoHead(
+                  userName: 'محمد علي', phoneNumber: '07728833423'),
               Gap(Insets.medium),
               UserCard(
                   carPlateInfo: '24214 أ / بغداد',

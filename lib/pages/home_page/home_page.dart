@@ -23,13 +23,38 @@ class HomePage extends StatelessWidget {
             imageUrl: Assets.assetsImagesAvatarImage,
           ),
           Gap(Insets.medium),
-          UserCard(
-              carPlateInfo: '24214 أ / بغداد',
-              carType: 'دوج جارجر',
-              expireDate: ' 10/12/2025',
-              cardNumber: '10023',
-              qrData: 'https://github.com/karamiq/Garage-App',
-              cardMoney: 125000),
+          Stack(
+            alignment: Alignment.bottomRight,
+            children: [
+              UserCard(
+                  carPlateInfo: '24214 أ / بغداد',
+                  carType: 'دوج جارجر',
+                  expireDate: ' 10/12/2025',
+                  cardNumber: '10023',
+                  qrData: 'https://github.com/karamiq/Garage-App',
+                  cardMoney: 125000),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: IconButton(
+                  onPressed: () => Get.toNamed(Routes.profilePage),
+                  style: IconButton.styleFrom(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor:
+                          Theme.of(context).scaffoldBackgroundColor),
+                  icon: Transform.rotate(
+                    angle: 0.5,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.chevron_right,
+                        size: 30,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
           Gap(Insets.small),
           Row(
             children: [

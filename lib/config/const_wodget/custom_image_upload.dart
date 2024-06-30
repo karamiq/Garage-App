@@ -1,9 +1,4 @@
 import 'dart:io';
-
-import 'package:Trip/config/const_wodget/ink_me.dart';
-import 'package:Trip/config/utils/const_class.dart';
-import 'package:Trip/config/utils/functions.dart';
-import 'package:Trip/constants/assets.dart';
 import 'package:Trip/controller/file_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:mobkit_dashed_border/mobkit_dashed_border.dart';
@@ -104,7 +99,7 @@ class _CustomImageUploadState extends State<CustomImageUpload> {
             : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  //TODO: 
+                  //TODO:
                   //SvgPicture.asset(
                   //  Assets.assetsIconsUpload,
                   //  color: context.theme.colorScheme.scrim,

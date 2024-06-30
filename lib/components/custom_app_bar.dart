@@ -1,10 +1,7 @@
 import 'package:Trip/components/custom_back_botton.dart';
 import 'package:Trip/config/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../config/utils/const_class.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
@@ -17,6 +14,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
       title: title == null ? null : Text(title!),
       titleTextStyle: TextStyle(
           fontSize: CustomFontsTheme.bigSize,

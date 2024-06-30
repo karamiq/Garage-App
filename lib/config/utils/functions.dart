@@ -77,6 +77,7 @@ Future<void> makePhoneCall(String phoneNumber) async {
     scheme: 'tel',
     path: phoneNumber,
   );
+  print(launchUri);
   await launchUrl(launchUri);
 }
 

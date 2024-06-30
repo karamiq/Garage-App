@@ -42,24 +42,6 @@ class _TapsPageState extends State<TapsPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true,
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      //floatingActionButton: FloatingActionButton(
-      //  shape: const CircleBorder(),
-      //  elevation: 0,
-      //  onPressed: () {},
-      //  mini: true,
-      //  child: Container(
-      //    alignment: Alignment.center,
-      //    decoration: BoxDecoration(
-      //        color: const Color(0xFFC9DEE5),
-      //        borderRadius: BorderRadius.circular(50)),
-      //    child: const Icon(
-      //      Icons.add_circle_outline_rounded,
-      //      color: CustomColorsTheme.headLineColor,
-      //      size: 40,
-      //    ),
-      //  ),
-      //),
       bottomNavigationBar: CustomBottomAppBar(
         selectedPage: _selectedPage,
         selectedPageIndex: pageIndex,
