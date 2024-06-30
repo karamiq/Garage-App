@@ -21,14 +21,16 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: Insets.medium),
         child: Column(
           children: [
-            HomePageHead(),
+            HomePageHead(
+              imageUrl: Assets.assetsImagesAvatarImage,
+            ),
             Gap(Insets.medium),
             UserCard(
                 carPlateInfo: '24214 أ / بغداد',
                 carType: 'دوج جارجر',
                 expireDate: ' 10/12/2025',
                 cardNumber: '10023',
-                cardMoney: '125,000'),
+                cardMoney: 125000),
             Gap(Insets.small),
             Row(
               children: [

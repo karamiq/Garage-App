@@ -221,6 +221,10 @@ class Assets {
   /// assets/icons/phone.svg
   static const String assetsIconsPhone = "assets/icons/phone.svg";
 
+  /// Assets for assetsIconsPlusCircle
+  /// assets/icons/PlusCircle.svg
+  static const String assetsIconsPlusCircle = "assets/icons/PlusCircle.svg";
+
   /// Assets for assetsIconsPrivacy
   /// assets/icons/privacy.svg
   static const String assetsIconsPrivacy = "assets/icons/privacy.svg";

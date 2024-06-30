@@ -14,7 +14,7 @@ class UserCard extends StatelessWidget {
     this.buttonAppears = true,
   });
   final String cardNumber;
-  final String cardMoney;
+  final int cardMoney;
   final String expireDate;
   final String carType;
   final String carPlateInfo;
@@ -109,7 +109,7 @@ class UserCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'د.ع $cardMoney',
+                        price().format(cardMoney),
                         style: TextStyle(
                           fontSize: CustomFontsTheme.bigSize,
                           fontWeight: CustomFontsTheme.bigWeight,

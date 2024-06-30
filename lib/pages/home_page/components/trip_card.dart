@@ -33,36 +33,46 @@ class TripCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(Insets.small),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                          CustomBorderTheme.normalBorderRadius),
-                      color: Theme.of(context).colorScheme.onInverseSurface,
-                    ),
-                    child: SvgPicture.asset(
-                      Assets.assetsIconsRouting,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  Gap(Insets.small),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'من',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontSize: CustomFontsTheme.smallSize,
-                        ),
+              Expanded(
+                flex: 11,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(Insets.small),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                            CustomBorderTheme.normalBorderRadius),
+                        color: Theme.of(context).colorScheme.onInverseSurface,
                       ),
-                      Text(from),
-                    ],
-                  ),
-                ],
+                      child: SvgPicture.asset(
+                        Assets.assetsIconsRouting,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                    Gap(Insets.small),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'من',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontSize: CustomFontsTheme.smallSize,
+                            ),
+                          ),
+                          Text(
+                            from,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Container(
                 height: 40.0,
@@ -70,41 +80,55 @@ class TripCard extends StatelessWidget {
                   thickness: 1,
                 ),
               ),
-              Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'الى',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontSize: CustomFontsTheme.smallSize,
-                        ),
+              Expanded(
+                flex: 14,
+                child: Row(
+                  children: [
+                    Gap(Insets.exSmall),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'الى',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontSize: CustomFontsTheme.smallSize,
+                            ),
+                          ),
+                          Text(
+                            to,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 3,
+                          ),
+                        ],
                       ),
-                      Text(to)
-                    ],
-                  ),
-                  Gap(Insets.small),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'السعر الكلي',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontSize: CustomFontsTheme.smallSize,
-                        ),
+                    ),
+                    Gap(Insets.small),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'السعر الكلي',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontSize: CustomFontsTheme.smallSize,
+                            ),
+                          ),
+                          Text(
+                            '$price د. ع.',
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ],
                       ),
-                      Text('$price د. ع.')
-                    ],
-                  ),
-                  SvgPicture.asset(
-                    Assets.assetsIconsCaretLeft,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ],
+                    ),
+                    Icon(Icons.chevron_right,
+                        color: Theme.of(context).colorScheme.primary),
+                  ],
+                ),
               ),
             ],
           )),

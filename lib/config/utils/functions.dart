@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:Trip/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -69,6 +70,14 @@ Future<void> launchUrls(Uri url) async {
   } else {
     throw 'Could not launch $url';
   }
+}
+
+Future<void> makePhoneCall(String phoneNumber) async {
+  final Uri launchUri = Uri(
+    scheme: 'tel',
+    path: phoneNumber,
+  );
+  await launchUrl(launchUri);
 }
 
 void changeTheme(bool isDark) {

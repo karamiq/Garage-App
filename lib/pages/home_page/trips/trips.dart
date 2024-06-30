@@ -42,7 +42,9 @@ class TripsPage extends StatelessWidget {
               shrinkWrap: true,
               itemCount: 11,
               itemBuilder: (context, index) => TripCard(
-                  from: 'كراج العلاوي ', to: 'كراج ام قصر', price: '3,500'),
+                  from: 'كراج السليمانية  ',
+                  to: 'كراج صلاح اغعفلغ',
+                  price: '3,500'),
               separatorBuilder: (context, index) => Gap(Insets.small),
             )
           ],

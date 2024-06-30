@@ -13,14 +13,14 @@ class FeeCard extends StatelessWidget {
   final bool isFeePaid;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(Insets.small),
-      decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.onSecondary,
-          borderRadius:
-              BorderRadius.circular(CustomBorderTheme.normalBorderRadius)),
+    return Card(
+      elevation: 0,
+      color: Theme.of(context).colorScheme.onSecondary,
       child: ListTile(
-        contentPadding: EdgeInsets.all(0),
+        onTap: () => Get.toNamed(Routes.feesOnCarPage + Routes.feeDetailesPage,
+            //here is where tha id is passed
+            arguments: {'id': 'id'}),
+        contentPadding: EdgeInsets.symmetric(horizontal: Insets.small),
         leading: Container(
           padding: EdgeInsets.all(Insets.small),
           decoration: BoxDecoration(
@@ -60,16 +60,10 @@ class FeeCard extends StatelessWidget {
                           ? Color.fromARGB(255, 31, 72, 33)
                           : Color.fromARGB(255, 91, 30, 30)),
                 )),
-            IconButton(
-              onPressed: () =>
-                  Get.toNamed(Routes.feesOnCarPage + Routes.feeDetailesPage,
-                      //here is where tha id is passed
-                      arguments: {'id': 'id'}),
-              icon: Icon(
-                Icons.chevron_right_outlined,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              iconSize: Insets.large,
+            Gap(Insets.small),
+            Icon(
+              Icons.chevron_right_outlined,
+              color: Theme.of(context).colorScheme.primary,
             ),
           ],
         ),

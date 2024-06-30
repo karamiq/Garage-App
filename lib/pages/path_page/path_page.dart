@@ -23,7 +23,9 @@ class PathPage extends StatelessWidget {
             alignment: Alignment.topCenter,
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: Insets.medium),
-              child: HomePageHead(),
+              child: HomePageHead(
+                imageUrl: Assets.assetsImagesAvatarImage,
+              ),
             ),
           )
         ],

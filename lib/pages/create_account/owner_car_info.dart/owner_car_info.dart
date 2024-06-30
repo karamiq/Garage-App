@@ -44,8 +44,17 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
         valid = false;
       }
       if (valid) {
-        Get.toNamed(Routes.enterPersonalPicturePage,
-            arguments: {'isOwner': isOwner});
+        if (isOwner) {
+          //Here im using osOwner as a way to know if the page is getting used in
+          //creating account or just adding new car
+
+          //here if it's onwer then it's mean creating new account
+          Get.toNamed(Routes.enterPersonalPicturePage,
+              arguments: {'isOwner': isOwner});
+        } else {
+          //and here just adding new car
+          Get.back();
+        }
       } else {
         print('error');
       }
@@ -72,8 +81,9 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
                 ),
               ),
               SizedBox(height: Insets.small),
-              CustomAuthStepsTracker(
-                  itemCount: isOwner ? 4 : 3, highlightIndex: 1),
+              if (isOwner)
+                CustomAuthStepsTracker(
+                    itemCount: isOwner ? 4 : 3, highlightIndex: 1),
               SizedBox(height: Insets.medium * 2),
               Row(
                 mainAxisSize: MainAxisSize.min,

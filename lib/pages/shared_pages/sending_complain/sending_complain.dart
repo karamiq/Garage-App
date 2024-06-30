@@ -118,7 +118,13 @@ class _SendingComplainPageState extends State<SendingComplainPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text('( $textLength / 100 )'),
+                  Text(
+                    '( $textLength / 100 )',
+                    style: TextStyle(
+                        color: textLength > 100
+                            ? Theme.of(context).colorScheme.error
+                            : null),
+                  ),
                 ],
               ),
               Spacer(),
