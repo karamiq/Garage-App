@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:Trip/components/custom_back_botton.dart';
 import 'package:Trip/config/constant.dart';
+import 'package:Trip/config/validator/validator.dart';
+import 'package:Trip/controller/otp_controller.dart';
 import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
@@ -14,7 +16,8 @@ class OtpPage extends StatefulWidget {
 }
 
 class _OtpPageState extends State<OtpPage> {
-  final pinController = TextEditingController();
+  final OtpController otpController = Get.put<OtpController>(OtpController());
+
   bool buttomEnabled = false;
   int _countdown = 0;
 
@@ -22,9 +25,9 @@ class _OtpPageState extends State<OtpPage> {
 
   void startCountdown() {
     setState(() {
-      pinController.text = '';
+      otpController.otpCode.text = '';
       buttomEnabled = false;
-      _countdown = 60;
+      _countdown = 6999990;
     });
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (mounted) {
@@ -47,13 +50,6 @@ class _OtpPageState extends State<OtpPage> {
   }
 
   @override
-  void dispose() {
-    pinController.dispose();
-    _timer.cancel(); // Cancel the timer when the widget is disposed
-    super.dispose();
-  }
-
-  @override
   void initState() {
     super.initState();
     startCountdown();
@@ -61,9 +57,9 @@ class _OtpPageState extends State<OtpPage> {
 
   @override
   Widget build(BuildContext context) {
+    final OtpController controller = Get.put<OtpController>(OtpController());
     final data =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final phoneNumber = data['phoneNumber'];
     final isLogin = data['isLogin'];
     void confirm() {
       if (isLogin) {
@@ -91,7 +87,7 @@ class _OtpPageState extends State<OtpPage> {
             ),
             Gap(Insets.large),
             Text(
-              (phoneNumber!.substring(1) + ' 964+'),
+              (controller.phoneNumber.text.substring(1) + ' 964+'),
               style: TextStyle(
                 fontSize: CustomFontsTheme.mediumSize * 2,
               ),
@@ -103,8 +99,9 @@ class _OtpPageState extends State<OtpPage> {
                     fontSize: CustomFontsTheme.mediumSize)),
             Gap(Insets.exLarge),
             Pinput(
-              length: 5,
-              controller: pinController,
+              length: 6,
+              validator: otpController.validator,
+              controller: otpController.otpCode,
             ),
             Gap(Insets.large),
             Text(
@@ -136,7 +133,7 @@ class _OtpPageState extends State<OtpPage> {
             ),
             Gap(Insets.small),
             ElevatedButton(
-                onPressed: pinController.text.isEmpty
+                onPressed: otpController.otpCode.text.isEmpty
                     ? null
                     : (!buttomEnabled ? confirm : null),
                 child: Text(

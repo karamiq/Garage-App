@@ -4,6 +4,7 @@ import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
 import '../../../components/custom_elevated_button.dart';
 import '../../../config/constant.dart';
+import '../../../controller/otp_controller.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -14,7 +15,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController phoneNumberController = TextEditingController();
+  final OtpController otpController = Get.put<OtpController>(OtpController());
 
   String? validator(String? query) {
     return validatePhoneNumber(
@@ -25,8 +26,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   void next() {
     if (_formKey.currentState!.validate()) {
+      otpController.sendOtp();
       Get.toNamed(Routes.otpPage, arguments: {
-        'phoneNumber': phoneNumberController.text,
         'isLogin': false,
       });
     }
@@ -34,7 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
-    phoneNumberController = TextEditingController(text: '077');
+    otpController.phoneNumber = TextEditingController(text: '077');
     super.initState();
   }
 
@@ -48,7 +49,8 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
-            horizontal: Insets.medium, vertical: Insets.large),
+          horizontal: Insets.medium,
+        ),
         child: Form(
           key: _formKey,
           child: Column(
@@ -64,7 +66,7 @@ class _RegisterPageState extends State<RegisterPage> {
               Gap(Insets.medium),
               CustomTextFormField(
                 validator: validator,
-                controller: phoneNumberController,
+                controller: otpController.phoneNumber,
                 labelText: 'رقم الهاتف',
                 prefixIcon: Assets.assetsIconsPhone,
               ),

@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:Trip/config/constant.dart';
 import 'package:Trip/router/router.dart';
-import 'package:flutter/material.dart';
-import '../../../components/custom_text_form_field.dart';
+import 'package:Trip/components/custom_text_form_field.dart';
+import 'package:Trip/controller/otp_controller.dart';
 
 class LoginOrRigisterPage extends StatefulWidget {
   const LoginOrRigisterPage({super.key});
@@ -12,26 +14,29 @@ class LoginOrRigisterPage extends StatefulWidget {
 
 class _LoginOrRigisterPageState extends State<LoginOrRigisterPage> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController phoneNumberController = TextEditingController();
+  final OtpController otpController = Get.put<OtpController>(OtpController());
 
   void signIn() {
     if (_formKey.currentState!.validate()) {
-      Get.toNamed(Routes.otpPage,
-          arguments: {'phoneNumber': phoneNumberController.text,'isLogin': true,});
+      Get.toNamed(Routes.otpPage, arguments: {
+        'phoneNumber': otpController.phoneNumber.text,
+        'isLogin': true,
+      });
     }
   }
 
   @override
   void initState() {
-    phoneNumberController = TextEditingController(text: '077');
+    otpController.phoneNumber = TextEditingController(text: '077');
     super.initState();
   }
 
   String? validator(String? query) {
     return validatePhoneNumber(
-        query: query,
-        message: 'الرقم الذي قمت بأدخله خطأ ! يرجى التحقق منه',
-        context: context);
+      query: query,
+      message: 'الرقم الذي قمت بأدخله خطأ ! يرجى التحقق منه',
+      context: context,
+    );
   }
 
   @override
@@ -39,7 +44,9 @@ class _LoginOrRigisterPageState extends State<LoginOrRigisterPage> {
     return Scaffold(
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
-            horizontal: Insets.medium, vertical: Insets.large),
+          horizontal: Insets.medium,
+          vertical: Insets.large,
+        ),
         child: Form(
           key: _formKey,
           child: Column(
@@ -49,36 +56,28 @@ class _LoginOrRigisterPageState extends State<LoginOrRigisterPage> {
               Text(
                 'تسجيل الدخول',
                 style: TextStyle(
-                    fontSize: CustomFontsTheme.veryBigSize,
-                    fontWeight: CustomFontsTheme.bigWeight),
+                  fontSize: CustomFontsTheme.veryBigSize,
+                  fontWeight: CustomFontsTheme.bigWeight,
+                ),
               ),
               Gap(Insets.medium),
               CustomTextFormField(
                 validator: validator,
-                controller: phoneNumberController,
+                controller: otpController.phoneNumber,
                 labelText: 'رقم الهاتف',
-                prefixIcon:Assets.assetsIconsCustomPhone,
+                prefixIcon: Assets.assetsIconsCustomPhone,
               ),
               Gap(Insets.medium),
-              //CustomTextFormField(
-              //  validator: validator,
-              //  controller: phoneNumberController,
-              //  labelText: 'رقم الهاتف',
-              //  prefixIcon: SvgPicture.asset(
-              //    Assets.assetsIconsCustomPhone,
-              //    color: Theme.of(context).hintColor.withAlpha(100),
-              //  ),
-              //),
               Gap(Insets.exLarge),
               ElevatedButton(onPressed: signIn, child: Text('تسجيل الدخول')),
               Gap(Insets.small),
               OutlinedButton(
-                  onPressed: ()=>Get.toNamed(Routes.registerPage),
-                  style: OutlinedButton.styleFrom(
-                      foregroundColor: Theme.of(context).colorScheme.onSurface
-                      // minimumSize: const Size(double.infinity, 50),
-                      ),
-                  child: Text('انشاء حساب جديد'))
+                onPressed: () => Get.toNamed(Routes.registerPage),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Theme.of(context).colorScheme.onSurface,
+                ),
+                child: Text('انشاء حساب جديد'),
+              ),
             ],
           ),
         ),

@@ -1,5 +1,6 @@
 import 'package:Trip/components/custom_auth_steps_tracker.dart';
 import 'package:Trip/components/custom_item_select.dart';
+import 'package:Trip/config/const_wodget/custom_image_upload.dart';
 import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
 import '../../../../components/custom_date_picker.dart';
@@ -40,6 +41,7 @@ class _EnterHolderOrOwnerInfoPageState
       if (_formKey.currentState!.validate() &&
           controller.drivingLicensePicture != null) {
         if (isOwner) {
+          controller.printValues();
           Get.toNamed(Routes.ownerCarInfoPage, arguments: {'isOwner': isOwner});
         } else {
           Get.toNamed(Routes.enterPersonalPicturePage,

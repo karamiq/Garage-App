@@ -1,22 +1,19 @@
+import 'package:Trip/pages/path_page/components/map_trip_card.dart';
+import 'package:flutter/material.dart';
 import 'package:Trip/config/constant.dart';
 import 'package:Trip/pages/home_page/components/home_page_head.dart';
-import 'package:Trip/pages/path_page/components/path_page_content.dart';
-import 'package:Trip/pages/path_page/components/path_page_shimmer.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
 
-import 'components/map_trip_card.dart';
-
-class PathPage extends StatefulWidget {
-  const PathPage({super.key});
+class PathPageContent extends StatefulWidget {
+  const PathPageContent({super.key});
 
   @override
-  State<PathPage> createState() => _PathPageState();
+  State<PathPageContent> createState() => _PathPageContentState();
 }
 
-class _PathPageState extends State<PathPage> {
+class _PathPageContentState extends State<PathPageContent> {
   late GoogleMapController mapController;
   List<LatLng> polylineCoordinates = [];
   Map<String, Marker> markers = {};
@@ -78,19 +75,38 @@ class _PathPageState extends State<PathPage> {
 
   @override
   Widget build(BuildContext context) {
-    //i can do all the data fetch here and then pass it to the
-    //PathPageContent to display it to the user
-    Widget content = PathPageShimmer();
-    dynamic data = 'map data';
-    if (data == null) {
-      content = PathPageContent();
-    } else {
-      content = PathPageShimmer();
-    }
-    return Scaffold(
-      body: Stack(
-        children: [content],
-      ),
+    return Stack(
+      children: [
+        GoogleMap(
+          myLocationButtonEnabled: false,
+          myLocationEnabled: true,
+          zoomControlsEnabled: false,
+          initialCameraPosition:
+              CameraPosition(target: LatLng(33.312805, 44.361488), zoom: 10.5),
+          onMapCreated: (controller) {
+            mapController = controller;
+            mapController.setMapStyle(themeForMap);
+          },
+          markers: markers.values.toSet(),
+          polylines: {
+            Polyline(
+                width: 5,
+                color: Colors.green,
+                polylineId: PolylineId('line'),
+                points: polylineCoordinates)
+          },
+        ),
+        Align(
+          alignment: Alignment.topCenter,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: Insets.medium),
+            child: HomePageHead(
+              imageUrl: Assets.assetsImagesAvatarImage,
+            ),
+          ),
+        ),
+        MapTripCard(from: 'كراج العلاوي', to: 'كراج ام قصر')
+      ],
     );
   }
 }

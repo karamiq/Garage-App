@@ -10,7 +10,7 @@ import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 class DioHttp extends GetxController {
   Dio dio = Dio();
-  static const String baseUrls = 'http://164.92.197.198:6663/api';
+  static const String baseUrls = 'https://garagat-api.digital-logic.tech/api';
 
   @override
   void onInit() {

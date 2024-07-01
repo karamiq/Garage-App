@@ -37,8 +37,6 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
       if (!_formKey.currentState!.validate()) {
         valid = false;
       }
-      if (controller.carPicture == null) valid = false;
-      if (controller.carLicensePicture == null) valid = false;
 
       if (valid) {
         if (isOwner) {
@@ -46,6 +44,7 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
           //creating account or just adding new car
 
           //here if it's onwer then it's mean creating new account
+          controller.printValues();
           Get.toNamed(Routes.enterPersonalPicturePage,
               arguments: {'isOwner': isOwner});
         } else {

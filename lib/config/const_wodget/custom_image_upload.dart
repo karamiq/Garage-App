@@ -74,7 +74,7 @@ class _CustomImageUploadState extends State<CustomImageUpload> {
       },
       child: Container(
         width: context.width,
-        height: context.height * 0.14,
+        height: context.height * 0.22,
         padding: EdgeInsets.all(Insets.medium),
         decoration: BoxDecoration(
           color: const Color(0xff119DBB).withOpacity(0.08),

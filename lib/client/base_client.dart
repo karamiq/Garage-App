@@ -6,7 +6,7 @@ import 'package:tuple/tuple.dart';
 
 class BaseClient {
   static DioHttp get dioHttp => Get.find<DioHttp>();
- 
+
   static Future<dynamic> get({
     required String api,
     Map<String, dynamic>? queryParameters,
@@ -89,8 +89,9 @@ class BaseClient {
   }
 }
 
-
 class EndPoints {
   static const String login = '/login';
-  static const String register='/register';
+  static const String register = '/profiles/register';
+  static const verifyOtp = '/profiles/verify-otp';
+  static const sendOtp = '/profiles/send-otp';
 }

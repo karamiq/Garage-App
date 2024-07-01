@@ -32,7 +32,7 @@ List<GetPage> generateRoutes() {
   return [
     GetPage(
       name: Routes.splashPageRoute,
-      page: () => TapsPage(),
+      page: () => SplashPage(),
       //page: () => SplashPage(),
       children: [
         //GetPage(name: '/details', page: () => DetailsScreen()), // Nested route
