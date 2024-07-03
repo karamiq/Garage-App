@@ -1,4 +1,5 @@
 import 'package:Trip/config/constant.dart';
+import 'package:Trip/controller/create_onwer_controller.dart';
 import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
 import '../../../components/custom_back_botton.dart';
@@ -12,8 +13,11 @@ class CreateAccountTypePage extends StatefulWidget {
 }
 
 class _CreateAccountTypePageState extends State<CreateAccountTypePage> {
+  final CreateOwnerController controller =
+      Get.put<CreateOwnerController>(CreateOwnerController());
   bool isOnwerType = false;
   void next() {
+    controller.isOwner = isOnwerType;
     Get.toNamed(Routes.enterHolderOrOwnerInfoPage,
         arguments: {'isOwner': isOnwerType});
   }

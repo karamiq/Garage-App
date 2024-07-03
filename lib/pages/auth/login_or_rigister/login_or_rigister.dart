@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:Trip/config/constant.dart';
 import 'package:Trip/router/router.dart';
 import 'package:Trip/components/custom_text_form_field.dart';
@@ -18,6 +17,7 @@ class _LoginOrRigisterPageState extends State<LoginOrRigisterPage> {
 
   void signIn() {
     if (_formKey.currentState!.validate()) {
+      otpController.sendOtp();
       Get.toNamed(Routes.otpPage, arguments: {
         'phoneNumber': otpController.phoneNumber.text,
         'isLogin': true,
@@ -27,7 +27,7 @@ class _LoginOrRigisterPageState extends State<LoginOrRigisterPage> {
 
   @override
   void initState() {
-    otpController.phoneNumber = TextEditingController(text: '077');
+    otpController.phoneNumber = TextEditingController(text: '07709509877');
     super.initState();
   }
 

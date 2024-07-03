@@ -1,7 +1,6 @@
 import 'package:Trip/components/custom_app_bar.dart';
 import 'package:Trip/components/custom_item_select.dart';
 import 'package:Trip/config/constant.dart';
-import 'package:Trip/pages/create_account/owner_car_info.dart/owner_car_info.dart';
 import 'package:Trip/pages/veichles_page/components/holder_info_row.dart';
 import 'package:flutter/material.dart';
 
@@ -50,7 +49,7 @@ class _AllAvailableDriversPageState extends State<AllAvailableDriversPage> {
                   child: CustomItemSelect(
                       labelText: 'المحافظة',
                       controller: garageController,
-                      itemsList: iraqStates,
+                      itemList: [],
                       validator: null),
                 ),
                 Gap(Insets.small),
@@ -58,7 +57,7 @@ class _AllAvailableDriversPageState extends State<AllAvailableDriversPage> {
                   child: CustomItemSelect(
                       labelText: 'الكراج',
                       controller: stateController,
-                      itemsList: [],
+                      itemList: [],
                       validator: null),
                 ),
               ],

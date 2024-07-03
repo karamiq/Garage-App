@@ -1,4 +1,5 @@
 import 'package:Trip/config/constant.dart';
+import 'package:Trip/controller/otp_controller.dart';
 import 'package:pinput/pinput.dart';
 
 class CustomPinPut extends StatelessWidget {
@@ -8,6 +9,7 @@ class CustomPinPut extends StatelessWidget {
     super.key,
     this.onCompleted,
     this.onChanged,
+    required OtpController otpController,
   });
 
   @override

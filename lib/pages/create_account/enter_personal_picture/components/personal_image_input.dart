@@ -29,19 +29,7 @@ class _PersonalImageInputState extends State<PersonalImageInput> {
           type: FileType.image,
           allowMultiple: false,
         );
-      } else {
-        try {
-          final bool success = await platform.invokeMethod('captureImage');
-          if (success) {
-            print('Image captured successfully.');
-            // Handle the captured image
-          } else {
-            print('Failed to capture image.');
-          }
-        } on PlatformException catch (e) {
-          print('Error: ${e.message}');
-        }
-      }
+      } else {}
 
       if (result != null) {
         File pickedFile = File(result.files.single.path!);

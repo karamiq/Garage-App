@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:Trip/config/interceptor/dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:get/instance_manager.dart';
@@ -87,11 +89,62 @@ class BaseClient {
       return false;
     }
   }
+
+  //Wasn't here before
+  static Future<Tuple2<bool, dynamic>> postFile({
+    required String api,
+    required File file,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    try {
+      String fileName = file.path.split('/').last;
+      FormData formData = FormData.fromMap({
+        "file": await MultipartFile.fromFile(
+          file.path,
+          filename: fileName,
+        ),
+      });
+
+      Response<dynamic> response = await dioHttp.dio.post(
+        api,
+        data: formData,
+        queryParameters: queryParameters,
+        options: Options(
+          contentType: 'multipart/form-data',
+          // You can adjust timeout options as needed
+          receiveTimeout: const Duration(seconds: 30),
+          sendTimeout: const Duration(seconds: 30),
+        ),
+      );
+
+      return Tuple2(true, response.data);
+    } catch (e) {
+      Logger().e("Error in POST (File) request:");
+      Logger().e(e);
+      return const Tuple2(false, null);
+    }
+  }
 }
 
 class EndPoints {
+  //file
+  static const file = '/file';
+  static const files = 'file/multi';
+  //Mobile utils
+  static const governorate = '/mobile/governorates';
+  static const city = '/mobile/cities';
+  static const plateCharacter = '/mobile/plate-characters';
+  static const plateTypes = '/mobile/plate-types';
+  static const vehicleModel = '/mobile/vehicle-models';
+  static const vehiclTypes = '/mobile/vehicle-types';
+  static const pathTypes = '/mobile/path-types';
+  static const garages = '/mobile/garages';
+  static const paths = '/mobile/paths';
+  //Profiles
   static const String login = '/login';
-  static const String register = '/profiles/register';
+  static const String register = 'profiles/register';
   static const verifyOtp = '/profiles/verify-otp';
   static const sendOtp = '/profiles/send-otp';
+  static const notifications = '/profiles/notifications';
+  static const getDriverVehcile = '/profiles/get-driver-vehicles';
 }

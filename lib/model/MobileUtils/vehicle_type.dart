@@ -1,9 +1,9 @@
 class VehicleType {
-  String id;
-  DateTime creationDate;
-  bool deleted;
-  String name;
-  int numberOfSeat;
+  String? id;
+  DateTime? creationDate;
+  bool? deleted;
+  String? name;
+  int? numberOfSeat;
 
   VehicleType({
     required this.id,

@@ -1,12 +1,16 @@
-import 'package:Trip/components/custom_date_picker.dart';
 import 'package:Trip/components/custom_item_select.dart';
 import 'package:Trip/router/router.dart';
+import 'package:Trip/services/dio_govs&cities.dart';
 import 'package:flutter/material.dart';
 import '../../../components/custom_auth_steps_tracker.dart';
 import '../../../components/custom_back_botton.dart';
 import '../../../components/custom_text_form_field.dart';
+import '../../../components/custom_year_date_picker.dart';
 import '../../../config/constant.dart';
 import '../../../controller/create_onwer_controller.dart';
+import '../../../model/MobileUtils/vehicle_type.dart';
+import '../../../services/dio_plate.dart';
+import '../../../services/dio_vehicle.dart';
 import '../enter_holder_or_owner_info_page/components/image_input.dart';
 
 class OwnerCarInfoPage extends StatefulWidget {
@@ -25,38 +29,52 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
     return isValid;
   }
 
+  dynamic iraqStates = [];
+  dynamic carPlates = [];
+  static dynamic carCharacters = [];
+  List<VehicleType> carTypes = [];
+  dynamic carModels = [];
   bool valid = true;
+
+  Future<void> loadData() async {
+    iraqStates = await GovsService.gov();
+    carPlates = await PlateTypeService.plateTypeGet();
+    carModels = await VehicleService.vehicleModelGet();
+    carTypes = await VehicleService.vehicleTypeGet();
+    carCharacters = controller.carState.text.isEmpty
+        ? await PlateCharactersService.plateCharacterGet()
+        : [];
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
 
   @override
   Widget build(BuildContext context) {
     final data =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     bool isOwner = data['isOwner'];
+
     void checkValidation() {
+      controller.printVariables();
       setState(() => valid = true);
-      if (!_formKey.currentState!.validate()) {
-        valid = false;
-      }
+      if (!_formKey.currentState!.validate()) return;
+      if (controller.carLicensePicture == null) return;
+      if (controller.carPicture == null) return;
 
-      if (valid) {
-        if (isOwner) {
-          //Here im using osOwner as a way to know if the page is getting used in
-          //creating account or just adding new car
-
-          //here if it's onwer then it's mean creating new account
-          controller.printValues();
-          Get.toNamed(Routes.enterPersonalPicturePage,
-              arguments: {'isOwner': isOwner});
-        } else {
-          //and here just adding new car
-          Get.toNamed(Routes.qrCodeGeneratorPage, arguments: {
-            'text': 'اذهب الى الهيأة لأضافة السيارة',
-            'qrData': "https://github.com/karamiq/Garage-App",
-            'newCar': true,
-          });
-        }
+      if (isOwner) {
+        Get.toNamed(Routes.enterPersonalPicturePage,
+            arguments: {'isOwner': isOwner});
       } else {
-        print('error');
+        Get.toNamed(Routes.qrCodeGeneratorPage, arguments: {
+          'text': 'اذهب الى الهيأة لأضافة السيارة',
+          'qrData': "https://github.com/karamiq/Garage-App",
+          'newCar': true,
+        });
       }
     }
 
@@ -74,12 +92,8 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
           key: _formKey,
           child: Column(
             children: [
-              Text(
-                'معلومات السيارة',
-                style: TextStyle(
-                  fontSize: CustomFontsTheme.veryBigSize,
-                ),
-              ),
+              Text('معلومات السيارة',
+                  style: TextStyle(fontSize: CustomFontsTheme.veryBigSize)),
               SizedBox(height: Insets.small),
               if (isOwner)
                 CustomAuthStepsTracker(
@@ -100,11 +114,16 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
                   SizedBox(width: Insets.small),
                   Expanded(
                     child: CustomItemSelect(
-                      //onSelect: (value) =>
-                      //controller.carPlateLetter.text = value,
+                      onChanged: (selectedChar) async {
+                        controller.plateCharacterId.text = selectedChar.id;
+                        dynamic ff = await GovsService.govGetById(
+                            selectedChar.governorateId);
+                        controller.carState.text = ff.name;
+                        print(selectedChar);
+                      },
                       labelText: 'حرف اللوحة',
                       controller: controller.carPlateLetter,
-                      itemsList: iraqiPlateLetters,
+                      itemList: carCharacters,
                       validator: validator,
                     ),
                   ),
@@ -112,19 +131,26 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
               ),
               SizedBox(height: Insets.small),
               CustomItemSelect(
-                //onSelect: (value) => controller.carState.text = value,
                 labelText: 'المحافظة',
                 controller: controller.carState,
-                itemsList: iraqStates,
+                itemList: iraqStates,
                 validator: validator,
+                onChanged: (selectedState) async {
+                  controller.carGovernorateId.text = selectedState.id;
+                  controller.carPlateLetter = TextEditingController();
+                  carCharacters =
+                      await PlateCharactersService.plateCharacterGetByGovId(
+                          selectedState.id);
+                  setState(() {});
+                },
               ),
               SizedBox(height: Insets.small),
               CustomItemSelect(
-                //onSelect: (value) => controller.carPlateType.text = value,
                 labelText: 'نوع اللوحة',
                 controller: controller.carPlateType,
-                itemsList: carPlates,
+                itemList: carPlates,
                 validator: validator,
+                onChanged: (p0) => controller.plateTypeId.text = p0.id,
               ),
               SizedBox(height: Insets.small),
               CustomTextFormField(
@@ -135,26 +161,30 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
                 prefixIcon: Assets.assetsIconsCarNumber,
               ),
               SizedBox(height: Insets.small),
-              CustomTextFormField(
-                validator: validator,
-                controller: controller.carType,
+              CustomItemSelect(
                 labelText: 'نوع المركبة',
+                controller: controller.carType,
+                itemList: carTypes,
+                validator: validator,
                 prefixIcon: Assets.assetsIconsCar,
+                onChanged: (p0) => controller.vehicleTypeId.text = p0.id,
               ),
               SizedBox(height: Insets.small),
-              CustomTextFormField(
+              CustomItemSelect(
+                itemList: carModels,
                 validator: validator,
                 controller: controller.carModel,
                 labelText: 'موديل المركبة',
                 prefixIcon: Assets.assetsIconsDocument,
+                onChanged: (p0) => controller.vehicleModelId.text = p0.id,
               ),
               SizedBox(height: Insets.small),
-              CustomDatePicker(
-                  validator: validator,
-                  onSelect: (value) => controller.carYear.text = value,
-                  labelText: 'سنة الصنع',
-                  controller: controller.carYear,
-                  prefixIcon: Assets.assetsIconsCalendar),
+              CustomYearDatePicker(
+                validator: validator,
+                labelText: 'سنة الصنع',
+                controller: controller.carYear,
+                prefixIcon: Assets.assetsIconsCalendar,
+              ),
               SizedBox(height: Insets.small),
               CustomTextFormField(
                 validator: validator,
@@ -200,108 +230,3 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
     );
   }
 }
-
-List<String> carPlates = [
-  'خصوصي',
-  'حكومي',
-  'دبلوماسي',
-  'أجرة',
-  'تجاري',
-  'مؤقت',
-];
-
-List<String> iraqiPlateLetters = [
-  'ب',
-  'ت',
-  'ث',
-  'ج',
-  'ح',
-  'خ',
-  'د',
-  'ذ',
-  'ر',
-  'ز',
-  'س',
-  'ش',
-  'ص',
-  'ض',
-  'ط',
-  'ظ',
-  'ع',
-  'غ',
-  'ف',
-  'ق',
-  'ك',
-  'ل',
-  'م',
-  'ن',
-  'ه',
-  'و',
-  'ي'
-];
-List<String> arabicCarModels = [
-  'تويوتا كامري',
-  'نيسان التيما',
-  'هوندا أكورد',
-  'مرسيدس بنز C-Class',
-  'بي إم دبليو الفئة الثالثة',
-  'أودي A4',
-  'فورد موستانج',
-  'كيا أوبتيما',
-  'هيونداي سوناتا',
-  'لكزس ES',
-  'شفروليه ماليبو',
-  'فولكس واجن باسات',
-  'مازدا 6',
-  'جينيسيس G70',
-  'سوبارو ليجاسي',
-  'جيب جراند شيروكي',
-  'رينو تاليسمان',
-  'فولفو S60',
-  'بورشه باناميرا',
-  'جاغوار XF',
-];
-List<String> arabicCarTypes = [
-  'سيدان',
-  'هاتشباك',
-  'كوبيه',
-  'كروس أوفر',
-  'كروسوفر',
-  'كوبيه كابريوليه',
-  'كامباكت',
-  'كاميونيت',
-  'ميني فان',
-  'فان',
-  'جيب',
-  'ستيشن واجون',
-  'سبورت',
-  'كابروليه',
-  'أفانت',
-  'بيك آب',
-  'كارجو فان',
-  'سوبر كار',
-  'هاتشباك سبورت',
-  'ميكرو كار',
-];
-
-List<String> iraqStates = [
-  'بغداد',
-  'الأنبار',
-  'بابل',
-  'بصرة',
-  'دهوك',
-  'القادسية',
-  'ديالى',
-  'ذي قار',
-  'السليمانية',
-  'كربلاء',
-  'كركوك',
-  'ميسان',
-  'النجف',
-  'نينوى',
-  'واسط',
-  'البصرة',
-  'المثنى',
-  'القادسية',
-  'المثنى'
-];

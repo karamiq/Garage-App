@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:Trip/config/constant.dart';
 import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
@@ -25,16 +27,17 @@ class _EnterPersonalPicturePageState extends State<EnterPersonalPicturePage> {
     final data =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     bool isOwner = data['isOwner'];
-    bool checkValidation() {
-      controller.printValues();
+    Future<bool> checkValidation() async {
       setState(() {
         isValid = controller.personalPicture != null;
       });
       if (isValid) {
+        await controller.register();
         if (isOwner) {
           Get.toNamed(Routes.createQrCodePage, arguments: {'isOwner': isOwner});
         } else {
-          Get.toNamed(Routes.whereDoYouWantToWorkPage, arguments: {'isOwner': isOwner});
+          Get.toNamed(Routes.whereDoYouWantToWorkPage,
+              arguments: {'isOwner': isOwner});
         }
       }
       return isValid;

@@ -11,11 +11,6 @@
   <string>sms</string>
   <string>tel</string>
 </array>
-	<key>NSCameraUsageDescription</key>
-<string>Used to capture photos for uploading.</string>
-
-
-
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

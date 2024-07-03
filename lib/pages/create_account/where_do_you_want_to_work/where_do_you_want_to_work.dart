@@ -8,12 +8,36 @@ import '../../../components/custom_back_botton.dart';
 import '../../../config/utils/const_class.dart';
 import '../../../config/utils/functions.dart';
 import '../../../controller/create_onwer_controller.dart';
+import '../../../services/dio_govs&cities.dart';
 
-class WhereDoYouWantToWorkPage extends StatelessWidget {
+class WhereDoYouWantToWorkPage extends StatefulWidget {
   const WhereDoYouWantToWorkPage({super.key});
+
+  @override
+  State<WhereDoYouWantToWorkPage> createState() =>
+      _WhereDoYouWantToWorkPageState();
+}
+
+class _WhereDoYouWantToWorkPageState extends State<WhereDoYouWantToWorkPage> {
   String? validator(String? query) {
     final isValid = validateInfo(query);
     return isValid;
+  }
+
+  dynamic iraqStates = [];
+  dynamic carPlates = [];
+  dynamic carCharacters = [];
+  bool valid = true;
+
+  Future<void> loadData() async {
+    iraqStates = await GovsService.gov();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
   }
 
   @override
@@ -25,7 +49,6 @@ class WhereDoYouWantToWorkPage extends StatelessWidget {
     //     ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     // bool isOwner = data['isOwner'];
     void checkValidation() {
-      controller.printValues();
       if (_formKey.currentState!.validate()) {
         Get.toNamed(Routes.createQrCodePage, arguments: {'isOwner': false});
       }
@@ -56,13 +79,13 @@ class WhereDoYouWantToWorkPage extends StatelessWidget {
               CustomItemSelect(
                   labelText: 'المحافظة',
                   controller: controller.holderStateWork,
-                  itemsList: iraqStates,
+                  itemList: iraqStates,
                   validator: validator),
               SizedBox(height: Insets.small),
               CustomItemSelect(
                   labelText: 'الكراج',
                   controller: controller.holderGarageWork,
-                  itemsList: ['العلاوي', 'النهضة'],
+                  itemList: ['العلاوي', 'النهضة'],
                   validator: validator),
               Spacer(),
               ElevatedButton(

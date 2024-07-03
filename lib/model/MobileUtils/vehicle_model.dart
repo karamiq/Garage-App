@@ -1,8 +1,8 @@
 class VehicleModel {
-  String id;
-  DateTime creationDate;
-  bool deleted;
-  String name;
+  String? id;
+  DateTime? creationDate;
+  bool? deleted;
+  String? name;
 
   VehicleModel({
     required this.id,

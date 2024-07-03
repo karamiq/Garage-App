@@ -1,6 +1,5 @@
 import 'package:Trip/components/custom_svg_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 import '../../../config/constant.dart';
 

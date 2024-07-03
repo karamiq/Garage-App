@@ -1,4 +1,5 @@
 import 'package:Trip/config/constant.dart';
+import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
 
 class KeepGoingPage extends StatelessWidget {
@@ -15,29 +16,32 @@ class KeepGoingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Gap(Insets.exLarge),
-              SvgPicture.asset(Assets.assetsIconsCheckCircleFilled,height: 250,color: Theme.of(context).colorScheme.primary,)
-             ,Gap(Insets.exLarge),
-             Column(
-              children: [
-                Text('تهانينا',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: CustomFontsTheme.veryBigSize*1.5
+              SvgPicture.asset(
+                Assets.assetsIconsCheckCircleFilled,
+                height: 250,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              Gap(Insets.exLarge),
+              Column(
+                children: [
+                  Text(
+                    'تهانينا',
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: CustomFontsTheme.veryBigSize * 1.5),
                   ),
-                ),
-                Gap(Insets.exSmall),
-                Text('تم انشاء الحساب بنجاح',
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.secondary,
-                    fontSize: CustomFontsTheme.mediumSize*1.5
-                  ),
-                )
-              ],
-             ),
-
-            ElevatedButton(
-                onPressed: ()=>Get.to,
-                child:Text('استمرار'),
+                  Gap(Insets.exSmall),
+                  Text(
+                    'تم انشاء الحساب بنجاح',
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.secondary,
+                        fontSize: CustomFontsTheme.mediumSize * 1.5),
+                  )
+                ],
+              ),
+              ElevatedButton(
+                onPressed: () => Get.offAllNamed(Routes.tapsPage),
+                child: Text('استمرار'),
               ),
             ],
           ),

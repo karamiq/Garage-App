@@ -20,7 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  dynamic uerInfo;
   Future<dynamic> fetchData() async {}
   @override
   Widget build(BuildContext context) {
@@ -30,8 +29,8 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.symmetric(horizontal: Insets.medium),
           child: Column(
             children: [
-              if (uerInfo != null) HomePageSkeleton(),
-              if (uerInfo == null) HomePageContent(),
+              //HomePageSkeleton(),
+              HomePageContent(),
             ],
           ),
         ));

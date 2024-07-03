@@ -6,7 +6,7 @@ import 'package:Trip/pages/create_account/keep_going/keep_going.dart';
 import 'package:Trip/pages/auth/login_or_rigister/login_or_rigister.dart';
 import 'package:Trip/pages/auth/otp/otp.dart';
 import 'package:Trip/pages/create_account/owner_car_info.dart/owner_car_info.dart';
-import 'package:Trip/pages/create_account/qr_code/qr_code.dart';
+import 'package:Trip/pages/create_account/qr_code/create_qr_code.dart';
 import 'package:Trip/pages/auth/register/register.dart';
 import 'package:Trip/pages/home_page/fee_detailes/fee_detailes.dart';
 import 'package:Trip/pages/home_page/fees_on_car/fees_on_car.dart';
@@ -17,7 +17,7 @@ import 'package:Trip/pages/shared_pages/qr_code_generator/qr_code_generator.dart
 import 'package:Trip/pages/shared_pages/sending_complain/sending_complain.dart';
 import 'package:Trip/pages/home_page/trip_detailes/trip_detailes.dart';
 import 'package:Trip/pages/home_page/trips/trips.dart';
-import 'package:Trip/pages/shared_pages/notifications.dart';
+import 'package:Trip/pages/shared_pages/notifications/notifications.dart';
 import 'package:Trip/pages/splash/splash_page.dart';
 import 'package:Trip/pages/taps_page/taps.dart';
 import 'package:Trip/pages/create_account/where_do_you_want_to_work/where_do_you_want_to_work.dart';
@@ -32,7 +32,7 @@ List<GetPage> generateRoutes() {
   return [
     GetPage(
       name: Routes.splashPageRoute,
-      page: () => SplashPage(),
+      page: () => LoginOrRigisterPage(),
       //page: () => SplashPage(),
       children: [
         //GetPage(name: '/details', page: () => DetailsScreen()), // Nested route

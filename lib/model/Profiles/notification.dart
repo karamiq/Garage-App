@@ -1,4 +1,4 @@
-class Notification {
+class Notif {
   String id;
   bool deleted;
   DateTime creationDate;
@@ -12,7 +12,7 @@ class Notification {
   bool isRead;
   int notificationDestination;
 
-  Notification({
+  Notif({
     required this.id,
     required this.deleted,
     required this.creationDate,
@@ -28,8 +28,8 @@ class Notification {
   });
 
   // Factory method to create a Notification from JSON
-  factory Notification.fromJson(Map<String, dynamic> json) {
-    return Notification(
+  factory Notif.fromJson(Map<String, dynamic> json) {
+    return Notif(
       id: json['id'],
       deleted: json['deleted'],
       creationDate: DateTime.parse(json['creationDate']),

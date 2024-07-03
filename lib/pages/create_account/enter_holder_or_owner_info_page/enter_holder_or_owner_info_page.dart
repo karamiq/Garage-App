@@ -1,17 +1,19 @@
 import 'package:Trip/components/custom_auth_steps_tracker.dart';
 import 'package:Trip/components/custom_item_select.dart';
-import 'package:Trip/config/const_wodget/custom_image_upload.dart';
+import 'package:Trip/pages/create_account/components/cities_management.dart';
 import 'package:Trip/router/router.dart';
+import 'package:Trip/services/dio_files.dart';
 import 'package:flutter/material.dart';
 import '../../../../components/custom_date_picker.dart';
 import '../../../../components/custom_text_form_field.dart';
 import '../../../../config/constant.dart';
 import '../../../../controller/create_onwer_controller.dart';
 import '../../../components/custom_back_botton.dart';
+import '../../../services/dio_govs&cities.dart';
 import 'components/image_input.dart';
 
 class EnterHolderOrOwnerInfoPage extends StatefulWidget {
-  const EnterHolderOrOwnerInfoPage({super.key});
+  EnterHolderOrOwnerInfoPage({super.key});
 
   @override
   State<EnterHolderOrOwnerInfoPage> createState() =>
@@ -21,14 +23,34 @@ class EnterHolderOrOwnerInfoPage extends StatefulWidget {
 class _EnterHolderOrOwnerInfoPageState
     extends State<EnterHolderOrOwnerInfoPage> {
   TextEditingController DatePicker = TextEditingController();
+
   String? message;
+
   final CreateOwnerController controller =
       Get.put<CreateOwnerController>(CreateOwnerController());
+
   String? storagingType;
+
   final _formKey = GlobalKey<FormState>();
+
   String? validator(String? query) {
     final isvalid = validateInfo(query);
     return isvalid;
+  }
+
+  dynamic governorateCities = [];
+  dynamic iraqStates = [];
+
+  Future<void> loadData() async {
+    iraqStates = await GovsService.gov();
+
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    loadData();
+    super.initState();
   }
 
   @override
@@ -36,12 +58,11 @@ class _EnterHolderOrOwnerInfoPageState
     final data =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final isOwner = data['isOwner'];
-    void nextPage() {
-      controller.printValues();
+    void nextPage() async {
+      controller.printVariables();
       if (_formKey.currentState!.validate() &&
           controller.drivingLicensePicture != null) {
         if (isOwner) {
-          controller.printValues();
           Get.toNamed(Routes.ownerCarInfoPage, arguments: {'isOwner': isOwner});
         } else {
           Get.toNamed(Routes.enterPersonalPicturePage,
@@ -50,6 +71,7 @@ class _EnterHolderOrOwnerInfoPageState
       }
     }
 
+    CitiesManagement citiesManagement = CitiesManagement();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -88,8 +110,13 @@ class _EnterHolderOrOwnerInfoPageState
                 CustomItemSelect(
                     validator: validator,
                     labelText: 'المحافظة',
-                    controller: controller.state,
-                    itemsList: iraqStates),
+                    controller: controller.governorate,
+                    itemList: iraqStates,
+                    onChanged: (p0) {
+                      controller.area = TextEditingController();
+                      governorateCities = citiesManagement
+                          .citiesAccordingToGov(controller.governorate.text);
+                    }),
                 Gap(Insets.small),
                 CustomTextFormField(
                     validator: validator,
@@ -99,6 +126,7 @@ class _EnterHolderOrOwnerInfoPageState
                 Gap(Insets.small),
                 CustomTextFormField(
                     validator: validator,
+                    keyboardType: TextInputType.number,
                     controller: controller.idNumber,
                     labelText: 'رقم الهوية',
                     prefixIcon: Assets.assetsIconsBuilding),
@@ -110,12 +138,17 @@ class _EnterHolderOrOwnerInfoPageState
                     prefixIcon: Assets.assetsIconsCalendar),
                 Gap(Insets.small),
                 CustomDatePicker(
-                  onSelect: (value) => controller.issuerDate.text = value,
                   labelText: 'تاريخ الاصدار',
                   controller: controller.issuerDate,
                   prefixIcon: Assets.assetsIconsCalendar,
                   validator: validator,
                 ),
+                CustomTextFormField(
+                    validator: validator,
+                    keyboardType: TextInputType.number,
+                    controller: controller.drivingLicenseNumber,
+                    labelText: 'رقم أجازة السوق',
+                    prefixIcon: Assets.assetsIconsCard),
                 Gap(Insets.small),
                 ImageInput(
                   text: 'قم برفع صورة لأجازة السوق',
@@ -140,25 +173,3 @@ class _EnterHolderOrOwnerInfoPageState
     );
   }
 }
-
-List<String> iraqStates = [
-  'بغداد',
-  'الأنبار',
-  'بابل',
-  'بصرة',
-  'دهوك',
-  'القادسية',
-  'ديالى',
-  'ذي قار',
-  'السليمانية',
-  'كربلاء',
-  'كركوك',
-  'ميسان',
-  'النجف',
-  'نينوى',
-  'واسط',
-  'البصرة',
-  'المثنى',
-  'القادسية',
-  'المثنى'
-];

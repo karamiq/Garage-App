@@ -1,11 +1,18 @@
 import 'package:Trip/client/base_client.dart';
 import 'package:Trip/config/constant.dart';
+import 'package:Trip/controller/current_user_controller.dart';
+import 'package:Trip/main.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../model/Profiles/profile.dart';
 
 class OtpController extends GetxController {
+  bool isLoading = false;
   TextEditingController phoneNumber = TextEditingController();
   TextEditingController otpCode = TextEditingController();
+  String? verifyToken;
   String? token;
 
   Future<void> sendOtp() async {
@@ -14,34 +21,31 @@ class OtpController extends GetxController {
         api: EndPoints.sendOtp,
         data: {"phoneNumber": phoneNumber.text},
       );
-      print(
-          '============================================================================');
-      token = response.item2!['verifyToken'];
-      print('token: ${token}');
-      //print(response);
+      verifyToken = response.item2['verifyToken'];
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString('token', verifyToken!);
+      print('verifyToken: ${verifyToken}');
     } catch (e) {
-      print(
-          '============================================================================');
-      throw e; // Rethrow the error to be caught by the caller
+      throw e;
     }
   }
 
   Future<void> verifyOtp() async {
+    isLoading = true;
+    UserController userController = Get.put<UserController>(UserController());
     try {
       final response = await BaseClient.post(
-        api: EndPoints.sendOtp,
-        data: {"phoneNumber": phoneNumber.text},
+        api: EndPoints.verifyOtp,
+        data: {"code": otpCode.text},
       );
-      print(
-          '============================================================================');
-      token = response.item2.data;
-      print('response.item2.data: ${token}');
-      print(response);
+      token = response.item2?['token'];
+      prefs.setString('token', token!);
+      userController.currentuUser = Driver.fromJson(response.item2['driver']);
     } catch (e) {
-      print(
-          '============================================================================');
-      throw e; // Rethrow the error to be caught by the caller
+      isLoading = false;
+      throw e;
     }
+    isLoading = false;
   }
 
   String? validator(String? query) {

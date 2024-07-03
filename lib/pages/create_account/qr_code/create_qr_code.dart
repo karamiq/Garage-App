@@ -1,6 +1,7 @@
 import 'package:Trip/config/constant.dart';
 import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import '../../../components/custom_auth_steps_tracker.dart';
 import '../../../components/custom_back_botton.dart';
 
@@ -55,7 +56,9 @@ class CreateQrCodePage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(
                           CustomBorderTheme.normalBorderRadius * 2)),
                   child: Center(
-                    child: null,
+                    child: QrImageView(
+                        data:
+                            'https://garagat-api.digital-logic.tech/Attachments/7ad203e5-2b92-4554-a7de-129e62b3964f.jpeg'),
                   ),
                 ),
               ),

@@ -96,7 +96,7 @@ class _SendingComplainPageState extends State<SendingComplainPage> {
                 CustomItemSelect(
                     labelText: 'أختر نوع الشكوى',
                     controller: complainTypeController,
-                    itemsList: [
+                    itemList: [
                       'شكوى عامة', // General Complaint
                       'شكوى عن خدمة عملاء', // Customer Service Complaint
                       'شكوى عن منتج', // Product Complaint

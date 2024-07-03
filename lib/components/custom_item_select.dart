@@ -4,18 +4,22 @@ import '../config/constant.dart';
 import 'custom_text_form_field.dart';
 
 class CustomItemSelect extends StatelessWidget {
-  const CustomItemSelect(
-      {super.key,
-      required this.labelText,
-      required this.controller,
-      required this.itemsList,
-      required this.validator,
-      this.prefixIcon});
+  CustomItemSelect({
+    super.key,
+    required this.labelText,
+    required this.controller,
+    required this.itemList,
+    required this.validator,
+    this.onChanged,
+    this.prefixIcon,
+  });
+
   final String labelText;
   final dynamic validator;
   final TextEditingController controller;
-  final List<String> itemsList;
+  final List<dynamic> itemList;
   final String? prefixIcon;
+  Function(dynamic)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +29,18 @@ class CustomItemSelect extends StatelessWidget {
           labelText: labelText, prefixIcon: prefixIcon, context: context),
       controller: controller,
       validator: validator,
+      onChanged: onChanged,
       onTap: () async {
-        final result = await customBottomSheet(
+        dynamic result = await customBottomSheet(
           context,
           child: showSelectionBottomSheet(
-            originalList: itemsList,
+            originalList: itemList,
             controller: controller,
           ),
         );
+        if (onChanged != null) {
+          onChanged!(result);
+        }
       },
     );
   }
@@ -42,7 +50,7 @@ class showSelectionBottomSheet extends StatefulWidget {
   const showSelectionBottomSheet(
       {super.key, required this.originalList, required this.controller});
 
-  final List<String> originalList;
+  final List<dynamic> originalList;
   final TextEditingController controller;
 
   @override
@@ -52,7 +60,7 @@ class showSelectionBottomSheet extends StatefulWidget {
 
 class _showSelectionBottomSheetState extends State<showSelectionBottomSheet> {
   final TextEditingController _searchController = TextEditingController();
-  late List<String> _filteredCountries;
+  late List<dynamic> _filteredCountries;
 
   @override
   void initState() {
@@ -66,8 +74,8 @@ class _showSelectionBottomSheetState extends State<showSelectionBottomSheet> {
   void _filterCountries(String query) {
     setState(() {
       _filteredCountries = widget.originalList
-          .where(
-              (country) => country.toLowerCase().contains(query.toLowerCase()))
+          .where((country) =>
+              country.name.toLowerCase().contains(query.toLowerCase()))
           .toList();
     });
   }
@@ -116,13 +124,13 @@ class _showSelectionBottomSheetState extends State<showSelectionBottomSheet> {
             child: ListView.builder(
               itemCount: _filteredCountries.length,
               itemBuilder: (BuildContext context, int index) {
-                var value = _filteredCountries.elementAt(index);
                 return ListTile(
-                  title: Text(value),
+                  title: Text(_filteredCountries[index].name),
                   onTap: () {
                     // Update the controller value
-                    widget.controller.text = value;
-                    Navigator.pop(context, value);
+                    widget.controller.text = _filteredCountries[index].name;
+
+                    Get.back(result: _filteredCountries[index]);
                   },
                 );
               },

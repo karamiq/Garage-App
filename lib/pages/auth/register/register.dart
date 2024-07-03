@@ -35,7 +35,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
-    otpController.phoneNumber = TextEditingController(text: '077');
+    otpController.phoneNumber = TextEditingController(text: '07709509877');
     super.initState();
   }
 

@@ -82,7 +82,7 @@ class _PathPageState extends State<PathPage> {
     //PathPageContent to display it to the user
     Widget content = PathPageShimmer();
     dynamic data = 'map data';
-    if (data == null) {
+    if (data != null) {
       content = PathPageContent();
     } else {
       content = PathPageShimmer();

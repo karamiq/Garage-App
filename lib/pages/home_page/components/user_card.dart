@@ -153,7 +153,7 @@ class UserCard extends StatelessWidget {
                           ),
                           Gap(Insets.small),
                           CardInfoContainer(
-                              text: 'انتهاء الصلاحية:$expireDate'),
+                              text: 'انتهاء الصلاحية: $expireDate'),
                         ],
                       ),
                     ),

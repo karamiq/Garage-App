@@ -155,3 +155,17 @@ String? validateInfo(String? query) {
     return null;
   }
 }
+
+String convertDateString(String dateString) {
+  DateTime parsedDate = DateTime.parse(dateString);
+  DateTime now = DateTime.now();
+
+  DateTime combinedDateTime = DateTime(parsedDate.year, parsedDate.month,
+      parsedDate.day, now.hour, now.minute, now.second, now.millisecond);
+
+  DateTime utcDateTime = combinedDateTime.toUtc();
+
+  String formattedDate = utcDateTime.toIso8601String();
+
+  return formattedDate;
+}
