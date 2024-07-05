@@ -17,8 +17,7 @@ class _PathPageContentState extends State<PathPageContent> {
   late GoogleMapController mapController;
   List<LatLng> polylineCoordinates = [];
   Map<String, Marker> markers = {};
-  final LatLng _startPoint =
-      LatLng(33.32805, 44.301488); // Example: Start Point
+  final LatLng _startPoint = LatLng(33.32805, 44.301488); // Example: Start Point
   final LatLng _endPoint = LatLng(33.412805, 44.381488); // Example: End Point
 
   String themeForMap = '';
@@ -27,36 +26,37 @@ class _PathPageContentState extends State<PathPageContent> {
   void initState() {
     super.initState();
     getPolyPoints();
-    DefaultAssetBundle.of(context)
-        .loadString(Assets.assetsThemesDarkMapStyle)
-        .then((value) {
-      themeForMap = value;
-    });
-    addMarker('1', _endPoint, Assets.assetsIconsLocationTick, context);
-    addMarker('2', _startPoint, Assets.assetsIconsMapPin, context);
+    loadMapStyle();
+    addMarker('1', _endPoint, Assets.assetsIconsLocationTick);
+    addMarker('2', _startPoint, Assets.assetsIconsMapPin);
+  }
+
+  void loadMapStyle() async {
+    themeForMap = await DefaultAssetBundle.of(context).loadString(Assets.assetsThemesDarkMapStyle);
   }
 
   Future<void> getPolyPoints() async {
-    PolylinePoints polylinePoints = PolylinePoints();
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      googleApiKey:
-          'AIzaSyC_HxdEWLvZODhPgCUxKtzXEBu6UCIanEU', // Replace with your API key
-      request: PolylineRequest(
-        origin: PointLatLng(_startPoint.latitude, _startPoint.longitude),
-        destination: PointLatLng(_endPoint.latitude, _endPoint.longitude),
-        mode: TravelMode.driving,
-      ),
-    );
-    print(result);
-    if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) =>
-          polylineCoordinates.add(LatLng(point.latitude, point.longitude)));
+    try {
+      PolylinePoints polylinePoints = PolylinePoints();
+      PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+        googleApiKey: 'AIzaSyC_HxdEWLvZODhPgCUxKtzXEBu6UCIanEU', // Replace with your API key
+        request: PolylineRequest(
+          origin: PointLatLng(_startPoint.latitude, _startPoint.longitude),
+          destination: PointLatLng(_endPoint.latitude, _endPoint.longitude),
+          mode: TravelMode.driving,
+        ),
+      );
+      print(result);
+      if (result.points.isNotEmpty) {
+        polylineCoordinates.addAll(result.points.map((point) => LatLng(point.latitude, point.longitude)));
+        setState(() {});
+      }
+    } catch (e) {
+      print('Error: $e');
     }
-    setState(() {});
   }
 
-  Future<void> addMarker(
-      String id, LatLng location, String icon, BuildContext context) async {
+  Future<void> addMarker(String id, LatLng location, String icon) async {
     final marker = Marker(
       markerId: MarkerId(id),
       position: location,
@@ -72,7 +72,6 @@ class _PathPageContentState extends State<PathPageContent> {
       markers[id] = marker;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Stack(

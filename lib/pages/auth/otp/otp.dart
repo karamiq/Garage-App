@@ -73,6 +73,7 @@ class _OtpPageState extends State<OtpPage> {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leadingWidth: 100,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
