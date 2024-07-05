@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:Trip/client/base_client.dart';
 import 'package:Trip/config/constant.dart';
-import 'package:Trip/model/Profiles/register.dart';
 import 'package:Trip/services/dio_files.dart';
 
 class CreateOwnerController extends GetxController {
@@ -73,7 +72,7 @@ class CreateOwnerController extends GetxController {
         'driverLicense': drivingLicenseNumber.text,
         'driverLicenseImages': [drivingLicenceIamge],
         'image': personalImage,
-        'vehicle': {
+        'vehicle': isOwner! ? {
           'plateNumber': carPlateNumber.text,
           'plateCharacterId': plateCharacterId.text,
           'governorateId': carGovernorateId.text,
@@ -88,7 +87,7 @@ class CreateOwnerController extends GetxController {
           'vehicleLicenseImages': [carLicenseImage],
           'vehicleImages': [carImage],
           'note': null,
-        },
+        } : null,
       });
       print('this is the register responde: $response');
     } catch (e) {
