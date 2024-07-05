@@ -3,8 +3,8 @@ class Vehicle {
   DateTime creationDate;
   bool deleted;
   String plateNumber;
-  String governorateId;
-  String governorateName;
+  String? governorateId;
+  String? governorateName;
   String plateCharacterId;
   String plateCharacterName;
   String plateTypeId;
@@ -17,7 +17,7 @@ class Vehicle {
   int manufacturingYear;
   String vehicleModelId;
   String vehicleModelName;
-  String note;
+  String? note;
   String vehicleLicense;
   String color;
   String ownerId;
@@ -25,22 +25,22 @@ class Vehicle {
   String ownerImage;
   int status;
   int numberOfSeats;
-  String smartCardNumber;
-  int fare;
+  String? smartCardNumber;
+  int? fare;
   bool isActive;
   List<String> vehicleLicenseImages;
   List<String> vehicleImages;
-  bool isOwner;
+  bool? isOwner;
   int vehicleRegistrationState;
   int vehiclePathReceiptNumber;
-  String rejectReason;
-  String debtStatementNumber;
-  DateTime debtStatementExpiredDate;
-  String clearanceNumber;
-  DateTime clearanceExpiredDate;
-  bool isNew;
-  DateTime deportationDate;
-  DateTime sheddingDate;
+  String? rejectReason;
+  String? debtStatementNumber;
+  DateTime? debtStatementExpiredDate;
+  String? clearanceNumber;
+  DateTime? clearanceExpiredDate;
+  bool? isNew;
+  DateTime? deportationDate;
+  DateTime? sheddingDate;
 
   Vehicle({
     required this.id,
@@ -89,53 +89,51 @@ class Vehicle {
 
   // Factory method to create a Vehicle from JSON
   factory Vehicle.fromJson(Map<String, dynamic> json) {
-    return Vehicle(
-      id: json['id'],
-      creationDate: DateTime.parse(json['creationDate']),
-      deleted: json['deleted'],
-      plateNumber: json['plateNumber'],
-      governorateId: json['governorateId'],
-      governorateName: json['governorateName'],
-      plateCharacterId: json['plateCharacterId'],
-      plateCharacterName: json['plateCharacterName'],
-      plateTypeId: json['plateTypeId'],
-      plateTypeName: json['plateTypeName'],
-      pathId: json['pathId'],
-      pathName: json['pathName'],
-      chassisNumber: json['chassisNumber'],
-      vehicleTypeId: json['vehicleTypeId'],
-      vehicleTypeName: json['vehicleTypeName'],
-      manufacturingYear: json['manufacturingYear'],
-      vehicleModelId: json['vehicleModelId'],
-      vehicleModelName: json['vehicleModelName'],
-      note: json['note'],
-      vehicleLicense: json['vehicleLicense'],
-      color: json['color'],
-      ownerId: json['ownerId'],
-      ownerName: json['ownerName'],
-      ownerImage: json['ownerImage'],
-      status: json['status'],
-      numberOfSeats: json['numberOfSeats'],
-      smartCardNumber: json['smartCardNumber'],
-      fare: json['fare'],
-      isActive: json['isActive'],
-      vehicleLicenseImages: List<String>.from(json['vehicleLicenseImages']),
-      vehicleImages: List<String>.from(json['vehicleImages']),
-      isOwner: json['isOwner'],
-      vehicleRegistrationState: json['vehicleRegistrationState'],
-      vehiclePathReceiptNumber: json['vehiclePathReceiptNumber'],
-      rejectReason: json['rejectReason'],
-      debtStatementNumber: json['debtStatementNumber'],
-      debtStatementExpiredDate:
-          DateTime.parse(json['debtStatementExpiredDate']),
-      clearanceNumber: json['clearanceNumber'],
-      clearanceExpiredDate: DateTime.parse(json['clearanceExpiredDate']),
-      isNew: json['isNew'],
-      deportationDate: DateTime.parse(json['deportationDate']),
-      sheddingDate: DateTime.parse(json['sheddingDate']),
-    );
-  }
-
+  return Vehicle(
+    id: json['id'],
+    creationDate: DateTime.parse(json['creationDate']),
+    deleted: json['deleted'],
+    plateNumber: json['plateNumber'],
+    governorateId: json['governorateId'],
+    governorateName: json['governorateName'],
+    plateCharacterId: json['plateCharacterId'],
+    plateCharacterName: json['plateCharacterName'],
+    plateTypeId: json['plateTypeId'],
+    plateTypeName: json['plateTypeName'],
+    pathId: json['pathId'],
+    pathName: json['pathName'],
+    chassisNumber: json['chassisNumber'],
+    vehicleTypeId: json['vehicleTypeId'],
+    vehicleTypeName: json['vehicleTypeName'],
+    manufacturingYear: json['manufacturingYear'],
+    vehicleModelId: json['vehicleModelId'],
+    vehicleModelName: json['vehicleModelName'],
+    note: json['note'] ?? "",  // Example of handling nullable String
+    vehicleLicense: json['vehicleLicense'],
+    color: json['color'],
+    ownerId: json['ownerId'],
+    ownerName: json['ownerName'],
+    ownerImage: json['ownerImage'],
+    status: json['status'],
+    numberOfSeats: json['numberOfSeats'],
+    smartCardNumber: json['smartCardNumber'],
+    fare: json['fare'],
+    isActive: json['isActive'],
+    vehicleLicenseImages: List<String>.from(json['vehicleLicenseImages'] ?? []),
+    vehicleImages: List<String>.from(json['vehicleImages'] ?? []),
+    isOwner: json['isOwner'],
+    vehicleRegistrationState: json['vehicleRegistrationState'],
+    vehiclePathReceiptNumber: json['vehiclePathReceiptNumber'],
+    rejectReason: json['rejectReason'],
+    debtStatementNumber: json['debtStatementNumber'],
+    debtStatementExpiredDate: json['debtStatementExpiredDate'] != null ? DateTime.tryParse(json['debtStatementExpiredDate']) : null,
+    clearanceNumber: json['clearanceNumber'],
+    clearanceExpiredDate: json['clearanceExpiredDate'] != null ? DateTime.parse(json['clearanceExpiredDate']) : null,
+    isNew: json['isNew'],
+    deportationDate: json['deportationDate'] != null ? DateTime.parse(json['deportationDate']) : null,
+    sheddingDate: json['sheddingDate'] != null ? DateTime.parse(json['sheddingDate']) : null,
+  );
+}
   // Method to convert a Vehicle instance to JSON
   Map<String, dynamic> toJson() {
     return {
@@ -175,12 +173,12 @@ class Vehicle {
       'vehiclePathReceiptNumber': vehiclePathReceiptNumber,
       'rejectReason': rejectReason,
       'debtStatementNumber': debtStatementNumber,
-      'debtStatementExpiredDate': debtStatementExpiredDate.toIso8601String(),
+      'debtStatementExpiredDate': debtStatementExpiredDate?.toIso8601String(),
       'clearanceNumber': clearanceNumber,
-      'clearanceExpiredDate': clearanceExpiredDate.toIso8601String(),
+      'clearanceExpiredDate': clearanceExpiredDate?.toIso8601String(),
       'isNew': isNew,
-      'deportationDate': deportationDate.toIso8601String(),
-      'sheddingDate': sheddingDate.toIso8601String(),
+      'deportationDate': deportationDate?.toIso8601String(),
+      'sheddingDate': sheddingDate?.toIso8601String(),
     };
   }
 }

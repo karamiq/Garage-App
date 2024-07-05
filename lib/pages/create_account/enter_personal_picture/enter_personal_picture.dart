@@ -28,13 +28,14 @@ class _EnterPersonalPicturePageState extends State<EnterPersonalPicturePage> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     bool isOwner = data['isOwner'];
     Future<bool> checkValidation() async {
+      controller.printVariables();
       setState(() {
         isValid = controller.personalPicture != null;
       });
       if (isValid) {
-        await controller.register();
+        /// await controller.register();
         if (isOwner) {
-          Get.toNamed(Routes.createQrCodePage, arguments: {'isOwner': isOwner});
+            Get.toNamed(Routes.createQrCodePage, arguments: {'isOwner': isOwner});
         } else {
           Get.toNamed(Routes.whereDoYouWantToWorkPage,
               arguments: {'isOwner': isOwner});

@@ -2,6 +2,7 @@ import 'package:Trip/components/custom_app_bar.dart';
 import 'package:Trip/components/custom_item_select.dart';
 import 'package:Trip/config/constant.dart';
 import 'package:Trip/pages/veichles_page/components/holder_info_row.dart';
+import 'package:Trip/services/dio_govs&cities.dart';
 import 'package:flutter/material.dart';
 
 class AllAvailableDriversPage extends StatefulWidget {
@@ -49,7 +50,7 @@ class _AllAvailableDriversPageState extends State<AllAvailableDriversPage> {
                   child: CustomItemSelect(
                       labelText: 'المحافظة',
                       controller: garageController,
-                      itemList: [],
+                      itemListFuture: GovsService.gov(),
                       validator: null),
                 ),
                 Gap(Insets.small),
@@ -57,7 +58,7 @@ class _AllAvailableDriversPageState extends State<AllAvailableDriversPage> {
                   child: CustomItemSelect(
                       labelText: 'الكراج',
                       controller: stateController,
-                      itemList: [],
+                      itemListFuture: GovsService.gov(),
                       validator: null),
                 ),
               ],

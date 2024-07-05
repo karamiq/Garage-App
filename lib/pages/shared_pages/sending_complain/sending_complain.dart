@@ -4,6 +4,7 @@ import 'package:Trip/components/custom_item_select.dart';
 import 'package:Trip/components/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import '../../../config/constant.dart';
+import '../../../services/dio_govs&cities.dart';
 
 class SendingComplainPage extends StatefulWidget {
   const SendingComplainPage({Key? key}) : super(key: key);
@@ -96,14 +97,7 @@ class _SendingComplainPageState extends State<SendingComplainPage> {
                 CustomItemSelect(
                     labelText: 'أختر نوع الشكوى',
                     controller: complainTypeController,
-                    itemList: [
-                      'شكوى عامة', // General Complaint
-                      'شكوى عن خدمة عملاء', // Customer Service Complaint
-                      'شكوى عن منتج', // Product Complaint
-                      'شكوى عن خدمة', // Service Complaint
-                      'شكوى عن فاتورة', // Billing Complaint
-                      'شكوى عن تسليم', // Delivery Complaint
-                    ],
+                    itemListFuture: GovsService.gov(),
                     validator: validator),
               if (!isFromProfile) SizedBox(height: Insets.exLarge),
               if (isFromProfile) Gap(Insets.medium),

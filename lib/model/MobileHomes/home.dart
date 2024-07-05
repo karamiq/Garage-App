@@ -17,7 +17,7 @@ class Home {
 
   factory Home.fromJson(Map<String, dynamic> json) {
     return Home(
-      smartCards: (json['smartCards'] as List<dynamic>)
+      smartCards: (json['smartCards'])
           .map((e) => SmartCard.fromJson(e))
           .toList(),
       violationNumber: json['violationNumber'],

@@ -9,55 +9,81 @@ import 'home_page_bottom_falf.dart';
 import 'home_page_head.dart';
 
 class HomePageContent extends StatelessWidget {
-  const HomePageContent({super.key});
+  final String imageUrl;
+  final String carPlateInfo;
+  final String carType;
+  final String expireDate;
+  final String cardNumber;
+  final String qrData;
+  final int cardMoney;
+  final String feesCardTitle;
+  final String feesCardNumber;
+  final String feesCardNumText;
+  final String tripsCardTitle;
+  final String tripsCardNumber;
+  final String tripsCardNumText;
+  final List<CustomListTile> moneyTransfersList;
+  final List<TripCard> latestTripsList;
+
+  const HomePageContent({
+    super.key,
+    required this.imageUrl,
+    required this.carPlateInfo,
+    required this.carType,
+    required this.expireDate,
+    required this.cardNumber,
+    required this.qrData,
+    required this.cardMoney,
+    required this.feesCardTitle,
+    required this.feesCardNumber,
+    required this.feesCardNumText,
+    required this.tripsCardTitle,
+    required this.tripsCardNumber,
+    required this.tripsCardNumText,
+    required this.moneyTransfersList,
+    required this.latestTripsList,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
         children: [
-          HomePageHead(
-            imageUrl: Assets.assetsImagesAvatarImage,
-          ),
+          HomePageHead(imageUrl: imageUrl),
           Gap(Insets.medium),
           UserCard(
-              carPlateInfo: '24214 أ / بغداد',
-              carType: 'دوج جارجر',
-              expireDate: ' 10/12/2025',
-              cardNumber: '10023',
-              qrData: 'https://github.com/karamiq/Garage-App',
-              cardMoney: 125000),
+            carPlateInfo: carPlateInfo,
+            carType: carType,
+            expireDate: expireDate,
+            cardNumber: cardNumber,
+            qrData: qrData,
+            cardMoney: cardMoney,
+          ),
           Gap(Insets.small),
           Row(
             children: [
               MiniCard(
-                  cardTitle: 'الغرامات المالية',
-                  cardNumber: '20',
-                  cardNumText: 'غرامة مالية',
-                  decoration: SequaredPositionedContainers(),
-                  onIconPressed: () => Get.toNamed(Routes.feesOnCarPage)),
+                cardTitle: feesCardTitle,
+                cardNumber: feesCardNumber,
+                cardNumText: feesCardNumText,
+                decoration: SequaredPositionedContainers(),
+                onIconPressed: () => Get.toNamed(Routes.feesOnCarPage),
+              ),
               Gap(Insets.small),
               MiniCard(
-                  cardTitle: 'عدد الرحلات',
-                  cardNumber: '50',
-                  cardNumText: 'رحلة',
-                  decoration: CirculerPositionedContainers(),
-                  onIconPressed: () => Get.toNamed(Routes.tripsPage)),
+                cardTitle: tripsCardTitle,
+                cardNumber: tripsCardNumber,
+                cardNumText: tripsCardNumText,
+                decoration: CirculerPositionedContainers(),
+                onIconPressed: () => Get.toNamed(Routes.tripsPage),
+              ),
             ],
           ),
           Gap(Insets.small),
           HomePageBottomHalf(
-            moneyTransfersList: [
-              CustomListTile(
-                  icon: Assets.assetsIconsRouting,
-                  title: 'تم شحن البطاقة',
-                  subtitle: '2023/2/24',
-                  trailing2: '25,000 د. ع.')
-            ],
-            latestTripsList: [
-              TripCard(from: 'كراج العلاوي', to: 'كراج ام قصر', price: '6,500'),
-            ],
-          )
+            moneyTransfersList: moneyTransfersList,
+            latestTripsList: latestTripsList,
+          ),
         ],
       ),
     );

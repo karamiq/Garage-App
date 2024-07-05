@@ -1,26 +1,20 @@
+import 'package:Trip/components/custom_app_bar.dart';
 import 'package:Trip/components/custom_item_select.dart';
 import 'package:Trip/router/router.dart';
 import 'package:Trip/services/dio_govs&cities.dart';
 import 'package:flutter/material.dart';
 import '../../../components/custom_auth_steps_tracker.dart';
-import '../../../components/custom_back_botton.dart';
 import '../../../components/custom_text_form_field.dart';
 import '../../../components/custom_year_date_picker.dart';
 import '../../../config/constant.dart';
 import '../../../controller/create_onwer_controller.dart';
-import '../../../model/MobileUtils/vehicle_type.dart';
 import '../../../services/dio_plate.dart';
 import '../../../services/dio_vehicle.dart';
 import '../enter_holder_or_owner_info_page/components/image_input.dart';
 
-class OwnerCarInfoPage extends StatefulWidget {
-  const OwnerCarInfoPage({super.key});
+class OwnerCarInfoPage extends StatelessWidget {
+   OwnerCarInfoPage({super.key});
 
-  @override
-  State<OwnerCarInfoPage> createState() => _OwnerCarInfoPageState();
-}
-
-class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final CreateOwnerController controller =
       Get.put<CreateOwnerController>(CreateOwnerController());
@@ -28,30 +22,7 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
     final isValid = validateInfo(query);
     return isValid;
   }
-
-  dynamic iraqStates = [];
-  dynamic carPlates = [];
-  static dynamic carCharacters = [];
-  List<VehicleType> carTypes = [];
-  dynamic carModels = [];
   bool valid = true;
-
-  Future<void> loadData() async {
-    iraqStates = await GovsService.gov();
-    carPlates = await PlateTypeService.plateTypeGet();
-    carModels = await VehicleService.vehicleModelGet();
-    carTypes = await VehicleService.vehicleTypeGet();
-    carCharacters = controller.carState.text.isEmpty
-        ? await PlateCharactersService.plateCharacterGet()
-        : [];
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    loadData();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +32,6 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
 
     void checkValidation() {
       controller.printVariables();
-      setState(() => valid = true);
       if (!_formKey.currentState!.validate()) return;
       if (controller.carLicensePicture == null) return;
       if (controller.carPicture == null) return;
@@ -80,11 +50,7 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        leadingWidth: 100,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        leading: CustomBackButton(),
-      ),
+      appBar: CustomAppBar(),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(
             horizontal: Insets.medium, vertical: Insets.large),
@@ -115,15 +81,19 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
                   Expanded(
                     child: CustomItemSelect(
                       onChanged: (selectedChar) async {
-                        controller.plateCharacterId.text = selectedChar.id;
-                        dynamic ff = await GovsService.govGetById(
-                            selectedChar.governorateId);
-                        controller.carState.text = ff.name;
-                        print(selectedChar);
+                        try {
+                          controller.plateCharacterId?.text = selectedChar?.id;
+                          dynamic ff = await GovsService.govGetById(
+                              selectedChar.governorateId);
+                          controller.carState.text = ff.name;
+                          print(selectedChar);
+                        } catch (e) {
+                          print(selectedChar);
+                        }
                       },
                       labelText: 'حرف اللوحة',
                       controller: controller.carPlateLetter,
-                      itemList: carCharacters,
+                      itemListFuture: PlateCharactersService.plateCharacterGetByGovId(controller.carGovernorateId!.text),
                       validator: validator,
                     ),
                   ),
@@ -133,24 +103,24 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
               CustomItemSelect(
                 labelText: 'المحافظة',
                 controller: controller.carState,
-                itemList: iraqStates,
+                itemListFuture: GovsService.gov(),
                 validator: validator,
                 onChanged: (selectedState) async {
-                  controller.carGovernorateId.text = selectedState.id;
-                  controller.carPlateLetter = TextEditingController();
-                  carCharacters =
-                      await PlateCharactersService.plateCharacterGetByGovId(
-                          selectedState.id);
-                  setState(() {});
+                  try {
+                    controller.carGovernorateId?.text = selectedState?.id;
+                    controller.carPlateLetter = TextEditingController();
+                  } catch (e) {
+                    print(selectedState);
+                  }
                 },
               ),
               SizedBox(height: Insets.small),
               CustomItemSelect(
                 labelText: 'نوع اللوحة',
                 controller: controller.carPlateType,
-                itemList: carPlates,
+                itemListFuture: PlateTypeService.plateTypeGet(),
                 validator: validator,
-                onChanged: (p0) => controller.plateTypeId.text = p0.id,
+                onChanged: (p0) => controller.plateTypeId?.text = p0?.id,
               ),
               SizedBox(height: Insets.small),
               CustomTextFormField(
@@ -164,19 +134,19 @@ class _OwnerCarInfoPageState extends State<OwnerCarInfoPage> {
               CustomItemSelect(
                 labelText: 'نوع المركبة',
                 controller: controller.carType,
-                itemList: carTypes,
+                itemListFuture: VehicleService.vehicleTypeGet(),
                 validator: validator,
                 prefixIcon: Assets.assetsIconsCar,
-                onChanged: (p0) => controller.vehicleTypeId.text = p0.id,
+                onChanged: (p0) => controller.vehicleTypeId?.text = p0?.id,
               ),
               SizedBox(height: Insets.small),
               CustomItemSelect(
-                itemList: carModels,
+                itemListFuture: VehicleService.vehicleModelGet(),
                 validator: validator,
                 controller: controller.carModel,
                 labelText: 'موديل المركبة',
                 prefixIcon: Assets.assetsIconsDocument,
-                onChanged: (p0) => controller.vehicleModelId.text = p0.id,
+                onChanged: (p0) => controller.vehicleModelId?.text = p0?.id,
               ),
               SizedBox(height: Insets.small),
               CustomYearDatePicker(

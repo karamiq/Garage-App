@@ -25,12 +25,21 @@ class PlateCharactersService {
   static Future<List<PlateCharacter>> plateCharacterGetByGovId(
       String govId) async {
     final response = await BaseClient.get(api: EndPoints.plateCharacter);
-    List<dynamic> dataList = response['data'];
-    List<PlateCharacter> govsList =
-        dataList.map((json) => PlateCharacter.fromJson(json)).toList();
-    List<PlateCharacter> filteredGovsList =
-        govsList.where((plate) => plate.governorateId == govId).toList();
+    if (govId.isEmpty) {
+      print('is null');
+      List<dynamic> dataList = response['data'];
+      List<PlateCharacter> govsList =
+          dataList.map((json) => PlateCharacter.fromJson(json)).toList();
+      return govsList;
+    } else {
+        print('is not null');
+      List<dynamic> dataList = response['data'];
+      List<PlateCharacter> govsList =
+          dataList.map((json) => PlateCharacter.fromJson(json)).toList();
+      List<PlateCharacter> filteredGovsList =
+          govsList.where((plate) => plate.governorateId == govId).toList();
 
-    return filteredGovsList;
+      return filteredGovsList;
+    }
   }
 }

@@ -43,6 +43,10 @@ class CustomCirculerAvatar extends StatelessWidget {
                 color: Theme.of(context).colorScheme.primaryContainer,
                 width: CustomBorderTheme.borderWidth / 2)),
         padding: EdgeInsets.all(5),
-        child: CircleAvatar(backgroundImage: AssetImage(path)));
+        child: CircleAvatar(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(1000),
+            child: Image.network(path,)),
+          backgroundImage: AssetImage(Assets.assetsImagesAvatarImage)));
   }
 }

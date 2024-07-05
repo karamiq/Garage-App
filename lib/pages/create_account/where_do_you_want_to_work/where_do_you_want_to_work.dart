@@ -1,6 +1,7 @@
 import 'package:Trip/components/custom_item_select.dart';
 import 'package:Trip/pages/create_account/enter_holder_or_owner_info_page/enter_holder_or_owner_info_page.dart';
 import 'package:Trip/router/router.dart';
+import 'package:Trip/services/dio_garages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,34 +11,12 @@ import '../../../config/utils/functions.dart';
 import '../../../controller/create_onwer_controller.dart';
 import '../../../services/dio_govs&cities.dart';
 
-class WhereDoYouWantToWorkPage extends StatefulWidget {
+class WhereDoYouWantToWorkPage extends StatelessWidget {
   const WhereDoYouWantToWorkPage({super.key});
 
-  @override
-  State<WhereDoYouWantToWorkPage> createState() =>
-      _WhereDoYouWantToWorkPageState();
-}
-
-class _WhereDoYouWantToWorkPageState extends State<WhereDoYouWantToWorkPage> {
   String? validator(String? query) {
     final isValid = validateInfo(query);
     return isValid;
-  }
-
-  dynamic iraqStates = [];
-  dynamic carPlates = [];
-  dynamic carCharacters = [];
-  bool valid = true;
-
-  Future<void> loadData() async {
-    iraqStates = await GovsService.gov();
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    loadData();
   }
 
   @override
@@ -79,13 +58,13 @@ class _WhereDoYouWantToWorkPageState extends State<WhereDoYouWantToWorkPage> {
               CustomItemSelect(
                   labelText: 'المحافظة',
                   controller: controller.holderStateWork,
-                  itemList: iraqStates,
+                  itemListFuture: GovsService.gov(),
                   validator: validator),
               SizedBox(height: Insets.small),
               CustomItemSelect(
                   labelText: 'الكراج',
                   controller: controller.holderGarageWork,
-                  itemList: ['العلاوي', 'النهضة'],
+                  itemListFuture: GaragesSrvce.garagesGet(),
                   validator: validator),
               Spacer(),
               ElevatedButton(

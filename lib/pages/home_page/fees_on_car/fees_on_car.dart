@@ -45,17 +45,22 @@ class _FeesOnCarPageState extends State<FeesOnCarPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CarFeesInfoCard(
-                  title: 'عدد الغرامات',
-                  subTitle: '35',
-                  icon: Assets.assetsIconsTrafficSignal,
-                  onIconPressed: () {},
+                Expanded(
+                  child: CarFeesInfoCard(
+                    title: 'عدد الغرامات',
+                    subTitle: '35',
+                    icon: Assets.assetsIconsTrafficSignal,
+                    onIconPressed: () {},
+                  ),
                 ),
-                CarFeesInfoCard(
-                  title: 'مبلغ الغرامات المتراكم',
-                  subTitle: '200,000 د. ع.',
-                  icon: Assets.assetsIconsDollarSquare,
-                  onIconPressed: () {},
+                Gap(Insets.medium),
+                Expanded(
+                  child: CarFeesInfoCard(
+                    title: 'مبلغ الغرامات المتراكم',
+                    subTitle: '200,000 د. ع.',
+                    icon: Assets.assetsIconsDollarSquare,
+                    onIconPressed: () {},
+                  ),
                 )
               ],
             ),

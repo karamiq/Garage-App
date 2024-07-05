@@ -6,8 +6,8 @@ class Garage {
   bool deleted;
   String name;
   City city;
-  String lat;
-  String lng;
+  String? lat;
+  String? lng;
   bool isActive;
 
   Garage({

@@ -1,27 +1,18 @@
 import 'package:Trip/components/custom_auth_steps_tracker.dart';
-import 'package:Trip/components/custom_item_select.dart';
-import 'package:Trip/pages/create_account/components/cities_management.dart';
 import 'package:Trip/router/router.dart';
-import 'package:Trip/services/dio_files.dart';
+import 'package:Trip/services/dio_govs&cities.dart';
 import 'package:flutter/material.dart';
 import '../../../../components/custom_date_picker.dart';
 import '../../../../components/custom_text_form_field.dart';
 import '../../../../config/constant.dart';
 import '../../../../controller/create_onwer_controller.dart';
 import '../../../components/custom_back_botton.dart';
-import '../../../services/dio_govs&cities.dart';
+import '../../../components/custom_item_select.dart';
 import 'components/image_input.dart';
 
-class EnterHolderOrOwnerInfoPage extends StatefulWidget {
-  EnterHolderOrOwnerInfoPage({super.key});
+class EnterHolderOrOwnerInfoPage extends StatelessWidget {
+   EnterHolderOrOwnerInfoPage({super.key});
 
-  @override
-  State<EnterHolderOrOwnerInfoPage> createState() =>
-      _EnterHolderOrOwnerInfoPageState();
-}
-
-class _EnterHolderOrOwnerInfoPageState
-    extends State<EnterHolderOrOwnerInfoPage> {
   TextEditingController DatePicker = TextEditingController();
 
   String? message;
@@ -37,22 +28,6 @@ class _EnterHolderOrOwnerInfoPageState
     final isvalid = validateInfo(query);
     return isvalid;
   }
-
-  dynamic governorateCities = [];
-  dynamic iraqStates = [];
-
-  Future<void> loadData() async {
-    iraqStates = await GovsService.gov();
-
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    loadData();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final data =
@@ -70,8 +45,6 @@ class _EnterHolderOrOwnerInfoPageState
         }
       }
     }
-
-    CitiesManagement citiesManagement = CitiesManagement();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -107,16 +80,12 @@ class _EnterHolderOrOwnerInfoPageState
                     labelText: 'أسم الأم',
                     prefixIcon: Assets.assetsIconsUser),
                 Gap(Insets.small),
-                CustomItemSelect(
-                    validator: validator,
-                    labelText: 'المحافظة',
-                    controller: controller.governorate,
-                    itemList: iraqStates,
-                    onChanged: (p0) {
-                      controller.area = TextEditingController();
-                      governorateCities = citiesManagement
-                          .citiesAccordingToGov(controller.governorate.text);
-                    }),
+                  CustomItemSelect(
+                labelText: 'المحافظة',
+                controller: controller.governorate,
+                validator: validator,
+                itemListFuture: GovsService.gov()
+              ),
                 Gap(Insets.small),
                 CustomTextFormField(
                     validator: validator,
