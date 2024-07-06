@@ -1,4 +1,5 @@
 import 'package:Trip/config/constant.dart';
+import 'package:Trip/model/MobileHomes/last_trips.dart';
 import 'package:Trip/pages/home_page/components/container_stack_decoration.dart';
 import 'package:Trip/pages/home_page/components/user_card.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class HomePageContent extends StatelessWidget {
   final String tripsCardNumber;
   final String tripsCardNumText;
   final List<CustomListTile> moneyTransfersList;
-  final List<TripCard> latestTripsList;
+  final List<TripHistory> latestTripsList;
 
   const HomePageContent({
     super.key,

@@ -2,6 +2,8 @@ import 'package:Trip/components/custom_app_bar.dart';
 import 'package:Trip/components/custom_elevated_button.dart';
 import 'package:Trip/components/custom_item_select.dart';
 import 'package:Trip/components/custom_text_form_field.dart';
+import 'package:Trip/model/DriverAppViolations/vehicle_violations.dart';
+import 'package:Trip/model/MobileHomes/vehicle_debt_statement.dart';
 import 'package:flutter/material.dart';
 import '../../../config/constant.dart';
 import '../../../services/dio_govs&cities.dart';
@@ -35,13 +37,9 @@ class _SendingComplainPageState extends State<SendingComplainPage> {
   Widget build(BuildContext context) {
     final data =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    final String id = data['id'];
-    final String feeNumber = data['feeNumber'];
-    final String feeDate = data['feeDate'];
-    final String feeReason = data['feeReason'];
-    final String fee = data['fee'];
-    final bool isFromProfile = data['isFromProfile'];
 
+    final bool isFromProfile = data['isFromProfile'];
+    final Violation? debtStatementReceipt = data['violation'];
     void send() {
       if (_formKey.currentState!.validate()) {
         if (isFromProfile) {
@@ -69,14 +67,14 @@ class _SendingComplainPageState extends State<SendingComplainPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'غرامة $feeNumber#',
+                      'غرامة ${debtStatementReceipt!.number}#',
                       style: TextStyle(
                         fontSize: CustomFontsTheme.bigSize,
                       ),
                     ),
                     SizedBox(width: Insets.exSmall),
                     Text(
-                      feeDate,
+                      makeDate(debtStatementReceipt.creationDate),
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary,
                       ),
@@ -84,11 +82,11 @@ class _SendingComplainPageState extends State<SendingComplainPage> {
                   ],
                 ),
               SizedBox(height: Insets.medium),
-              if (!isFromProfile) Text('لقد حصلت على غرامة بسبب $feeReason'),
+              if (!isFromProfile) Text('لقد حصلت على غرامة بسبب لايوجد'),
               if (!isFromProfile) SizedBox(height: Insets.medium),
               if (!isFromProfile)
                 Text(
-                  'قيمة الغرامة: $fee',
+                  'قيمة الغرامة: ${debtStatementReceipt!.totalAmount}',
                   style: TextStyle(
                     fontSize: CustomFontsTheme.bigSize,
                   ),

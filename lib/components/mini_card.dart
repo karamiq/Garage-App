@@ -20,7 +20,7 @@ class MiniCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        height: 165,
+        height: 170,
         width: 165,
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.onInverseSurface,

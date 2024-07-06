@@ -17,6 +17,7 @@ void main() async {
   prefs = await SharedPreferences.getInstance();
   // prefs.clear();
   Get.changeThemeMode(ThemeMode.light);
+
   // OneSignal.shared.setLogLevel(OSLogLevel.debug, OSLogLevel.none);
   // OneSignal.shared.setAppId('b3be826b-916f-4787-815a-4d1cc944b09b');
   // OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
@@ -71,7 +72,9 @@ class _MyAppState extends State<MyApp> {
         final theme = AppTheme();
         // SizeConfig().init(constraints, orientation);
         return GetMaterialApp(
-          initialRoute: Routes.splashPageRoute,
+          initialRoute: prefs.getString('currentUser') != null
+              ? Routes.tapsPage
+              : Routes.splashPageRoute,
           getPages: generateRoutes(),
           debugShowCheckedModeBanner: false,
           initialBinding: BindingsController(),

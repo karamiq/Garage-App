@@ -1,4 +1,30 @@
-class VehicleViolation {
+class VehicleViolations {
+  int accumulatedPrice;
+  int numberOfViolation;
+  List<Violation> vehicleViolations;
+
+  VehicleViolations({
+    required this.accumulatedPrice,
+    required this.numberOfViolation,
+    required this.vehicleViolations,
+  });
+
+  factory VehicleViolations.fromJson(Map<String, dynamic> json) {
+    List<Violation> violationsList = [];
+    if (json['vehicleViolations'] != null) {
+      var violationsJson = json['vehicleViolations'] as List;
+      violationsList =
+          violationsJson.map((v) => Violation.fromJson(v)).toList();
+    }
+    return VehicleViolations(
+      accumulatedPrice: json['accumulatedPrice'] ?? 0,
+      numberOfViolation: json['numberOfViolation'] ?? 0,
+      vehicleViolations: violationsList,
+    );
+  }
+}
+
+class Violation {
   String id;
   DateTime creationDate;
   bool deleted;
@@ -18,15 +44,15 @@ class VehicleViolation {
   bool isPaid;
   List<String> images;
   int duplicateCount;
-  double amount;
-  double totalAmount;
+  int amount;
+  int totalAmount;
   String lat;
   String lng;
   int invoiceNumber;
   String violationPayReceiptId;
   int violationPayReceiptNumber;
 
-  VehicleViolation({
+  Violation({
     required this.id,
     required this.creationDate,
     required this.deleted,
@@ -55,34 +81,34 @@ class VehicleViolation {
     required this.violationPayReceiptNumber,
   });
 
-  factory VehicleViolation.fromJson(Map<String, dynamic> json) {
-    return VehicleViolation(
-      id: json['id'],
+  factory Violation.fromJson(Map<String, dynamic> json) {
+    return Violation(
+      id: json['id'] ?? '',
       creationDate: DateTime.parse(json['creationDate']),
-      deleted: json['deleted'],
-      number: json['number'],
-      userId: json['userId'],
-      userFullName: json['userFullName'],
-      userGarageId: json['userGarageId'],
-      userGarageName: json['userGarageName'],
-      garageGovernorateName: json['garageGovernorateName'],
-      vehicleId: json['vehicleId'],
-      vehicleChassisNumber: json['vehicleChassisNumber'],
-      vehiclePlateCharacterName: json['vehiclePlateCharacterName'],
-      vehiclePlateType: json['vehiclePlateType'],
-      vehicleGovernorateName: json['vehicleGovernorateName'],
-      plateNumber: json['plateNumber'],
+      deleted: json['deleted'] ?? false,
+      number: json['number'] ?? 0,
+      userId: json['userId'] ?? '',
+      userFullName: json['userFullName'] ?? '',
+      userGarageId: json['userGarageId'] ?? '',
+      userGarageName: json['userGarageName'] ?? '',
+      garageGovernorateName: json['garageGovernorateName'] ?? '',
+      vehicleId: json['vehicleId'] ?? '',
+      vehicleChassisNumber: json['vehicleChassisNumber'] ?? '',
+      vehiclePlateCharacterName: json['vehiclePlateCharacterName'] ?? '',
+      vehiclePlateType: json['vehiclePlateType'] ?? '',
+      vehicleGovernorateName: json['vehicleGovernorateName'] ?? '',
+      plateNumber: json['plateNumber'] ?? '',
       feeFines: FeeFines.fromJson(json['feeFines']),
-      isPaid: json['isPaid'],
-      images: (json['images'] as List<dynamic>).cast<String>(),
-      duplicateCount: json['duplicateCount'],
-      amount: json['amount'],
-      totalAmount: json['totalAmount'],
-      lat: json['lat'],
-      lng: json['lng'],
-      invoiceNumber: json['invoiceNumber'],
-      violationPayReceiptId: json['violationPayReceiptId'],
-      violationPayReceiptNumber: json['violationPayReceiptNumber'],
+      isPaid: json['isPaid'] ?? false,
+      images: List<String>.from(json['images'] ?? []),
+      duplicateCount: json['duplicateCount'] ?? 0,
+      amount: json['amount'] ?? 0,
+      totalAmount: json['totalAmount'] ?? 0,
+      lat: json['lat'] ?? '',
+      lng: json['lng'] ?? '',
+      invoiceNumber: json['invoiceNumber'] ?? 0,
+      violationPayReceiptId: json['violationPayReceiptId'] ?? '',
+      violationPayReceiptNumber: json['violationPayReceiptNumber'] ?? 0,
     );
   }
 }
@@ -92,7 +118,7 @@ class FeeFines {
   DateTime creationDate;
   bool deleted;
   String name;
-  double amount;
+  int amount;
   int type;
 
   FeeFines({
@@ -106,12 +132,12 @@ class FeeFines {
 
   factory FeeFines.fromJson(Map<String, dynamic> json) {
     return FeeFines(
-      id: json['id'],
+      id: json['id'] ?? '',
       creationDate: DateTime.parse(json['creationDate']),
-      deleted: json['deleted'],
-      name: json['name'],
-      amount: json['amount'],
-      type: json['type'],
+      deleted: json['deleted'] ?? false,
+      name: json['name'] ?? '',
+      amount: json['amount'] ?? 0,
+      type: json['type'] ?? 0,
     );
   }
 }

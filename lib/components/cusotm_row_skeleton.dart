@@ -1,4 +1,3 @@
-
 import 'package:Trip/config/utils/const_class.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -13,18 +12,30 @@ class CustomRowSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShimmerContainer(
-     child: ListTile(
-     trailing: ShimmerContainer(width: 40,height: 40,),
-     leading: ShimmerContainer(width: 40,height: 40,),
-     title: Row(
-       mainAxisAlignment: MainAxisAlignment.spaceAround,
-       children: [
-         ShimmerContainer(width: 90, height: 20,),
-         Gap(Insets.medium),
-         ShimmerContainer(width: 100, height: 20,),
-       ],
-     ),
-     
-    ), width: double.infinity);
+        child: ListTile(
+          trailing: ShimmerContainer(
+            width: 30,
+            height: 30,
+          ),
+          leading: ShimmerContainer(
+            width: 30,
+            height: 30,
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ShimmerContainer(
+                width: 90,
+                height: 20,
+              ),
+              Gap(Insets.medium),
+              ShimmerContainer(
+                width: 100,
+                height: 20,
+              ),
+            ],
+          ),
+        ),
+        width: double.infinity);
   }
 }

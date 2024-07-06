@@ -1,6 +1,6 @@
 class LastTrips {
   int weeklyTripNumber;
-  double weeklyTripPercentage;
+  int weeklyTripPercentage;
   int totalTripNumber;
   List<TripHistory> tripHistory;
 
@@ -16,16 +16,24 @@ class LastTrips {
       weeklyTripNumber: json['weeklyTripNumber'],
       weeklyTripPercentage: json['weeklyTripPercentage'],
       totalTripNumber: json['totalTripNumber'],
-      tripHistory: (json['tripHistory'] as List<dynamic>)
-          .map((e) => TripHistory.fromJson(e))
-          .toList(),
+      tripHistory: List<TripHistory>.from(
+          json['tripHistory'].map((x) => TripHistory.fromJson(x))),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'weeklyTripNumber': weeklyTripNumber,
+      'weeklyTripPercentage': weeklyTripPercentage,
+      'totalTripNumber': totalTripNumber,
+      'tripHistory': List<dynamic>.from(tripHistory.map((x) => x.toJson())),
+    };
   }
 }
 
 class TripHistory {
   String id;
-  DateTime creationDate;
+  String creationDate;
   bool deleted;
   String gateId;
   String gateName;
@@ -37,7 +45,7 @@ class TripHistory {
   String plateNumber;
   String plateCharacter;
   String plateGovernorate;
-  double taxes;
+  int taxes;
   int action;
   FinancialLogDto financialLogDto;
 
@@ -63,7 +71,7 @@ class TripHistory {
   factory TripHistory.fromJson(Map<String, dynamic> json) {
     return TripHistory(
       id: json['id'],
-      creationDate: DateTime.parse(json['creationDate']),
+      creationDate: json['creationDate'],
       deleted: json['deleted'],
       gateId: json['gateId'],
       gateName: json['gateName'],
@@ -80,11 +88,32 @@ class TripHistory {
       financialLogDto: FinancialLogDto.fromJson(json['financialLogDto']),
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'creationDate': creationDate,
+      'deleted': deleted,
+      'gateId': gateId,
+      'gateName': gateName,
+      'garageId': garageId,
+      'garageName': garageName,
+      'toGarageId': toGarageId,
+      'toGarageName': toGarageName,
+      'vehicleId': vehicleId,
+      'plateNumber': plateNumber,
+      'plateCharacter': plateCharacter,
+      'plateGovernorate': plateGovernorate,
+      'taxes': taxes,
+      'action': action,
+      'financialLogDto': financialLogDto.toJson(),
+    };
+  }
 }
 
 class FinancialLogDto {
   String id;
-  DateTime creationDate;
+  String creationDate;
   bool deleted;
   int gate;
   int queue;
@@ -95,7 +124,7 @@ class FinancialLogDto {
   String plateNumber;
   int type;
   int number;
-  double totalPrice;
+  int totalPrice;
 
   FinancialLogDto({
     required this.id,
@@ -116,7 +145,7 @@ class FinancialLogDto {
   factory FinancialLogDto.fromJson(Map<String, dynamic> json) {
     return FinancialLogDto(
       id: json['id'],
-      creationDate: DateTime.parse(json['creationDate']),
+      creationDate: json['creationDate'],
       deleted: json['deleted'],
       gate: json['gate'],
       queue: json['queue'],
@@ -129,5 +158,23 @@ class FinancialLogDto {
       number: json['number'],
       totalPrice: json['totalPrice'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'creationDate': creationDate,
+      'deleted': deleted,
+      'gate': gate,
+      'queue': queue,
+      'manifest': manifest,
+      'parking': parking,
+      'vehicleMovementId': vehicleMovementId,
+      'vehicleId': vehicleId,
+      'plateNumber': plateNumber,
+      'type': type,
+      'number': number,
+      'totalPrice': totalPrice,
+    };
   }
 }

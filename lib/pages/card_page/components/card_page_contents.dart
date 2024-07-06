@@ -1,49 +1,81 @@
+import 'package:flutter/material.dart';
 import 'package:Trip/components/custom_list_tile.dart';
 import 'package:Trip/pages/home_page/components/user_card.dart';
 import 'package:Trip/components/viewed_item_title.dart';
 import 'package:Trip/router/router.dart';
+import 'package:Trip/config/constant.dart';
+import 'package:get/get.dart';
 
-import '../../../config/constant.dart';
 import '../../home_page/components/home_page_head.dart';
 
 class CardPageContents extends StatelessWidget {
-  const CardPageContents({super.key});
+  final String imageUrl;
+  final String qrData;
+  final String carPlateInfo;
+  final String carType;
+  final String expireDate;
+  final String cardNumber;
+  final int cardMoney;
+  final bool buttonAppears;
+  final String mainText;
+  final String secondText;
+  final List<Map<String, String>> transactions;
+
+  const CardPageContents({
+    super.key,
+    required this.imageUrl,
+    required this.qrData,
+    required this.carPlateInfo,
+    required this.carType,
+    required this.expireDate,
+    required this.cardNumber,
+    required this.cardMoney,
+    required this.buttonAppears,
+    required this.mainText,
+    required this.secondText,
+    required this.transactions,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         HomePageHead(
-          imageUrl: Assets.assetsImagesAvatarImage,
+          imageUrl: imageUrl,
         ),
-        Gap(Insets.medium),
+        SizedBox(height: Insets.medium),
         UserCard(
-          qrData: 'https://github.com/karamiq/Garage-App',
-          carPlateInfo: '24214 أ / بغداد',
-          carType: 'دوج جارجر',
-          expireDate: ' 10/12/2025',
-          cardNumber: '10023',
-          cardMoney: 125000,
-          buttonAppears: false,
+          qrData: qrData,
+          carPlateInfo: carPlateInfo,
+          carType: carType,
+          expireDate: expireDate,
+          cardNumber: cardNumber,
+          cardMoney: cardMoney,
+          buttonAppears: buttonAppears,
         ),
-        Gap(Insets.exLarge),
+        SizedBox(height: Insets.exLarge),
         ViewedItemsTitle(
-            mainText: 'أخر التحويلات المالية',
-            secontText: 'رؤية الجميع',
-            onTap: () => Get.toNamed(
-                  Routes.seeAllPage,
-                )),
+          mainText: mainText,
+          secontText: secondText,
+          onTap: () => Get.toNamed(
+            Routes.seeAllPage,
+          ),
+        ),
         ListView.separated(
           padding: EdgeInsets.symmetric(vertical: Insets.medium),
-          itemCount: 3,
+          itemCount: transactions.length,
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemBuilder: (context, index) => CustomListTile(
+          itemBuilder: (context, index) {
+            final transaction = transactions[index];
+            return CustomListTile(
               icon: Assets.assetsIconsCard,
-              title: 'تم شحن البطاقة',
-              subtitle: '2023/2/24',
-              trailing2: '25,000 د. ع.'),
-          separatorBuilder: (context, index) => Gap(Insets.small),
+              title: transaction['title']!,
+              subtitle: transaction['date']!,
+              trailing2: transaction['amount']!,
+            );
+          },
+          separatorBuilder: (context, index) => SizedBox(height: Insets.small),
         ),
       ],
     );

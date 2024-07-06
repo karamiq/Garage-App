@@ -1,7 +1,6 @@
 import 'package:Trip/components/custom_list_tile.dart';
 import 'package:Trip/pages/veichles_page/selected_car_info/components/selected_car_info_head.dart';
 import '../../../../components/mini_card.dart';
-import '../../../../components/trip_card.dart';
 import '../../../../config/constant.dart';
 import '../../../../router/router.dart';
 import '../../../home_page/components/container_stack_decoration.dart';
@@ -51,9 +50,7 @@ class SelectedCarInfoContent extends StatelessWidget {
                 subtitle: '2023/2/24',
                 trailing2: '25,000 د. ع.')
           ],
-          latestTripsList: [
-            TripCard(from: 'كراج العلاوي', to: 'كراج ام قصر', price: '6,500'),
-          ],
+          latestTripsList: [],
         )
       ],
     );

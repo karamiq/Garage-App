@@ -33,13 +33,13 @@ class HomePageSkeleton extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: ShimmerContainer(
-                    width: 100,
-                    height: 55,
+                    width: 60,
+                    height: 40,
                   ),
                 ),
                 Gap(Insets.medium),
                 Expanded(
-                  flex: 4,
+                  flex: 3,
                   child: ShimmerContainer(
                     width: 100,
                     height: 55,
@@ -48,8 +48,6 @@ class HomePageSkeleton extends StatelessWidget {
               ],
             ),
             Gap(Insets.small),
-            CustomRowSkeleton(),
-           Gap(Insets.small),
             CustomRowSkeleton(),
           ],
         )

@@ -1,3 +1,4 @@
+import 'package:Trip/components/custom_list_tile_skeleton.dart';
 import 'package:Trip/components/home_page_head_shimmer.dart';
 import 'package:Trip/components/shimmer_container.dart';
 import 'package:flutter/material.dart';
@@ -6,8 +7,8 @@ import 'package:gap/gap.dart';
 import '../../../components/viewed_item_title.dart';
 import '../../../config/utils/const_class.dart';
 
-class ViechlePageShimmer extends StatelessWidget {
-  const ViechlePageShimmer({super.key});
+class ViechlePageSkeleton extends StatelessWidget {
+  const ViechlePageSkeleton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,19 +34,31 @@ class ViechlePageShimmer extends StatelessWidget {
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
             //The filtered list must be applied here when linking with api
-            itemBuilder: (context, index) => ShimmerContainer(
-                  width: double.infinity,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: Insets.exSmall),
-                    child: ListTile(),
-                  ),
-                ),
+            itemBuilder: (context, index) => CustomListTileSkeleton(),
             separatorBuilder: (context, index) => Gap(Insets.small),
             itemCount: 3),
         Gap(Insets.large),
         ShimmerContainer(
           width: double.infinity,
           height: 50,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: Insets.exLarge * 2, vertical: Insets.small),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ShimmerContainer(
+                  width: 100,
+                ),
+                Gap(Insets.small),
+                ShimmerContainer(
+                  shape: BoxShape.circle,
+                  width: 60,
+                  height: 30,
+                ),
+              ],
+            ),
+          ),
         ),
         Gap(Insets.medium),
         Divider(
@@ -65,10 +78,7 @@ class ViechlePageShimmer extends StatelessWidget {
           ],
         ),
         Gap(Insets.medium),
-        ShimmerContainer(
-          width: double.infinity,
-          child: ListTile(),
-        ),
+        CustomListTileSkeleton(),
       ],
     );
   }

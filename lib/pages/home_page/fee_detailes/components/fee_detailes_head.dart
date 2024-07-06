@@ -1,3 +1,4 @@
+import 'package:Trip/model/DriverAppViolations/vehicle_violations.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../components/under_lined_text_button.dart';
@@ -7,19 +8,10 @@ import '../../../../router/router.dart';
 class FeeDetailesHead extends StatelessWidget {
   const FeeDetailesHead({
     super.key,
-    required this.feeNumber,
-    required this.feeDate,
-    required this.id,
-    required this.fee,
-    required this.feeReason,
+    required this.debtStatementReceipt,
   });
 
-  final String feeNumber;
-  final String feeDate;
-  final String id;
-  final String fee;
-  final String feeReason;
-
+  final Violation debtStatementReceipt;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -29,14 +21,14 @@ class FeeDetailesHead extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'غرامة $feeNumber#',
+              'غرامة ${debtStatementReceipt.number}#',
               style: TextStyle(
                 fontSize: CustomFontsTheme.bigSize,
               ),
             ),
             Gap(Insets.exSmall),
             Text(
-              feeDate,
+              makeDate(debtStatementReceipt.creationDate),
               style: TextStyle(
                 color: Theme.of(context).colorScheme.secondary,
               ),
@@ -49,11 +41,7 @@ class FeeDetailesHead extends StatelessWidget {
               Routes.feesOnCarPage + Routes.sendingComplainPage,
               arguments: {
                 'isFromProfile': false,
-                'id': id,
-                'fee': fee,
-                'feeReason': feeReason,
-                'feeDate': feeDate,
-                'feeNumber': feeNumber,
+                'debtStatementReceipt': debtStatementReceipt,
               }),
         )
       ],

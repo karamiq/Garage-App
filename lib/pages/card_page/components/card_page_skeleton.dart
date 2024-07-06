@@ -1,3 +1,4 @@
+import 'package:Trip/components/custom_list_tile_skeleton.dart';
 import 'package:Trip/components/home_page_head_shimmer.dart';
 import 'package:Trip/components/shimmer_container.dart';
 import 'package:Trip/components/user_card_shimmer.dart';
@@ -21,13 +22,10 @@ class CardPageSkeleton extends StatelessWidget {
         ShimmerContainer(width: 150),
         ListView.separated(
           padding: EdgeInsets.symmetric(vertical: Insets.medium),
-          itemCount: 3,
+          itemCount: 5,
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemBuilder: (context, index) => ShimmerContainer(
-            width: double.infinity,
-            child: ListTile(),
-          ),
+          itemBuilder: (context, index) => CustomListTileSkeleton(),
           separatorBuilder: (context, index) => Gap(Insets.small),
         ),
       ],

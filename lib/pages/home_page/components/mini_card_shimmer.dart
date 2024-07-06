@@ -10,7 +10,7 @@ class MiniCardShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: ShimmerContainer(
-        height: 160,
+        height: 170,
         width: 160,
         child: Padding(
           padding: EdgeInsets.all(Insets.small),

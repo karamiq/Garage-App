@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:widget_to_marker/widget_to_marker.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'components/map_trip_card.dart';
 
@@ -17,15 +18,33 @@ class PathPage extends StatefulWidget {
 }
 
 class _PathPageState extends State<PathPage> {
+  dynamic data;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  Future<void> fetchData() async {
+    try {
+      // Simulate data fetching
+      await Future.delayed(Duration(seconds: 2));
+      if (mounted) {
+        setState(() {
+          data = 'map data'; // Replace with actual data fetching logic
+        });
+      }
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     Widget content = PathPageShimmer();
-    dynamic data = 'map data'; // Replace with actual data fetching logic
     if (data != null) {
       content = PathPageContent();
-    } else {
-      content = PathPageShimmer();
     }
     return Scaffold(
       body: Stack(

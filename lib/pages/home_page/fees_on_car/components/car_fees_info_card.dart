@@ -19,7 +19,7 @@ class CarFeesInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 160,
+      height: 170,
       width: 160,
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surfaceContainerHighest,

@@ -18,8 +18,6 @@ class ProfilePage extends StatelessWidget {
       print('ffffff');
     }
 
-    String type = 'fff';
-
     return Scaffold(
       appBar: CustomAppBar(
         title: 'الحساب الشخصي',

@@ -1,3 +1,4 @@
+import 'package:Trip/model/DriverAppViolations/vehicle_violations.dart';
 
 import '../../../../config/constant.dart';
 import '../../../../model/MobileHomes/vehicle_debt_statement.dart';
@@ -5,8 +6,12 @@ import 'car_fees_info_card.dart';
 import 'fee_card.dart';
 
 class FeesOnCarContent extends StatelessWidget {
-  const FeesOnCarContent({super.key, required this.feesList, required this.numberOfReceipt, required this.accumulatedPrice});
-  final List<DebtStatementReceipt> feesList;
+  const FeesOnCarContent(
+      {super.key,
+      required this.feesList,
+      required this.numberOfReceipt,
+      required this.accumulatedPrice});
+  final List<Violation> feesList;
   final int numberOfReceipt;
   final int accumulatedPrice;
   @override
@@ -41,8 +46,6 @@ class FeesOnCarContent extends StatelessWidget {
           shrinkWrap: true,
           itemCount: feesList.length,
           itemBuilder: (context, index) => FeeCard(
-            fee: feesList[index].amount.toString(),
-            isFeePaid: feesList[index].isPaid,
             debtStatementReceipt: feesList[index],
           ),
           separatorBuilder: (context, index) => Gap(Insets.small),

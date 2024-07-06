@@ -127,10 +127,14 @@ class BaseClient {
 }
 
 class EndPoints {
+  //vehicle violations
+  static const vehicleViolations = '/mobile/vehicle-violations';
+  static const vehicleViolationsId = '/mobile/vehicle-violations/';
   //Mobile Homes
   static const home = '/mobile/home/';
-  static const lastTrips = '/mobile/last-trip/';
-  static const smartCardTransactionLogs = '/mobile/smart-card-transaction-logs/';
+  static const lastTrips = '/mobile/last-trips/';
+  static const smartCardTransactionLogs =
+      '/mobile/smart-card-transaction-logs/';
   static const vehicleDebtStatement = '/mobile/vehicle-debt-statement/';
   static const tripScreen = '/mobile/trip-screen/';
   static const vehiclePathLocation = '/mobile/vehicle-path-locations/';
@@ -150,6 +154,7 @@ class EndPoints {
   static const paths = '/mobile/paths';
   //Profiles
   static const profiles = '/profiles';
+  static const addVehicle = '/profiles/add-vehicle';
   static const login = '/login';
   static const register = 'profiles/register';
   static const verifyOtp = '/profiles/verify-otp';

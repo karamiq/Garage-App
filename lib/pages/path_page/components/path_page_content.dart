@@ -17,7 +17,8 @@ class _PathPageContentState extends State<PathPageContent> {
   late GoogleMapController mapController;
   List<LatLng> polylineCoordinates = [];
   Map<String, Marker> markers = {};
-  final LatLng _startPoint = LatLng(33.32805, 44.301488); // Example: Start Point
+  final LatLng _startPoint =
+      LatLng(33.32805, 44.301488); // Example: Start Point
   final LatLng _endPoint = LatLng(33.412805, 44.381488); // Example: End Point
 
   String themeForMap = '';
@@ -32,46 +33,57 @@ class _PathPageContentState extends State<PathPageContent> {
   }
 
   void loadMapStyle() async {
-    themeForMap = await DefaultAssetBundle.of(context).loadString(Assets.assetsThemesDarkMapStyle);
+    try {
+      themeForMap = await DefaultAssetBundle.of(context)
+          .loadString(Assets.assetsThemesDarkMapStyle);
+    } catch (e) {
+      print('Error loading map style: $e');
+    }
   }
 
   Future<void> getPolyPoints() async {
     try {
       PolylinePoints polylinePoints = PolylinePoints();
       PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-        googleApiKey: 'AIzaSyC_HxdEWLvZODhPgCUxKtzXEBu6UCIanEU', // Replace with your API key
+        googleApiKey:
+            'AIzaSyC_HxdEWLvZODhPgCUxKtzXEBu6UCIanEU', // Replace with your API key
         request: PolylineRequest(
           origin: PointLatLng(_startPoint.latitude, _startPoint.longitude),
           destination: PointLatLng(_endPoint.latitude, _endPoint.longitude),
           mode: TravelMode.driving,
         ),
       );
-      print(result);
       if (result.points.isNotEmpty) {
-        polylineCoordinates.addAll(result.points.map((point) => LatLng(point.latitude, point.longitude)));
+        polylineCoordinates.addAll(result.points
+            .map((point) => LatLng(point.latitude, point.longitude)));
         setState(() {});
       }
     } catch (e) {
-      print('Error: $e');
+      print('Error fetching polyline points: $e');
     }
   }
 
   Future<void> addMarker(String id, LatLng location, String icon) async {
-    final marker = Marker(
-      markerId: MarkerId(id),
-      position: location,
-      icon: await Container(
-        child: SvgPicture.asset(
-          icon,
-          color: const Color.fromARGB(255, 79, 180, 131),
-          height: 30,
-        ),
-      ).toBitmapDescriptor(logicalSize: const Size(430, 430)),
-    );
-    setState(() {
-      markers[id] = marker;
-    });
+    try {
+      final marker = Marker(
+        markerId: MarkerId(id),
+        position: location,
+        icon: await Container(
+          child: SvgPicture.asset(
+            icon,
+            color: const Color.fromARGB(255, 79, 180, 131),
+            height: 30,
+          ),
+        ).toBitmapDescriptor(logicalSize: const Size(430, 430)),
+      );
+      setState(() {
+        markers[id] = marker;
+      });
+    } catch (e) {
+      print('Error adding marker: $e');
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     return Stack(

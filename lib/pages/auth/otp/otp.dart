@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../components/custom_back_botton.dart';
 import '../../../config/utils/const_class.dart';
@@ -57,18 +58,23 @@ class _OtpPageState extends State<OtpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final data = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    final data =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final isLogin = data['isLogin'];
 
     void confirm() async {
+      final prefs = await SharedPreferences.getInstance();
       if (!_formKey.currentState!.validate()) {
         return;
       }
       await otpController.verifyOtp();
+
       if (isLogin) {
         Get.toNamed(Routes.tapsPage);
       } else {
-        Get.toNamed(Routes.createAccountType);
+        // If not logged in, navigate to the account creation type page
+        Get.toNamed(Routes
+            .createAccountType); // Navigate to the account creation type page defined in Routes
       }
     }
 
@@ -177,7 +183,8 @@ class _OtpPageState extends State<OtpPage> {
               ),
               SizedBox(height: Insets.small),
               ElevatedButton(
-                onPressed: otpController.otpCode.text.isEmpty || otpController.isLoading
+                onPressed: otpController.otpCode.text.isEmpty ||
+                        otpController.isLoading
                     ? null
                     : (!buttonEnabled ? confirm : null),
                 child: otpController.isLoading

@@ -1,3 +1,6 @@
+import 'package:Trip/components/custom_list_tile.dart';
+import 'package:Trip/components/custom_svg_style.dart';
+import 'package:Trip/model/Profiles/notification.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../config/constant.dart';
@@ -9,17 +12,20 @@ class NotificationsContent extends StatelessWidget {
     required this.notifications,
   });
 
-  final List<Widget> notifications;
+  final List<Notif> notifications;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: ListView.separated(
-      padding: EdgeInsets.symmetric(vertical: Insets.medium),
       itemCount: notifications.length,
       physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
-      itemBuilder: (context, index) => notifications[index],
+      itemBuilder: (context, index) => CustomListTile(
+          icon: notifications[index].picture,
+          title: notifications[index].title,
+          subtitle: notifications[index].description,
+          trailing2: makeDate(notifications[index].date)),
       separatorBuilder: (context, index) => Gap(Insets.small),
     ));
   }

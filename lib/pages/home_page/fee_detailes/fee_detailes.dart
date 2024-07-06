@@ -1,12 +1,10 @@
 import 'package:Trip/components/custom_app_bar.dart';
 import 'package:Trip/components/custom_elevated_button.dart';
 import 'package:Trip/components/custom_svg_style.dart';
+import 'package:Trip/model/DriverAppViolations/vehicle_violations.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
 import '../../../components/under_lined_text_button.dart';
 import '../../../config/constant.dart';
-import '../../../model/MobileHomes/vehicle_debt_statement.dart';
 import 'components/fee_detailes_head.dart';
 
 class FeeDetailesPage extends StatefulWidget {
@@ -18,7 +16,6 @@ class FeeDetailesPage extends StatefulWidget {
 
 class _FeeDetailesPageState extends State<FeeDetailesPage> {
   var feeNumber = 21;
-  String feeDate = DateFormat('yyyy/M/d').format(DateTime.now());
   var feeReason = 'وقوف خارج الكراج';
   var carLetterType = 'ب';
   var carPlateType = 'أجرة';
@@ -27,15 +24,20 @@ class _FeeDetailesPageState extends State<FeeDetailesPage> {
   var privousFee = '50,000';
   var newFee = '100,00';
   //Assuming this is how we know if it was doubled cuz i dont have the api
-  bool isDoubled = true;
-
   dynamic currentFee;
   @override
   Widget build(BuildContext context) {
-    currentFee = isDoubled ? newFee : privousFee;
     final data =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    DebtStatementReceipt debtStatementReceipt = data['debtStatementReceipt'];
+    Violation violation = data['violation'];
+    bool isDoubled() {
+      if (violation.amount != violation.totalAmount) {
+        return true;
+      }
+      return false;
+    }
+
+    currentFee = isDoubled() ? newFee : privousFee;
     return Scaffold(
       appBar: CustomAppBar(),
       body: Padding(
@@ -45,11 +47,7 @@ class _FeeDetailesPageState extends State<FeeDetailesPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FeeDetailesHead(
-              feeNumber: feeNumber.toString(),
-              feeDate: feeDate.toString(),
-              fee: currentFee,
-              feeReason: feeReason,
-              id: '',
+              debtStatementReceipt: violation,
             ),
             Gap(Insets.medium),
             Row(
@@ -57,17 +55,17 @@ class _FeeDetailesPageState extends State<FeeDetailesPage> {
                 CustomISvgStyle(icon: Assets.assetsIconsReceipt),
                 Gap(Insets.small),
                 Text(
-                  'سبب المخالفة: ${debtStatementReceipt.totalAmount}.',
+                  'سبب المخالفة: لا يوجد.',
                   style: TextStyle(fontSize: CustomFontsTheme.mediumSize),
                 )
               ],
             ),
             Gap(Insets.medium),
             CarInfo(
-                carPlateNumber: carPlateNumber,
-                carState: carState,
-                carLetterType: carLetterType,
-                carPlateType: carPlateType),
+                carPlateNumber: violation.vehicleChassisNumber,
+                carState: violation.vehicleGovernorateName ?? 'لا يوجد',
+                carLetterType: violation.vehiclePlateCharacterName,
+                carPlateType: violation.vehiclePlateType ?? 'لا يوجد'),
             Gap(Insets.medium),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -94,7 +92,7 @@ class _FeeDetailesPageState extends State<FeeDetailesPage> {
                 CustomISvgStyle(icon: Assets.assetsIconsReceipt),
                 Gap(Insets.small),
                 Text(
-                  'سبب موقع المخالفة: كراج العلاوي',
+                  'سبب موقع المخالفة: ${violation.amount}',
                   style: TextStyle(fontSize: CustomFontsTheme.mediumSize),
                 ),
               ],
@@ -121,25 +119,25 @@ class _FeeDetailesPageState extends State<FeeDetailesPage> {
                 ),
                 Gap(Insets.exSmall),
                 Text(
-                  ' 50,000 د. ع',
+                  ' ${addCommasToNumber(violation.amount)} د. ع',
                   style: TextStyle(
                       decorationColor: Theme.of(context).colorScheme.error,
-                      decoration: isDoubled
+                      decoration: isDoubled()
                           ? TextDecoration.lineThrough
                           : TextDecoration.none,
-                      fontSize: isDoubled
+                      fontSize: isDoubled()
                           ? CustomFontsTheme.smallSize
                           : CustomFontsTheme.bigSize - 4),
                 ),
                 Spacer(),
-                if (isDoubled)
+                if (isDoubled())
                   Text(
-                    '100,000 د. ع.',
+                    '${addCommasToNumber(violation.totalAmount)} د. ع.',
                     style: TextStyle(fontSize: CustomFontsTheme.bigSize - 4),
                   ),
               ],
             ),
-            if (isDoubled)
+            if (isDoubled())
               Text(
                 '* تمت مضاعفة قيمة الغرامة لتأخرك شهر عن الدفع',
                 style: TextStyle(
@@ -205,7 +203,7 @@ class CarInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('حرف اللوحة: $carLetterType'),
-                Text('حرفنوع اللوحة: $carPlateType')
+                Text('نوع اللوحة: $carPlateType')
               ],
             ),
           ],

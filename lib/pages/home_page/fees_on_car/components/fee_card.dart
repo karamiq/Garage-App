@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../../config/constant.dart';
+import '../../../../model/DriverAppViolations/vehicle_violations.dart';
 import '../../../../model/MobileHomes/vehicle_debt_statement.dart';
 import '../../../../router/router.dart';
 
 class FeeCard extends StatelessWidget {
   const FeeCard({
     super.key,
-    required this.fee,
-    required this.isFeePaid, 
     required this.debtStatementReceipt,
   });
-  final String fee;
-  final bool isFeePaid;
-  final DebtStatementReceipt debtStatementReceipt;
+  final Violation debtStatementReceipt;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -38,7 +35,7 @@ class FeeCard extends StatelessWidget {
         ),
         title: Text('غرامة مالية'),
         subtitle: Text(
-          '$fee د. ع',
+          '${debtStatementReceipt.amount} د. ع',
           style: TextStyle(
             color: Theme.of(context).colorScheme.secondary,
             fontSize: CustomFontsTheme.smallSize,
@@ -52,14 +49,14 @@ class FeeCard extends StatelessWidget {
             Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(Insets.exLarge),
-                    color: isFeePaid
+                    color: debtStatementReceipt.isPaid
                         ? Color.fromARGB(255, 93, 216, 157)
                         : Theme.of(context).colorScheme.errorContainer),
                 padding: EdgeInsets.all(Insets.small),
                 child: Text(
-                  isFeePaid ? 'مدفوعة' : ' غير مدفوعة',
+                  debtStatementReceipt.isPaid ? 'مدفوعة' : ' غير مدفوعة',
                   style: TextStyle(
-                      color: isFeePaid
+                      color: debtStatementReceipt.isPaid
                           ? Color.fromARGB(255, 31, 72, 33)
                           : Color.fromARGB(255, 91, 30, 30)),
                 )),

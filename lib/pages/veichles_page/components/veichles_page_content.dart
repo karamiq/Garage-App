@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:Trip/components/custom_elevated_button.dart';
 import 'package:Trip/config/constant.dart';
 import 'package:Trip/pages/home_page/components/home_page_head.dart';
@@ -8,8 +9,8 @@ import '../../../components/viewed_item_title.dart';
 import 'holder_info_row.dart';
 import 'viechle_info_row.dart';
 
-class VeichlesPageContent extends StatelessWidget {
-  const VeichlesPageContent({super.key});
+class VehiclesPageContent extends StatelessWidget {
+  const VehiclesPageContent({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class VeichlesPageContent extends StatelessWidget {
         phoneNumber: '07728833423',
       ),
     ];
-    List viechles = [
+    List vehicles = [
       VehiclesInfoRow(
           id: '',
           carType: "سايبة",
@@ -45,24 +46,24 @@ class VeichlesPageContent extends StatelessWidget {
     return Column(
       children: [
         HomePageHead(
-          imageUrl: Assets.assetsImagesAvatarImage,
+          imageUrl:
+              'https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg',
         ),
         Gap(Insets.large * 1.5),
         ViewedItemsTitle(
             mainText: 'المركبات التي تمتلكها',
             secontText: 'رؤية الجميع',
             onTap: () => Get.toNamed(
-                  Routes.allVeichlesPage,
+                  Routes.allVeichlesPage, // Corrected route name
                 )),
         Gap(Insets.large * 1.5),
         ListView.separated(
             padding: EdgeInsets.all(0),
             shrinkWrap: true,
             physics: NeverScrollableScrollPhysics(),
-            //The filtered list must be applied here when linking with api
-            itemBuilder: (context, index) => viechles[index],
+            itemBuilder: (context, index) => vehicles[index],
             separatorBuilder: (context, index) => Gap(Insets.small),
-            itemCount: viechles.length),
+            itemCount: vehicles.length),
         Gap(Insets.large),
         ElevatedButton(
             onPressed: () => Get.toNamed(Routes.ownerCarInfoPage,
@@ -83,8 +84,13 @@ class VeichlesPageContent extends StatelessWidget {
               padding: EdgeInsets.all(0),
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              //The filtered list must be applied here when linking with api
-              itemBuilder: (context, index) => availableDrivers[index],
+              itemBuilder: (context, index) => HolderInfoRow(
+                  name: 'name',
+                  state: 'state',
+                  id: 'id',
+                  phoneNumber: 'phoneNumber',
+                  photoUrl:
+                      'https://d38b044pevnwc9.cloudfront.net/cutout-nuxt/enhancer/2.jpg'),
               separatorBuilder: (context, index) => Gap(Insets.small),
               itemCount: availableDrivers.length),
         if (availableDrivers.isEmpty)

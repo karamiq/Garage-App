@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'package:Trip/config/constant.dart';
+import 'package:Trip/model/MobileHomes/last_trips.dart';
+import 'package:Trip/services/mobile_home/dio_last_trips.dart';
 import 'package:flutter/material.dart';
 import '../../components/custom_list_tile.dart';
-import '../../components/trip_card.dart';
 import '../../controller/current_user_controller.dart';
 import '../../model/MobileHomes/vehicle_debt_statement.dart';
 import '../../model/Profiles/profile.dart';
@@ -20,32 +21,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final UserController controller = Get.put<UserController>(UserController());
-  bool dataLoaded = false;
-  Future<Profile>? homeDetails;
+  Profile? profile;
   VehicleDebtStatement? vehicleDebtStatementDetails;
+  LastTrips? lastTrips;
 
   Future<void> fetchData() async {
-    setState(() {
-      dataLoaded = false;
-    });
-
-    homeDetails = HomeService.homeGet();
-    if (controller.currentuUser != null &&
-        controller.currentuUser!.vehicle != null &&
-        controller.currentuUser!.vehicle!.isNotEmpty) {
+    await controller
+        .loadUserFromPreferences(); // Load user data from preferences
+    if (controller.currentuUser != null) {
+      profile = await ProfileService.profileGet();
+      lastTrips = await lastTripsService
+          .lastTripsGet(controller.currentuUser!.vehicle!.first.id);
       vehicleDebtStatementDetails =
           await VehicleDebtStatementService.vehicleDebtStatementGet(
               controller.currentuUser!.vehicle!.first.id);
     }
-    setState(() {
-      dataLoaded = true;
-    });
   }
-  @override
-  void initState() {
-    super.initState();
-    fetchData();
-  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,37 +45,39 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: Insets.medium),
         child: FutureBuilder(
-          future: homeDetails,
+          future: fetchData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return HomePageSkeleton();
             } else if (snapshot.hasError) {
-              return Center(
-                child: Text('Error: ${snapshot.error}'),
-              );
-            } else if (!dataLoaded) {
-              return HomePageSkeleton();
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (controller.currentuUser == null) {
+              return Center(child: Text('No user data available.'));
             } else {
-              var user = controller.currentuUser!;
               return HomePageContent(
-                cardAvailable: user.driverCard != null,
-                imageUrl: user.image ?? '',
+                cardAvailable: controller.currentuUser!.driverCard != null,
+                imageUrl: controller.currentuUser!.image ?? '',
                 carPlateInfo:
-                    '${user.vehicle?.first.plateNumber ?? ''} ${user.vehicle?.first.plateCharacterName ?? ''} / ${user.vehicle?.first.governorateName ?? ''}',
-                carType: user.vehicle != null && user.vehicle!.isNotEmpty
-                    ? user.vehicle![0].vehicleModelName ?? ''
+                    '${controller.currentuUser!.vehicle?.first.plateNumber ?? ''} ${controller.currentuUser!.vehicle?.first.plateCharacterName ?? ''} / ${controller.currentuUser!.vehicle?.first.governorateName ?? ''}',
+                carType: controller.currentuUser!.vehicle != null &&
+                        controller.currentuUser!.vehicle!.isNotEmpty
+                    ? controller.currentuUser!.vehicle![0].vehicleModelName
                     : '',
-                expireDate: user.driverCard?.expiredDate?.toString() ?? ' ',
-                cardNumber: user.driverCard?.number?.toString() ?? '0',
+                expireDate: controller.currentuUser!.driverCard?.expiredDate
+                        .toString() ??
+                    ' ',
+                cardNumber:
+                    controller.currentuUser!.driverCard?.number.toString() ??
+                        '0',
                 qrData: 'https://github.com/karamiq/Garage-App',
-                cardMoney: user.driverCard?.balance ?? 0,
+                cardMoney: controller.currentuUser!.driverCard?.balance ?? 0,
                 feesCardTitle: 'الغرامات المالية',
                 feesCardNumber:
-                    vehicleDebtStatementDetails?.numberOfReceipt?.toString() ??
+                    vehicleDebtStatementDetails?.numberOfReceipt.toString() ??
                         '0',
                 feesCardNumText: 'غرامة مالية',
                 tripsCardTitle: 'عدد الرحلات',
-                tripsCardNumber: '50',
+                tripsCardNumber: lastTrips!.totalTripNumber.toString(),
                 tripsCardNumText: 'رحلة',
                 moneyTransfersList: [
                   CustomListTile(
@@ -93,14 +87,7 @@ class _HomePageState extends State<HomePage> {
                     trailing2: '25,000 د. ع.',
                   ),
                 ],
-                latestTripsList: [
-                  TripCard(
-                    from: 'كراج العلاوي',
-                    to: 'كراج ام قصر',
-                    price: '6,500',
-                  ),
-                  
-                ],
+                latestTripsList: lastTrips!.tripHistory,
               );
             }
           },

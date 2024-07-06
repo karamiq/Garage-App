@@ -1,7 +1,10 @@
+import 'package:Trip/router/router.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../components/custom_svg_style.dart';
 import '../../../../config/constant.dart';
+import '../../../../controller/current_user_controller.dart';
 
 class SignOutBottomSheet extends StatelessWidget {
   const SignOutBottomSheet({
@@ -10,6 +13,7 @@ class SignOutBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserController controller = Get.put<UserController>(UserController());
     return Card(
       elevation: 0,
       color: Theme.of(context).colorScheme.onSecondary,
@@ -32,7 +36,11 @@ class SignOutBottomSheet extends StatelessWidget {
             ),
             Spacer(),
             ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  final prefs = SharedPreferences.getInstance();
+                  Get.offAllNamed(Routes.loginOrRigisterPage);
+                  controller.removeUserFromPreferences();
+                },
                 style: ElevatedButton.styleFrom(
                     minimumSize: Size(double.infinity, 40),
                     backgroundColor: Theme.of(context).colorScheme.error),

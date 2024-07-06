@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:Trip/main.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -9,7 +8,7 @@ import '../../components/custom_snack_bar.dart';
 import '../constant.dart';
 
 String makeDate(DateTime? date) {
-  return DateFormat('yyyy-MM-dd').format(date ?? DateTime.now());
+  return DateFormat('yyyy / MM / dd').format(date ?? DateTime.now());
 }
 
 String makeTime(DateTime? date) {
@@ -22,6 +21,11 @@ String getStringOrDefault(String? inputString, [String defaultString = '-']) {
   } else {
     return inputString;
   }
+}
+
+String addCommasToNumber(int number) {
+  final formatter = NumberFormat('#,###');
+  return formatter.format(number);
 }
 
 //TODO: fix it

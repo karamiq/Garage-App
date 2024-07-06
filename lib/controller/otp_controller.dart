@@ -47,6 +47,7 @@ class OtpController extends GetxController {
       final prefs = await SharedPreferences.getInstance();
       prefs.setString('token', token!);
       userController.currentuUser = Profile.fromJson(response.item2['driver']);
+      userController.saveUserToPreferences();
     } catch (e) {
       print(e);
     } finally {
