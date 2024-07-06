@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../../../../config/constant.dart';
+import '../../../../model/MobileHomes/vehicle_debt_statement.dart';
 import '../../../../router/router.dart';
 
 class FeeCard extends StatelessWidget {
   const FeeCard({
     super.key,
     required this.fee,
-    required this.isFeePaid,
+    required this.isFeePaid, 
+    required this.debtStatementReceipt,
   });
   final String fee;
   final bool isFeePaid;
+  final DebtStatementReceipt debtStatementReceipt;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,7 +22,7 @@ class FeeCard extends StatelessWidget {
       child: ListTile(
         onTap: () => Get.toNamed(Routes.feesOnCarPage + Routes.feeDetailesPage,
             //here is where tha id is passed
-            arguments: {'id': 'id'}),
+            arguments: {'debtStatementReceipt': debtStatementReceipt}),
         contentPadding: EdgeInsets.symmetric(horizontal: Insets.small),
         leading: Container(
           padding: EdgeInsets.all(Insets.small),

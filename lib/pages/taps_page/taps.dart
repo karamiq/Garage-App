@@ -27,7 +27,7 @@ class _TapsPageState extends State<TapsPage> {
   void initState() {
     super.initState();
     _pages = [
-      const HomePage(),
+       HomePage(),
       const CardPage(),
       const PathPage(),
       const VeichlesPage(),

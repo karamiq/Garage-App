@@ -1,3 +1,4 @@
+import 'package:Trip/components/cusotm_row_skeleton.dart';
 import 'package:flutter/material.dart';
 import '../../../components/home_page_head_shimmer.dart';
 import '../../../components/shimmer_container.dart';
@@ -47,7 +48,9 @@ class HomePageSkeleton extends StatelessWidget {
               ],
             ),
             Gap(Insets.small),
-            ShimmerContainer(child: ListTile(), width: double.infinity),
+            CustomRowSkeleton(),
+           Gap(Insets.small),
+            CustomRowSkeleton(),
           ],
         )
       ],

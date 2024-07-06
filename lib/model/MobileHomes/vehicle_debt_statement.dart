@@ -1,5 +1,5 @@
 class VehicleDebtStatement {
-  double accumulatedPrice;
+  dynamic accumulatedPrice;
   int numberOfReceipt;
   List<DebtStatementReceipt> debtStatementReceipts;
 
@@ -25,21 +25,21 @@ class DebtStatementReceipt {
   DateTime creationDate;
   bool deleted;
   int number;
-  double amount;
+  int amount;
   String vehicleId;
   String vehiclePlateNumber;
   String vehicleChassisNumber;
   String vehiclePlateCharacterId;
   String vehiclePlateCharacterName;
   String vehiclePlateTypeId;
-  String vehiclePlateType;
-  String vehicleGovernorateId;
-  String vehicleGovernorateName;
+  String? vehiclePlateType;
+  String? vehicleGovernorateId;
+  String? vehicleGovernorateName;
   String garageId;
-  String garageName;
-  double totalTaxes;
-  double taxes;
-  double totalAmount;
+  String? garageName;
+  int totalTaxes;
+  int  taxes;
+  int totalAmount;
   bool isPaid;
   DateTime expiredDate;
 

@@ -128,12 +128,12 @@ class BaseClient {
 
 class EndPoints {
   //Mobile Homes
-  static const home = '/mobile/home';
-  static const lastTrips = '/mobile/last-trip';
-  static const smartCardTransactionLogs = '/mobile/smart-card-transaction-logs';
-  static const vehicleDebtStatement = '/mobile/vehicle-debt-statement';
-  static const tripScreen = '/mobile/trip-screen';
-  static const vehiclePathLocation = '/mobile/vehicle-path-locations';
+  static const home = '/mobile/home/';
+  static const lastTrips = '/mobile/last-trip/';
+  static const smartCardTransactionLogs = '/mobile/smart-card-transaction-logs/';
+  static const vehicleDebtStatement = '/mobile/vehicle-debt-statement/';
+  static const tripScreen = '/mobile/trip-screen/';
+  static const vehiclePathLocation = '/mobile/vehicle-path-locations/';
   static const driverCardTransaction = '/mobile/dricer-card-transation';
   //file
   static const file = '/file';

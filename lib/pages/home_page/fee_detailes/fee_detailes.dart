@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../../../components/under_lined_text_button.dart';
 import '../../../config/constant.dart';
+import '../../../model/MobileHomes/vehicle_debt_statement.dart';
 import 'components/fee_detailes_head.dart';
 
 class FeeDetailesPage extends StatefulWidget {
@@ -32,6 +33,9 @@ class _FeeDetailesPageState extends State<FeeDetailesPage> {
   @override
   Widget build(BuildContext context) {
     currentFee = isDoubled ? newFee : privousFee;
+    final data =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    DebtStatementReceipt debtStatementReceipt = data['debtStatementReceipt'];
     return Scaffold(
       appBar: CustomAppBar(),
       body: Padding(
@@ -53,7 +57,7 @@ class _FeeDetailesPageState extends State<FeeDetailesPage> {
                 CustomISvgStyle(icon: Assets.assetsIconsReceipt),
                 Gap(Insets.small),
                 Text(
-                  'سبب المخالفة: $feeReason.',
+                  'سبب المخالفة: ${debtStatementReceipt.totalAmount}.',
                   style: TextStyle(fontSize: CustomFontsTheme.mediumSize),
                 )
               ],

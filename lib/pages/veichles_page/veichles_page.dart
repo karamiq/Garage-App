@@ -19,8 +19,8 @@ class VeichlesPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: Insets.medium),
         child: Column(
           children: [
-            //ViechlePageShimmer(),
-            VeichlesPageContent(),
+            ViechlePageShimmer(),
+            //VeichlesPageContent(),
           ],
         ),
       ),

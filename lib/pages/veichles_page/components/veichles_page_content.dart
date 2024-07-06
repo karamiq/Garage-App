@@ -20,7 +20,7 @@ class VeichlesPageContent extends StatelessWidget {
         state: 'بغداد',
         photoUrl: '',
         phoneNumber: '07728833423',
-      )
+      ),
     ];
     List viechles = [
       VehiclesInfoRow(

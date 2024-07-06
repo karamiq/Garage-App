@@ -1,14 +1,17 @@
 import 'package:Trip/config/constant.dart';
 import 'package:Trip/pages/home_page/components/container_stack_decoration.dart';
 import 'package:Trip/pages/home_page/components/user_card.dart';
+import 'package:flutter/material.dart';
 import '../../../components/custom_list_tile.dart';
 import '../../../components/mini_card.dart';
+import '../../../components/shimmer_container.dart';
 import '../../../components/trip_card.dart';
 import '../../../router/router.dart';
 import 'home_page_bottom_falf.dart';
 import 'home_page_head.dart';
 
 class HomePageContent extends StatelessWidget {
+  final bool cardAvailable;
   final String imageUrl;
   final String carPlateInfo;
   final String carType;
@@ -27,6 +30,7 @@ class HomePageContent extends StatelessWidget {
 
   const HomePageContent({
     super.key,
+    required this.cardAvailable,
     required this.imageUrl,
     required this.carPlateInfo,
     required this.carType,
@@ -51,34 +55,9 @@ class HomePageContent extends StatelessWidget {
         children: [
           HomePageHead(imageUrl: imageUrl),
           Gap(Insets.medium),
-          UserCard(
-            carPlateInfo: carPlateInfo,
-            carType: carType,
-            expireDate: expireDate,
-            cardNumber: cardNumber,
-            qrData: qrData,
-            cardMoney: cardMoney,
-          ),
+          _buildUserCard(),
           Gap(Insets.small),
-          Row(
-            children: [
-              MiniCard(
-                cardTitle: feesCardTitle,
-                cardNumber: feesCardNumber,
-                cardNumText: feesCardNumText,
-                decoration: SequaredPositionedContainers(),
-                onIconPressed: () => Get.toNamed(Routes.feesOnCarPage),
-              ),
-              Gap(Insets.small),
-              MiniCard(
-                cardTitle: tripsCardTitle,
-                cardNumber: tripsCardNumber,
-                cardNumText: tripsCardNumText,
-                decoration: CirculerPositionedContainers(),
-                onIconPressed: () => Get.toNamed(Routes.tripsPage),
-              ),
-            ],
-          ),
+          _buildMiniCardsRow(),
           Gap(Insets.small),
           HomePageBottomHalf(
             moneyTransfersList: moneyTransfersList,
@@ -86,6 +65,44 @@ class HomePageContent extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildUserCard() {
+    return UserCard(
+      cardAvailable: cardAvailable,
+      carPlateInfo: carPlateInfo,
+      carType: carType,
+      expireDate: expireDate,
+      cardNumber: cardNumber,
+      qrData: qrData,
+      cardMoney: cardMoney,
+    );
+  }
+
+  Widget _buildMiniCardsRow() {
+    return Row(
+      children: [
+        Expanded(
+          child: MiniCard(
+            cardTitle: feesCardTitle,
+            cardNumber: feesCardNumber,
+            cardNumText: feesCardNumText,
+            decoration: SequaredPositionedContainers(),
+            onIconPressed: () => Get.toNamed(Routes.feesOnCarPage),
+          ),
+        ),
+        Gap(Insets.small),
+        Expanded(
+          child: MiniCard(
+            cardTitle: tripsCardTitle,
+            cardNumber: tripsCardNumber,
+            cardNumText: tripsCardNumText,
+            decoration: CirculerPositionedContainers(),
+            onIconPressed: () => Get.toNamed(Routes.tripsPage),
+          ),
+        ),
+      ],
     );
   }
 }

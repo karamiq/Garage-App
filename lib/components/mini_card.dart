@@ -22,7 +22,6 @@ class MiniCard extends StatelessWidget {
       child: Container(
         height: 165,
         width: 165,
-        //padding: EdgeInsets.all(Insets.small),
         decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.onInverseSurface,
             borderRadius:
