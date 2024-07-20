@@ -16,7 +16,6 @@ class EnterPersonalPicturePage extends StatefulWidget {
   State<EnterPersonalPicturePage> createState() =>
       _EnterPersonalPicturePageState();
 }
-
 class _EnterPersonalPicturePageState extends State<EnterPersonalPicturePage> {
   final CreateOwnerController controller =
       Get.put<CreateOwnerController>(CreateOwnerController());
@@ -35,7 +34,7 @@ class _EnterPersonalPicturePageState extends State<EnterPersonalPicturePage> {
       if (isValid) {
         /// await controller.register();
         if (isOwner) {
-            Get.toNamed(Routes.createQrCodePage, arguments: {'isOwner': isOwner});
+          Get.toNamed(Routes.createQrCodePage, arguments: {'isOwner': isOwner});
         } else {
           Get.toNamed(Routes.whereDoYouWantToWorkPage,
               arguments: {'isOwner': isOwner});

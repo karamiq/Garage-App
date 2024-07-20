@@ -99,9 +99,9 @@ class _showSelectionBottomSheetState extends State<showSelectionBottomSheet> {
           return Center(child: Text('No items available'));
         } else {
           if (_originalList.isEmpty) {
-  _originalList = snapshot.data!;
-  _filteredCountries = _originalList;
-}
+            _originalList = snapshot.data!;
+            _filteredCountries = _originalList;
+          }
           double height = 600;
           if (_originalList.length <= 4) {
             height = 300;
@@ -115,7 +115,8 @@ class _showSelectionBottomSheetState extends State<showSelectionBottomSheet> {
             height: height,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(CustomBorderTheme.normalBorderRadius))),
+                    top:
+                        Radius.circular(CustomBorderTheme.normalBorderRadius))),
             padding: EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,8 +141,8 @@ class _showSelectionBottomSheetState extends State<showSelectionBottomSheet> {
                       return ListTile(
                         title: Text(_filteredCountries[index].name),
                         onTap: () {
-                          // Update the controller value
-                          widget.controller.text = _filteredCountries[index].name;
+                          widget.controller.text =
+                              _filteredCountries[index].name;
                           Navigator.of(context).pop(_filteredCountries[index]);
                         },
                       );
