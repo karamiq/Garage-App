@@ -55,13 +55,13 @@ class WhereDoYouWantToWorkPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: Insets.exLarge * 1.5),
-              CustomItemSelect(
+              CustomApiItemSelect(
                   labelText: 'المحافظة',
                   controller: controller.holderStateWork,
                   itemListFuture: GovsService.gov(),
                   validator: validator),
               SizedBox(height: Insets.small),
-              CustomItemSelect(
+              CustomApiItemSelect(
                   labelText: 'الكراج',
                   controller: controller.holderGarageWork,
                   itemListFuture: GaragesSrvce.garagesGet(),

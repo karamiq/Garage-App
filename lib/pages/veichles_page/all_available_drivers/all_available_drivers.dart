@@ -47,7 +47,7 @@ class _AllAvailableDriversPageState extends State<AllAvailableDriversPage> {
             Row(
               children: [
                 Expanded(
-                  child: CustomItemSelect(
+                  child: CustomApiItemSelect(
                       labelText: 'المحافظة',
                       controller: garageController,
                       itemListFuture: GovsService.gov(),
@@ -55,7 +55,7 @@ class _AllAvailableDriversPageState extends State<AllAvailableDriversPage> {
                 ),
                 Gap(Insets.small),
                 Expanded(
-                  child: CustomItemSelect(
+                  child: CustomApiItemSelect(
                       labelText: 'الكراج',
                       controller: stateController,
                       itemListFuture: GovsService.gov(),

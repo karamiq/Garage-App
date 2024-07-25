@@ -72,7 +72,7 @@ class _MyAppState extends State<MyApp> {
         final theme = AppTheme();
         // SizeConfig().init(constraints, orientation);
         return GetMaterialApp(
-          initialRoute: prefs.getString('currentUser') != null
+          initialRoute: prefs.getString('currentUser') == null
               ? Routes.tapsPage
               : Routes.splashPageRoute,
           getPages: generateRoutes(),

@@ -89,7 +89,7 @@ class HolderInfoRow extends StatelessWidget {
                       borderRadius: BorderRadius.circular(
                           CustomBorderTheme.normalBorderRadius),
                       onTap: () async => await makePhoneCall(phoneNumber),
-                      child: CustomISvgStyle(icon: Assets.assetsIconsPhone))
+                      child: CustomSvgStyle(icon: Assets.assetsIconsPhone))
                 ],
               ),
             ),

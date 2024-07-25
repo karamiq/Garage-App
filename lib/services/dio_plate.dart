@@ -32,7 +32,7 @@ class PlateCharactersService {
           dataList.map((json) => PlateCharacter.fromJson(json)).toList();
       return govsList;
     } else {
-        print('is not null');
+      print('is not null');
       List<dynamic> dataList = response['data'];
       List<PlateCharacter> govsList =
           dataList.map((json) => PlateCharacter.fromJson(json)).toList();

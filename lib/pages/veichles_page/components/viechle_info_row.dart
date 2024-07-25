@@ -37,7 +37,7 @@ class VehiclesInfoRow extends StatelessWidget {
                 flex: 11,
                 child: Row(
                   children: [
-                    CustomISvgStyle(icon: Assets.assetsIconsCar),
+                    CustomSvgStyle(icon: Assets.assetsIconsCar),
                     Gap(Insets.small),
                     Expanded(
                       child: Column(

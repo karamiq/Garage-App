@@ -92,7 +92,7 @@ class _SendingComplainPageState extends State<SendingComplainPage> {
                   ),
                 ),
               if (isFromProfile)
-                CustomItemSelect(
+                CustomApiItemSelect(
                     labelText: 'أختر نوع الشكوى',
                     controller: complainTypeController,
                     itemListFuture: GovsService.gov(),

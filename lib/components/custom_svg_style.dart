@@ -1,8 +1,8 @@
 import 'package:Trip/config/constant.dart';
 import 'package:flutter/material.dart';
 
-class CustomISvgStyle extends StatelessWidget {
-  CustomISvgStyle({
+class CustomSvgStyle extends StatelessWidget {
+  CustomSvgStyle({
     super.key,
     required this.icon,
     this.color,

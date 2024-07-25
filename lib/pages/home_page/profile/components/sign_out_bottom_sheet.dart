@@ -72,7 +72,7 @@ class _ChangeThemeButtonState extends State<ChangeThemeButton> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-        leading: CustomISvgStyle(icon: Assets.assetsIconsPaintRoller),
+        leading: CustomSvgStyle(icon: Assets.assetsIconsPaintRoller),
         title: Text('الثيم'),
         trailing: Switch(
             value: themeChange,

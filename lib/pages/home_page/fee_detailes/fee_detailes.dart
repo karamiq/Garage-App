@@ -52,7 +52,7 @@ class _FeeDetailesPageState extends State<FeeDetailesPage> {
             Gap(Insets.medium),
             Row(
               children: [
-                CustomISvgStyle(icon: Assets.assetsIconsReceipt),
+                CustomSvgStyle(icon: Assets.assetsIconsReceipt),
                 Gap(Insets.small),
                 Text(
                   'سبب المخالفة: لا يوجد.',
@@ -72,7 +72,7 @@ class _FeeDetailesPageState extends State<FeeDetailesPage> {
               children: [
                 Row(
                   children: [
-                    CustomISvgStyle(icon: Assets.assetsIconsCamera),
+                    CustomSvgStyle(icon: Assets.assetsIconsCamera),
                     Gap(Insets.small),
                     Text(
                       'صورة المخالفة',
@@ -89,7 +89,7 @@ class _FeeDetailesPageState extends State<FeeDetailesPage> {
             Gap(Insets.medium),
             Row(
               children: [
-                CustomISvgStyle(icon: Assets.assetsIconsReceipt),
+                CustomSvgStyle(icon: Assets.assetsIconsReceipt),
                 Gap(Insets.small),
                 Text(
                   'سبب موقع المخالفة: ${violation.amount}',
@@ -111,7 +111,7 @@ class _FeeDetailesPageState extends State<FeeDetailesPage> {
             Gap(Insets.small),
             Row(
               children: [
-                CustomISvgStyle(icon: Assets.assetsIconsReceipt),
+                CustomSvgStyle(icon: Assets.assetsIconsReceipt),
                 Gap(Insets.small),
                 Text(
                   'قيمة الغرامة',
@@ -179,7 +179,7 @@ class CarInfo extends StatelessWidget {
       children: [
         Row(
           children: [
-            CustomISvgStyle(icon: Assets.assetsIconsCar),
+            CustomSvgStyle(icon: Assets.assetsIconsCar),
             Gap(Insets.small),
             Text(
               'تفاصيل المركبة:',

@@ -46,7 +46,7 @@ class SelectedCarInfoHead extends StatelessWidget {
               children: [
                 InkWell(
                     onTap: () async => makePhoneCall(phoneNumber),
-                    child: CustomISvgStyle(icon: Assets.assetsIconsPhone)),
+                    child: CustomSvgStyle(icon: Assets.assetsIconsPhone)),
                 Gap(Insets.small),
                 Icon(
                   Icons.keyboard_arrow_down_outlined,

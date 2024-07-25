@@ -27,7 +27,7 @@ class CustomListTile extends StatelessWidget {
           borderRadius:
               BorderRadius.circular(CustomBorderTheme.normalBorderRadius)),
       child: ListTile(
-        leading: CustomISvgStyle(icon: icon),
+        leading: CustomSvgStyle(icon: icon),
         title: Text(title),
         subtitle: Text(
           subtitle,

@@ -13,7 +13,7 @@ import '../../../services/dio_vehicle.dart';
 import '../enter_holder_or_owner_info_page/components/image_input.dart';
 
 class OwnerCarInfoPage extends StatelessWidget {
-   OwnerCarInfoPage({super.key});
+  OwnerCarInfoPage({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final CreateOwnerController controller =
@@ -22,6 +22,7 @@ class OwnerCarInfoPage extends StatelessWidget {
     final isValid = validateInfo(query);
     return isValid;
   }
+
   bool valid = true;
 
   @override
@@ -79,7 +80,7 @@ class OwnerCarInfoPage extends StatelessWidget {
                   ),
                   SizedBox(width: Insets.small),
                   Expanded(
-                    child: CustomItemSelect(
+                    child: CustomApiItemSelect(
                       onChanged: (selectedChar) async {
                         try {
                           controller.plateCharacterId?.text = selectedChar?.id;
@@ -93,14 +94,16 @@ class OwnerCarInfoPage extends StatelessWidget {
                       },
                       labelText: 'حرف اللوحة',
                       controller: controller.carPlateLetter,
-                      itemListFuture: PlateCharactersService.plateCharacterGetByGovId(controller.carGovernorateId!.text),
+                      itemListFuture:
+                          PlateCharactersService.plateCharacterGetByGovId(
+                              controller.carGovernorateId!.text),
                       validator: validator,
                     ),
                   ),
                 ],
               ),
               SizedBox(height: Insets.small),
-              CustomItemSelect(
+              CustomApiItemSelect(
                 labelText: 'المحافظة',
                 controller: controller.carState,
                 itemListFuture: GovsService.gov(),
@@ -115,7 +118,7 @@ class OwnerCarInfoPage extends StatelessWidget {
                 },
               ),
               SizedBox(height: Insets.small),
-              CustomItemSelect(
+              CustomApiItemSelect(
                 labelText: 'نوع اللوحة',
                 controller: controller.carPlateType,
                 itemListFuture: PlateTypeService.plateTypeGet(),
@@ -131,7 +134,7 @@ class OwnerCarInfoPage extends StatelessWidget {
                 prefixIcon: Assets.assetsIconsCarNumber,
               ),
               SizedBox(height: Insets.small),
-              CustomItemSelect(
+              CustomApiItemSelect(
                 labelText: 'نوع المركبة',
                 controller: controller.carType,
                 itemListFuture: VehicleService.vehicleTypeGet(),
@@ -140,7 +143,7 @@ class OwnerCarInfoPage extends StatelessWidget {
                 onChanged: (p0) => controller.vehicleTypeId?.text = p0?.id,
               ),
               SizedBox(height: Insets.small),
-              CustomItemSelect(
+              CustomApiItemSelect(
                 itemListFuture: VehicleService.vehicleModelGet(),
                 validator: validator,
                 controller: controller.carModel,

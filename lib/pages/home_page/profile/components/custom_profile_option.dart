@@ -17,7 +17,7 @@ class CustomProfileOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onPressed,
-      leading: CustomISvgStyle(
+      leading: CustomSvgStyle(
         icon: icon,
         color: color,
       ),

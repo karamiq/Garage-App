@@ -11,7 +11,7 @@ import '../../../components/custom_item_select.dart';
 import 'components/image_input.dart';
 
 class EnterHolderOrOwnerInfoPage extends StatelessWidget {
-   EnterHolderOrOwnerInfoPage({super.key});
+  EnterHolderOrOwnerInfoPage({super.key});
 
   TextEditingController DatePicker = TextEditingController();
 
@@ -28,6 +28,7 @@ class EnterHolderOrOwnerInfoPage extends StatelessWidget {
     final isvalid = validateInfo(query);
     return isvalid;
   }
+
   @override
   Widget build(BuildContext context) {
     final data =
@@ -45,6 +46,7 @@ class EnterHolderOrOwnerInfoPage extends StatelessWidget {
         }
       }
     }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -80,12 +82,11 @@ class EnterHolderOrOwnerInfoPage extends StatelessWidget {
                     labelText: 'أسم الأم',
                     prefixIcon: Assets.assetsIconsUser),
                 Gap(Insets.small),
-                  CustomItemSelect(
-                labelText: 'المحافظة',
-                controller: controller.governorate,
-                validator: validator,
-                itemListFuture: GovsService.gov()
-              ),
+                CustomApiItemSelect(
+                    labelText: 'المحافظة',
+                    controller: controller.governorate,
+                    validator: validator,
+                    itemListFuture: GovsService.gov()),
                 Gap(Insets.small),
                 CustomTextFormField(
                     validator: validator,
